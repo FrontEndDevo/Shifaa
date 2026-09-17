@@ -84,3 +84,18 @@ export const registerPatient = async (patientData: IRegisterUserParams) => {
     throw error;
   }
 };
+
+// Get specefic patient info by ID:
+export const getPatient = async (userId: string) => {
+  try {
+    const patients = await tablesDB.listRows({
+      databaseId: PATIENT_DATABASE_ID as string,
+      tableId: PATIENT_TABLE_ID as string,
+      queries: [Query.equal("userId", userId)],
+    });
+
+    return parseStringify(patients.rows[0]);
+  } catch (error) {
+    throw error;
+  }
+};
