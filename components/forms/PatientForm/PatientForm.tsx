@@ -1,15 +1,14 @@
 "use client";
 
 // Hooks:
-import usePatientForm from "@/hooks/usePatientForm";
+import usePatientForm from "./usePatientForm";
 
 // Components:
-import InputField from "./common/InputField";
-import SubmitButton from "./common/SubmitButton";
+import InputField from "../common/InputField";
+import SubmitButton from "../common/SubmitButton";
 
 // Types
 import { InputFieldType } from "@/types/form.types";
-
 
 const PatientForm = () => {
   const { isLoading, onSubmitHandler, handleSubmit, control } =
