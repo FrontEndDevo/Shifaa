@@ -124,6 +124,12 @@ const InputField = <TFieldValues extends FieldValues>({
                 value={field.value}
                 onChange={field.onChange}
               />
+              {fieldState.invalid && (
+                <FieldError
+                  errors={[fieldState.error]}
+                  className="text-xs font-medium text-red-500 mt-1"
+                />
+              )}
             </Field>
           )}
         />
