@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/forms/RegisterForm";
+import RegisterForm from "@/components/forms/RegisterForm/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
