@@ -70,7 +70,7 @@ const RegisterForm = ({ userInfo }: { userInfo: IUser }) => {
         </div>
 
         {/* BirthDate & Gender */}
-        <div className="flex flex-col gap-6 xl:flex-row my-8">
+        <div className="flex flex-col items-end gap-6 xl:flex-row my-8">
           <InputField
             fieldType={InputFieldType.DATE_PICKER}
             control={form.control}
