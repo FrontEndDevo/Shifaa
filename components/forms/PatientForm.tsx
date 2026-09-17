@@ -1,45 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { UserFormSchema } from "@/validation/schema/UserFormSchema";
+// Hooks:
+import usePatientForm from "@/hooks/usePatientForm";
 
-import SubmitButton from "./common/SubmitButton";
-import { InputFieldType } from "@/types/form.types";
-import { createUser } from "@/lib/actions/patient.actions";
-import { useRouter } from "next/navigation";
+// Components:
 import InputField from "./common/InputField";
+import SubmitButton from "./common/SubmitButton";
+
+// Types
+import { InputFieldType } from "@/types/form.types";
+
 
 const PatientForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
-  const { handleSubmit, control } = useForm<z.infer<typeof UserFormSchema>>({
-    resolver: zodResolver(UserFormSchema),
-    mode: "onBlur",
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-    },
-  });
-
-  const onSubmitHandler = async (data: z.infer<typeof UserFormSchema>) => {
-    setIsLoading(true);
-    try {
-      const user = await createUser(data);
-
-      if (user) {
-        router.push(`/patients/${user.$id}/register`);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { isLoading, onSubmitHandler, handleSubmit, control } =
+    usePatientForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
