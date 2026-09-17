@@ -1,8 +1,17 @@
+// Next Components:
 import Image from "next/image";
 
-import { getPatient } from "@/lib/actions/patient.actions";
+// Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
+
+// API:
+import { getPatient } from "@/lib/actions/patient.actions";
+
+// Types
 import { SearchParamProps } from "@/types";
+
+// Shifaa Icon:
+import Shifaa from "@/components/layout/Shifaa";
 
 const NewAppointment = async ({ params }: SearchParamProps) => {
   const { userId } = await params;
@@ -13,13 +22,7 @@ const NewAppointment = async ({ params }: SearchParamProps) => {
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
-          <Image
-            src="/assets/icons/logo-full.svg"
-            height={1000}
-            width={1000}
-            alt="logo"
-            className="mb-12 h-10 w-fit"
-          />
+          <Shifaa />
 
           <AppointmentForm
             patientId={patient?.$id}
@@ -27,7 +30,7 @@ const NewAppointment = async ({ params }: SearchParamProps) => {
             type="create"
           />
 
-          <p className="copyright mt-10 py-12">© 2024 CarePluse</p>
+          <p className="copyright mt-10 py-12">© 2026 Shifaa</p>
         </div>
       </section>
 
