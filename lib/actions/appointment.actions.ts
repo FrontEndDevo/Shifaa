@@ -1,6 +1,6 @@
 "use server";
 
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import {
   APPOINTMENT_TABLE_ID,
@@ -23,6 +23,20 @@ export const createAppointment = async (
     });
 
     return parseStringify(newAppointment);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAppointment = async (appointmentId: string) => {
+  try {
+    const currentAppointment = await tablesDB.listRows({
+      databaseId: PATIENT_DATABASE_ID as string,
+      tableId: APPOINTMENT_TABLE_ID as string,
+      queries: [Query.equal("$id", appointmentId)],
+    });
+
+    return parseStringify(currentAppointment.rows[0]);
   } catch (error) {
     throw error;
   }
