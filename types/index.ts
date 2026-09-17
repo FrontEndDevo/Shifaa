@@ -6,6 +6,8 @@ export interface ICreateUserParams {
 
 export type Gender = "Male" | "Female" | "Other";
 
+export type Status = "pending" | "scheduled" | "cancelled";
+
 export interface IUser extends ICreateUserParams {
   $id: string;
 }
@@ -34,4 +36,14 @@ export interface IRegisterUserParams extends ICreateUserParams {
 export type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export type CreateAppointmentParams = {
+  userId: string;
+  patient: string;
+  primaryPhysician: string;
+  reason: string;
+  schedule: Date;
+  status: Status;
+  note: string | undefined;
 };
