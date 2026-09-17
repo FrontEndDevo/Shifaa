@@ -137,28 +137,31 @@ const InputField = <TFieldValues extends FieldValues>({
 
     case InputFieldType.DATE_PICKER:
       return (
-        <div className="flex rounded-md border border-dark-500 bg-dark-400">
-          <Image
-            src="/assets/icons/calendar.svg"
-            height={24}
-            width={24}
-            alt="user"
-            className="ml-2"
-          />
-          <Controller
-            name={name}
-            control={control}
-            render={({ field }) => (
-              <DatePicker
-                selected={field.value}
-                onChange={field.onChange}
-                showTimeSelect={showTimeSelect ?? false}
-                timeInputLabel="Time:"
-                dateFormat={dateFormat ?? "MM/dd/yyyy"}
-                wrapperClassName="date-picker"
-              />
-            )}
-          />
+        <div>
+          <Label className="mb-2">{label}</Label>
+          <div className="flex h-fit items-center rounded-md border border-dark-500 bg-dark-400">
+            <Image
+              src="/assets/icons/calendar.svg"
+              height={24}
+              width={24}
+              alt="user"
+              className="ml-2"
+            />
+            <Controller
+              name={name}
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  selected={field.value}
+                  onChange={field.onChange}
+                  showTimeSelect={showTimeSelect ?? false}
+                  timeInputLabel="Time:"
+                  dateFormat={dateFormat ?? "MM/dd/yyyy"}
+                  wrapperClassName="date-picker"
+                />
+              )}
+            />
+          </div>
         </div>
       );
 
