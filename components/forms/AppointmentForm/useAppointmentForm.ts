@@ -73,8 +73,8 @@ const useAppointmentForm = ({
 
         if (patientAppointment) {
           form.reset();
-          router.push(
-            `patient/${userId}/new-appointment/success?appointmentId=${patientAppointment.$id}`,
+          router.replace(
+            `/patients/${userId}/new-appointment/success?appointmentId=${patientAppointment.$id}`,
           );
         }
       }
