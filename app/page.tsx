@@ -1,6 +1,12 @@
-import PatientForm from "@/components/forms/PatientForm/PatientForm";
-import Image from "next/image";
+// Next Components:
 import Link from "next/link";
+import Image from "next/image";
+
+// Forms:
+import PatientForm from "@/components/forms/PatientForm/PatientForm";
+
+// Shifaa Icon:
+import Shifaa from "@/components/layout/Shifaa";
 
 export default function Home() {
   return (
@@ -9,13 +15,7 @@ export default function Home() {
 
       <section className="container remove-scrollbar my-auto">
         <div className="sub-container max-w-[496px]">
-          <Image
-            src="/assets/icons/logo-full.svg"
-            alt="patient"
-            width={1000}
-            height={1000}
-            className="mb-12 h-10 w-fit"
-          />
+          <Shifaa />
           <PatientForm />
 
           <div className="text-14-regular mt-20 flex justify-between">
