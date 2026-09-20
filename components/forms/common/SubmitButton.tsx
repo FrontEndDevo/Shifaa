@@ -14,7 +14,7 @@ const SubmitButton = ({ children, className, isLoading }: IButtonProps) => {
     <Button
       type="submit"
       disabled={isLoading}
-      className={className ?? "shad-primary-btn"}
+      className={className ?? "shad-primary-btn mt-10 w-full"}
     >
       {isLoading ? (
         <div className="flex justify-center gap-4">
