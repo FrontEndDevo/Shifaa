@@ -19,7 +19,7 @@ const Register = async ({ params }: SearchParamProps) => {
 
           <RegisterForm userInfo={userInfo} />
 
-          <p className="justify-items-end text-gray-600 xl:text-left">
+          <p className="justify-items-end text-gray-600 xl:text-left my-10">
             © 2026 Shifaa
           </p>
         </div>
