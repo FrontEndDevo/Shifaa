@@ -28,7 +28,7 @@ const RegisterForm = ({ userInfo }: { userInfo: IUser }) => {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmitHandler)}>
-      <section className="mb-12">
+      <section className="my-12">
         <h1 className="header mb-2">Welcome again 👋🏻</h1>
         <p className="text-dark-700">Tell us more about yourself.</p>
       </section>
@@ -70,7 +70,7 @@ const RegisterForm = ({ userInfo }: { userInfo: IUser }) => {
         </div>
 
         {/* BirthDate & Gender */}
-        <div className="flex flex-col items-end gap-6 xl:flex-row my-8">
+        <div className="flex flex-col gap-6 xl:flex-row my-8">
           <InputField
             fieldType={InputFieldType.DATE_PICKER}
             control={form.control}
