@@ -50,7 +50,7 @@ const Success = async ({ params, searchParams }: SearchParamProps) => {
         </section>
 
         <section className="request-details">
-          <p>Requested appointment details: </p>
+          <p>Appointment details: </p>
           <div className="flex items-center gap-3">
             <Image
               src={doctor?.image as string}
@@ -72,7 +72,10 @@ const Success = async ({ params, searchParams }: SearchParamProps) => {
           </div>
         </section>
 
-        <Button variant="outline" className="shad-primary-btn">
+        <Button
+          variant="outline"
+          className="shad-primary-btn px-10 border-none hover:"
+        >
           <Link href={`/patients/${userId}/new-appointment`}>
             New Appointment
           </Link>
