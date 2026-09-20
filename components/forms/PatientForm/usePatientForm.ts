@@ -31,7 +31,7 @@ const usePatientForm = () => {
       const user = await createUser(data);
 
       if (user) {
-        router.push(`/patients/${user.$id}/register`);
+        router.replace(`/patients/${user.$id}/register`);
       }
     } catch (error) {
       throw error;
