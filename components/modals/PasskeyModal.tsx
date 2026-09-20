@@ -2,7 +2,7 @@
 
 // Next Hooks:
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // Next Components:
 import Image from "next/image";
