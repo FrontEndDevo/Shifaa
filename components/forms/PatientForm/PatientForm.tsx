@@ -17,7 +17,7 @@ const PatientForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <div>
-        <h1 className="header mb-2">Hello there 👋🏻</h1>
+        <h1 className="header mb-2 mt-10">Hello there 👋🏻</h1>
         <p className="text-dark-700">Schedule your first appointment</p>
       </div>
 
