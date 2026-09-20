@@ -7,11 +7,16 @@ import PatientForm from "@/components/forms/PatientForm/PatientForm";
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
+import { SearchParamProps } from "@/types";
+import PasskeyModal from "@/components/modals/PasskeyModal";
 
-export default function Home() {
+export default async function Home({ searchParams }: SearchParamProps) {
+  const { admin } = await searchParams;
+  console.log(admin);
+
   return (
     <div className="h-screen flex max-h-screen">
-      {/* Todo: OTP verification | passkey*/}
+      {admin && <PasskeyModal />}
 
       <section className="container remove-scrollbar my-auto">
         <div className="sub-container max-w-[496px]">
