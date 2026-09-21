@@ -12,7 +12,6 @@ import PasskeyModal from "@/components/modals/PasskeyModal";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const { admin } = await searchParams;
-  console.log(admin);
 
   return (
     <div className="h-screen flex max-h-screen">
