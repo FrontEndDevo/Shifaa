@@ -4,7 +4,7 @@ import Image from "next/image";
 // Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
 
-// API:
+// API actions::
 import { getPatient } from "@/lib/actions/patient.actions";
 
 // Types

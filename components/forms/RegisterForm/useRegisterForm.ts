@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { PatientFormValidation } from "@/validation/schema";
 import { PatientFormDefaultValues } from "@/constants";
 
-// API
+// API actions:
 import { registerPatient } from "@/lib/actions/patient.actions";
 
 // Types

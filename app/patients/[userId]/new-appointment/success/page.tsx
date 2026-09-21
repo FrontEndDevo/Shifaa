@@ -14,7 +14,7 @@ import { formatDateTime } from "@/lib/utils";
 // Types:
 import { SearchParamProps } from "@/types";
 
-// API
+// API actions:
 import { getAppointment } from "@/lib/actions/appointment.actions";
 
 // Shifaa Icon:
