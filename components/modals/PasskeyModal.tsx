@@ -29,24 +29,42 @@ import { decryptKey, encryptKey } from "@/lib/encryption";
 const PasskeyModal = () => {
   const router = useRouter();
 
-  const [open, setOpen] = useState(true);
   const [passkey, setPasskey] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    // Get the encrypted key from the local storage.
-    const getEncryptedKey = localStorage.getItem("accessKey");
+  // Initialize states lazily so we know what to render immediately on first paint
+  const [isChecking, setIsChecking] = useState(() => {
+    const getEncryptedKey =
+      typeof window !== "undefined" ? localStorage.getItem("accessKey") : null;
+    const passkey = getEncryptedKey ? decryptKey(getEncryptedKey) : null;
+    // If valid, keep isChecking true so it returns null and doesn't flash the modal
+    return passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString();
+  });
 
-    // Decrypt the key:
+  const [open, setOpen] = useState(() => {
+    const getEncryptedKey =
+      typeof window !== "undefined" ? localStorage.getItem("accessKey") : null;
     const passkey = getEncryptedKey ? decryptKey(getEncryptedKey) : null;
 
-    // Check if the key is correct for going to admin page or not.
-    if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString()) {
+    // If invalid, open the modal immediately
+    return passkey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString();
+  });
+
+  useEffect(() => {
+    const getEncryptedKey = localStorage.getItem("accessKey");
+    const decryptedPasskey = getEncryptedKey
+      ? decryptKey(getEncryptedKey)
+      : null;
+
+    if (
+      decryptedPasskey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString()
+    ) {
       router.replace("/admin");
     }
   }, [router]);
 
   const closeModalHandler = () => {
+    setIsChecking(false);
     setOpen(false);
   };
 
@@ -56,16 +74,15 @@ const PasskeyModal = () => {
     e.preventDefault();
 
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
-      // Encrypt passkey by applying (Symmetric Encryption) using AES (Advanced Encryption Standard) algorithm in the crypto.js library.
       const encryptedKey = encryptKey(passkey);
-
       localStorage.setItem("accessKey", encryptedKey);
-
       router.replace("/admin");
     } else {
       setError("Invalid passkey. Please try again.");
     }
   };
+
+  if (isChecking) return null;
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
