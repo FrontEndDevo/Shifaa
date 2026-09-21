@@ -37,13 +37,3 @@ export type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
-
-export type CreateAppointmentParams = {
-  userId: string;
-  patient: string;
-  primaryPhysician: string;
-  reason: string;
-  schedule: Date;
-  status: Status;
-  note: string | undefined;
-};
