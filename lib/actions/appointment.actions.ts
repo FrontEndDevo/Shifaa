@@ -1,14 +1,26 @@
 "use server";
 
+// Next:
+import { revalidatePath } from "next/cache";
+
+// Appwrite.io:
 import { ID, Query } from "node-appwrite";
-import { parseStringify } from "../utils";
 import {
   APPOINTMENT_TABLE_ID,
   PATIENT_DATABASE_ID,
   tablesDB,
 } from "../appwrite.config";
-import { CreateAppointmentParams } from "@/types";
 
+// Utilities:
+import { parseStringify } from "../utils";
+
+// Types:
+import {
+  CreateAppointmentParams,
+  UpdateAppointmentParams,
+} from "@/types/appointment.types";
+
+// CREATE APPOINTMENT
 export const createAppointment = async (
   appointmentData: CreateAppointmentParams,
 ) => {
@@ -28,6 +40,37 @@ export const createAppointment = async (
   }
 };
 
+// UPDATE APPOINTMENT
+export const updateAppointment = async ({
+  appointmentId,
+  appointment,
+}: UpdateAppointmentParams) => {
+  // Guard clause to handle the undefined case safely
+  if (!appointmentId)
+    throw new Error("Appointment ID is missing. Cannot update appointment.");
+
+  try {
+    const updatedAppointment = await tablesDB.updateRow({
+      databaseId: PATIENT_DATABASE_ID as string,
+      tableId: APPOINTMENT_TABLE_ID as string,
+      rowId: appointmentId,
+      data: {
+        ...appointment,
+      },
+    });
+
+    if (updatedAppointment) {
+      // SMS Notifications:
+
+      revalidatePath("/admin");
+      return parseStringify(updatedAppointment);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+// GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
   try {
     const currentAppointment = await tablesDB.listRows({
@@ -37,6 +80,49 @@ export const getAppointment = async (appointmentId: string) => {
     });
 
     return parseStringify(currentAppointment.rows[0]);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// GET ALL APPOINTMENTS
+export const getRecentAppointments = async () => {
+  try {
+    const recentAppointments = await tablesDB.listRows({
+      databaseId: PATIENT_DATABASE_ID as string,
+      tableId: APPOINTMENT_TABLE_ID as string,
+      queries: [
+        Query.select(["*", "patient.*"]),
+        Query.orderDesc("$createdAt"),
+      ],
+    });
+
+    const initialCounts = {
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+    };
+
+    const counts = recentAppointments.rows.reduce((acc, appointment) => {
+      if (appointment.status === "scheduled") {
+        acc.scheduledCount += 1;
+      }
+      if (appointment.status === "pending") {
+        acc.pendingCount += 1;
+      }
+      if (appointment.status === "cancelled") {
+        acc.cancelledCount += 1;
+      }
+      return acc;
+    }, initialCounts);
+
+    const appointmentsData = {
+      total: recentAppointments.total,
+      ...counts,
+      rows: recentAppointments.rows,
+    };
+
+    return parseStringify(appointmentsData);
   } catch (error) {
     throw error;
   }
