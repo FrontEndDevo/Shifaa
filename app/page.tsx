@@ -7,7 +7,11 @@ import PatientForm from "@/components/forms/PatientForm/PatientForm";
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
+
+// Types:
 import { SearchParamProps } from "@/types";
+
+// Modal Components:
 import PasskeyModal from "@/components/modals/PasskeyModal";
 
 export default async function Home({ searchParams }: SearchParamProps) {
