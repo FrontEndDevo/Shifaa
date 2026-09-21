@@ -1,5 +1,5 @@
 // React Hooks:
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // Validation:
@@ -9,11 +9,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getAppointmentSchema } from "@/validation/schema/AppointmentSchema";
 
 // Types:
-import { TAppointmentFormProps } from "./appointment.types";
+import { TAppointmentFormProps } from "@/types/appointment.types";
 import { Status } from "@/types";
 
-// API
-import { createAppointment } from "@/lib/actions/appointment.actions";
+// API actions:
+import {
+  createAppointment,
+  updateAppointment,
+} from "@/lib/actions/appointment.actions";
 
 const useAppointmentForm = ({
   userId,
@@ -31,10 +34,11 @@ const useAppointmentForm = ({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
       primaryPhysician: appointment ? appointment?.primaryPhysician : "",
-      schedule: appointment ? new Date(appointment.schedule!) : new Date(),
+      schedule: appointment ? new Date(appointment.schedule) : new Date(),
       reason: appointment ? appointment.reason : "",
       note: appointment?.note || "",
-      cancellationReason: appointment?.cancellationReason || "",
+      cancellationReason:
+        type === "cancel" ? "" : appointment?.cancellationReason || "",
     },
   });
 
@@ -58,24 +62,46 @@ const useAppointmentForm = ({
     }
 
     try {
+      // This part of code is used in the NewAppointment page to create new patient appointment:
       if (type === "create" && patientId) {
-        const appointmentData = {
+        const creatingAppointmentData = {
           userId,
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
           schedule: new Date(values.schedule),
-          reason: values.reason!,
+          cancellationReason: values.reason!,
           note: values.note,
           status: status as Status,
         };
 
-        const patientAppointment = await createAppointment(appointmentData);
+        const appointmentToCreate = await createAppointment(
+          creatingAppointmentData,
+        );
 
-        if (patientAppointment) {
+        if (appointmentToCreate) {
           form.reset();
           router.replace(
-            `/patients/${userId}/new-appointment/success?appointmentId=${patientAppointment.$id}`,
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointmentToCreate.$id}`,
           );
+        }
+      } else {
+        const updatingAppointmentData = {
+          appointmentId: appointment?.$id,
+          appointment: {
+            primaryPhysician: values.primaryPhysician,
+            schedule: new Date(values.schedule),
+            status: status as Status,
+            cancellationReason: values.cancellationReason ?? null,
+          },
+        };
+
+        const appointmentToUpdate = await updateAppointment(
+          updatingAppointmentData,
+        );
+
+        if (appointmentToUpdate) {
+          form.reset();
+          setOpen?.(false);
         }
       }
     } catch (error) {
