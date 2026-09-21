@@ -17,8 +17,8 @@ import InputField from "../common/InputField";
 import useAppointmentForm from "./useAppointmentForm";
 
 // Types:
-import { TAppointmentFormProps } from "./appointment.types";
 import { InputFieldType } from "@/types/form.types";
+import { TAppointmentFormProps } from "@/types/appointment.types";
 
 // Date Picker Styles:
 import "react-datepicker/dist/react-datepicker.css";
@@ -26,7 +26,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export const AppointmentForm = ({
   userId,
   patientId,
-  type = "create",
+  type ,
   appointment,
   setOpen,
 }: TAppointmentFormProps) => {
@@ -92,7 +92,7 @@ export const AppointmentForm = ({
               name="reason"
               label="Appointment reason"
               placeholder="Annual montly check-up"
-              disabled={type === "schedule"}
+              disabled={type === "schedule"} // Admin not allowed to edit this field
             />
 
             <InputField
@@ -101,7 +101,7 @@ export const AppointmentForm = ({
               name="note"
               label="Comments/notes"
               placeholder="Prefer afternoon appointments, if possible"
-              disabled={type === "schedule"}
+              disabled={type === "schedule"} // Admin not allowed to edit this field
             />
           </div>
         </>
