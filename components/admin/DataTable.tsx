@@ -47,25 +47,25 @@ export function DataTable<TData extends RowData>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-center py-4 w-full">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter appointments by patient name..."
+          value={(table.getColumn("patient")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("patient")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm border focus:border-green-500 border-green-500"
         />
       </div>
 
       <div className="data-table">
-        <Table className="shad-table">
+        <Table className="shad-table text-center">
           <TableHeader className="bg-dark-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="shad-table-row-header">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-center">
                       {header.isPlaceholder ? null : (
                         <table.FlexRender header={header} />
                       )}

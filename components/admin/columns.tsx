@@ -21,9 +21,12 @@ export const columns = columnHelper.columns([
   },
 
   {
-    accessorKey: "patient",
+    id: "patient",
+    accessorFn: (row) => row.patient?.name,
     header: "Patient",
-    cell: ({ row }) => <h3 className="text-sm">{row.original.patient.name}</h3>,
+    cell: ({ row }) => (
+      <h3 className="text-sm">{row.original.patient?.name}</h3>
+    ),
   },
 
   {
