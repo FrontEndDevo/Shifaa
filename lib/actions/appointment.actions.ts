@@ -80,6 +80,24 @@ export const updateAppointment = async ({
   }
 };
 
+// DELETE APPOINTMENT
+export const deleteAppointment = async (appointmentId: string) => {
+  try {
+    const deletedAppointment = await tablesDB.deleteRow({
+      databaseId: PATIENT_DATABASE_ID as string,
+      tableId: APPOINTMENT_TABLE_ID as string,
+      rowId: appointmentId,
+    });
+
+    if (deletedAppointment) {
+      revalidatePath("/admin");
+      return parseStringify(deletedAppointment);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
   try {
