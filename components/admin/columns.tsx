@@ -106,12 +106,22 @@ export const columns = columnHelper.columns([
             description="Please confirm the following details to"
           />
 
-          <AppointmentModal
-            type="cancel"
-            appointment={data}
-            title="Cancle Appointment"
-            description="Are you sure you want to cancle this appointment?"
-          />
+          {data.status !== "cancelled" && (
+            <AppointmentModal
+              type="cancel"
+              appointment={data}
+              title="Cancle Appointment"
+              description="Are you sure you want to cancle this appointment?"
+            />
+          )}
+
+          {data.status === "cancelled" && (
+            <AppointmentModal
+              type="delete"
+              appointment={data}
+              title="Delete Appointment"
+            />
+          )}
         </div>
       );
     },
