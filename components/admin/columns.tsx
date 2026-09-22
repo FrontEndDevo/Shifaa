@@ -1,15 +1,26 @@
 "use client";
 
-import { createColumnHelper } from "@tanstack/react-table";
+// Next Components:
+import Image from "next/image";
 
+// Shadcn UI:
+import { createColumnHelper } from "@tanstack/react-table";
 import { DataTableFeatures } from "./AdminFeatures";
 
+// Components:
 import StatusBadge from "./StatusBadge";
-import { formatDateTime } from "@/lib/utils";
-import { Appointment } from "@/types/appointment.types";
-import Image from "next/image";
-import { Doctors } from "@/constants";
+
+// Modals Components:
 import AppointmentModal from "../modals/AppointmentModal";
+
+// Utilities:
+import { formatDateTime } from "@/lib/utils";
+
+// Types:
+import { Appointment } from "@/types/appointment.types";
+
+// Constants:
+import { Doctors } from "@/constants";
 
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Appointment>();
