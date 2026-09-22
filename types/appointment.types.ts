@@ -25,6 +25,7 @@ export type UpdateAppointmentParams = {
     status: Status;
     cancellationReason: string | null;
   };
+  userId: string;
 };
 
 export interface Appointment extends Models.Document {

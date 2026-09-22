@@ -7,12 +7,13 @@ import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
 import {
   APPOINTMENT_TABLE_ID,
+  messaging,
   PATIENT_DATABASE_ID,
   tablesDB,
 } from "../appwrite.config";
 
 // Utilities:
-import { parseStringify } from "../utils";
+import { formatDateTime, parseStringify } from "../utils";
 
 // Types:
 import {
@@ -44,6 +45,7 @@ export const createAppointment = async (
 export const updateAppointment = async ({
   appointmentId,
   appointment,
+  userId,
 }: UpdateAppointmentParams) => {
   // Guard clause to handle the undefined case safely
   if (!appointmentId)
@@ -60,7 +62,15 @@ export const updateAppointment = async ({
     });
 
     if (updatedAppointment) {
-      // SMS Notifications:
+      // const messageContent = `Hi there, it's Shifaa.
+      // ${
+      //   appointment.status === "scheduled"
+      //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
+      //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
+      //     ${appointment.cancellationReason}`
+      // }`;
+
+      // await sendNotificationBySMS({ userId, messageContent });
 
       revalidatePath("/admin");
       return parseStringify(updatedAppointment);
@@ -123,6 +133,36 @@ export const getRecentAppointments = async () => {
     };
 
     return parseStringify(appointmentsData);
+  } catch (error) {
+    console.error("Appwrite Fetch Error:", error);
+    // Must return default values to prevent the entire page from breaking.
+    return {
+      total: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      rows: [],
+    };
+  }
+};
+
+// SEND SMS MESSAGE
+export const sendNotificationBySMS = async ({
+  userId,
+  messageContent,
+}: {
+  userId: string;
+  messageContent: string;
+}) => {
+  try {
+    const message = await messaging.createSMS(
+      ID.unique(),
+      messageContent,
+      [],
+      [userId],
+    );
+
+    return parseStringify(message);
   } catch (error) {
     throw error;
   }

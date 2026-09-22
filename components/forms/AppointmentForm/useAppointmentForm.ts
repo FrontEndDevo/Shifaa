@@ -93,6 +93,7 @@ const useAppointmentForm = ({
             status: status as Status,
             cancellationReason: values.cancellationReason ?? null,
           },
+          userId,
         };
 
         const appointmentToUpdate = await updateAppointment(
