@@ -49,7 +49,7 @@ export const AppointmentForm = ({
         </section>
       )}
 
-      {type === "schedule" && (
+      {(type === "create" || type === "schedule") && (
         <>
           <InputField
             fieldType={InputFieldType.SELECT}
@@ -126,7 +126,7 @@ export const AppointmentForm = ({
 
       <SubmitButton
         isLoading={isLoading}
-        className={`${type === "schedule" ? "shad-primary-btn" : "shad-danger-btn"} w-full`}
+        className={`${type === "create" || type === "schedule" ? "shad-primary-btn" : "shad-danger-btn"} w-full`}
       >
         {buttonLabel}
       </SubmitButton>
