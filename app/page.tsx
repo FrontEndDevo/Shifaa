@@ -13,6 +13,7 @@ import { SearchParamProps } from "@/types";
 
 // Modal Components:
 import PasskeyModal from "@/components/modals/PasskeyModal";
+import SpinnerButton from "@/components/shared/SpinnerButton";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const { admin } = await searchParams;
@@ -30,9 +31,13 @@ export default async function Home({ searchParams }: SearchParamProps) {
             <p className="justify-items-end text-gray-600 xl:text-left">
               © 2026 Shifaa
             </p>
-            <Link href="/?admin=true" className="text-green-500">
-              Admin
-            </Link>
+            {!admin ? (
+              <Link href="/?admin=true" className="text-green-500">
+                Admin
+              </Link>
+            ) : (
+              <SpinnerButton />
+            )}
           </div>
         </div>
       </section>
