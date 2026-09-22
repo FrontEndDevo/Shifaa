@@ -3,7 +3,7 @@ import { Status } from ".";
 import { Patient } from "./patient.types";
 import { Dispatch, SetStateAction } from "react";
 
-export type TAppointmentFormTypes = "create" | "schedule" | "cancel";
+export type TAppointmentFormTypes = "create" | "schedule" | "cancel" | "delete";
 
 // Used in (createAppointment) action
 export type CreateAppointmentParams = {
@@ -53,5 +53,5 @@ export type TAppointmentModalProps = {
   type: TAppointmentFormTypes;
   appointment?: Appointment;
   title: string;
-  description: string;
+  description?: string;
 };
