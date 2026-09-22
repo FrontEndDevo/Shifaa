@@ -70,7 +70,7 @@ const InputField = <TFieldValues extends FieldValues>({
                     aria-invalid={fieldState.invalid}
                     placeholder={placeholder}
                     autoComplete="off"
-                    className="w-full border-0 bg-transparent p-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none text-white placeholder:text-dark-600"
+                    className="w-full border-0 focus:border-none bg-transparent p-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none text-white placeholder:text-dark-600"
                   />
                 </div>
 
