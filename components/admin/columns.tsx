@@ -87,7 +87,7 @@ export const columns = columnHelper.columns([
     header: "Actions",
     cell: ({ row: { original: data } }) => {
       return (
-        <div className="flex gap-1">
+        <div className="flex gap-1 justify-center">
           <AppointmentModal
             type="schedule"
             appointment={data}
