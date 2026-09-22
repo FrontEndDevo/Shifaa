@@ -6,7 +6,7 @@ import Image from "next/image";
 const StatusBadge = ({ status }: { status: Status }) => {
   return (
     <div
-      className={clsx("status-badge", {
+      className={clsx("status-badge mx-auto", {
         "bg-green-600": status === "scheduled",
         "bg-blue-600": status === "pending",
         "bg-red-600": status === "cancelled",
