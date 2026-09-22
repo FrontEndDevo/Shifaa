@@ -26,7 +26,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export const AppointmentForm = ({
   userId,
   patientId,
-  type ,
+  type,
   appointment,
   setOpen,
 }: TAppointmentFormProps) => {
@@ -49,7 +49,7 @@ export const AppointmentForm = ({
         </section>
       )}
 
-      {type !== "cancel" && (
+      {type === "schedule" && (
         <>
           <InputField
             fieldType={InputFieldType.SELECT}
@@ -117,9 +117,16 @@ export const AppointmentForm = ({
         />
       )}
 
+      {type === "delete" && (
+        <p>
+          Are you sure you want to delete this appointment? This action cannot
+          be undone.
+        </p>
+      )}
+
       <SubmitButton
         isLoading={isLoading}
-        className={`${type === "cancel" ? "shad-danger-btn" : "shad-primary-btn"} w-full`}
+        className={`${type === "schedule" ? "shad-primary-btn" : "shad-danger-btn"} w-full`}
       >
         {buttonLabel}
       </SubmitButton>

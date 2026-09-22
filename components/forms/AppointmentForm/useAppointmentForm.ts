@@ -15,6 +15,7 @@ import { Status } from "@/types";
 // API actions:
 import {
   createAppointment,
+  deleteAppointment,
   updateAppointment,
 } from "@/lib/actions/appointment.actions";
 
@@ -49,15 +50,14 @@ const useAppointmentForm = ({
 
     let status;
     switch (type) {
+      case "create":
+        status = "pending";
+        break;
       case "schedule":
         status = "scheduled";
         break;
       case "cancel":
         status = "cancelled";
-        break;
-
-      default:
-        status = "pending";
         break;
     }
 
@@ -83,6 +83,12 @@ const useAppointmentForm = ({
           router.replace(
             `/patients/${userId}/new-appointment/success?appointmentId=${appointmentToCreate.$id}`,
           );
+        }
+      } else if (type === "delete" && appointment?.$id) {
+        const appointmentToDelete = await deleteAppointment(appointment?.$id);
+
+        if (appointmentToDelete) {
+          setOpen?.(false);
         }
       } else {
         const updatingAppointmentData = {
@@ -116,6 +122,9 @@ const useAppointmentForm = ({
   switch (type) {
     case "cancel":
       buttonLabel = "Cancel Appointment";
+      break;
+    case "delete":
+      buttonLabel = "Delete Appointment forever";
       break;
     case "schedule":
       buttonLabel = "Schedule Appointment";
