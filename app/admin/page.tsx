@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // Data Table:
 import { DataTable } from "@/components/admin/DataTable";
 import { columns } from "@/components/admin/columns";
