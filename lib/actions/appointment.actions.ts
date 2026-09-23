@@ -118,6 +118,11 @@ export const deleteAppointment = async (appointmentId: string) => {
 
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
+  if (!appointmentId || appointmentId === "undefined")
+    return {
+      message: `Appointment ID is missing or invalid.`,
+    };
+
   const currentAppointment = await tablesDB.listRows({
     databaseId: PATIENT_DATABASE_ID as string,
     tableId: APPOINTMENT_TABLE_ID as string,
