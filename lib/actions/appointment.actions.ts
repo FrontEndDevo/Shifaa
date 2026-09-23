@@ -72,6 +72,25 @@ export const updateAppointment = async ({
 
       // await sendNotificationBySMS({ userId, messageContent });
 
+      // const messageContent = `Hi there, it's Shifaa.
+      // ${
+      //   appointment.status === "scheduled"
+      //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
+      //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
+      //     ${appointment.cancellationReason}`
+      // }`;
+
+      // const subject =
+      //   appointment.status === "scheduled"
+      //     ? "Confirm your appointment - Shifaa Healthcare System"
+      //     : "Cancling your appointment - Shifaa Healthcare System";
+
+      // await sendNotificationByEmail({
+      //   userId,
+      //   messageContent,
+      //   subject,
+      // });
+
       revalidatePath("/admin");
       return parseStringify(updatedAppointment);
     }
@@ -179,6 +198,36 @@ export const sendNotificationBySMS = async ({
       [],
       [userId],
     );
+
+    return parseStringify(message);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// SEND EMAIL
+export const sendNotificationByEmail = async ({
+  userId,
+  messageContent,
+  subject,
+}: {
+  userId: string;
+  messageContent: string;
+  subject: string;
+}) => {
+  try {
+    const message = await messaging.createEmail({
+      messageId: ID.unique(),
+      content: messageContent,
+      subject,
+      users: [userId],
+      topics: [],
+      targets: [],
+      draft: false,
+      html: false,
+    });
+    console.log(`*********** Email sended **********`);
+    console.log(parseStringify(message));
 
     return parseStringify(message);
   } catch (error) {
