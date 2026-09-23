@@ -36,7 +36,7 @@ const InputField = <TFieldValues extends FieldValues>({
   switch (fieldType) {
     case InputFieldType.INPUT:
       return (
-        <Field className="flex flex-col gap-1.5 w-full">
+        <Field className="flex flex-col gap-1.5 w-full my-4">
           {label && (
             <FieldLabel className="text-sm font-bold text-dark-700 dark:text-gray-300">
               {label}
