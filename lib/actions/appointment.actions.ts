@@ -25,20 +25,21 @@ import {
 export const createAppointment = async (
   appointmentData: CreateAppointmentParams,
 ) => {
-  try {
-    const newAppointment = await tablesDB.createRow({
-      databaseId: PATIENT_DATABASE_ID as string,
-      tableId: APPOINTMENT_TABLE_ID as string,
-      rowId: ID.unique(),
-      data: {
-        ...appointmentData,
-      },
-    });
+  const newAppointment = await tablesDB.createRow({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    rowId: ID.unique(),
+    data: {
+      ...appointmentData,
+    },
+  });
 
-    return parseStringify(newAppointment);
-  } catch (error) {
-    throw error;
-  }
+  if (!newAppointment)
+    return {
+      message: `Failed to create appointment, please try again.`,
+    };
+
+  return parseStringify(newAppointment);
 };
 
 // UPDATE APPOINTMENT
@@ -51,127 +52,120 @@ export const updateAppointment = async ({
   if (!appointmentId)
     throw new Error("Appointment ID is missing. Cannot update appointment.");
 
-  try {
-    const updatedAppointment = await tablesDB.updateRow({
-      databaseId: PATIENT_DATABASE_ID as string,
-      tableId: APPOINTMENT_TABLE_ID as string,
-      rowId: appointmentId,
-      data: {
-        ...appointment,
-      },
-    });
+  const updatedAppointment = await tablesDB.updateRow({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    rowId: appointmentId,
+    data: {
+      ...appointment,
+    },
+  });
 
-    if (updatedAppointment) {
-      // const messageContent = `Hi there, it's Shifaa.
-      // ${
-      //   appointment.status === "scheduled"
-      //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
-      //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
-      //     ${appointment.cancellationReason}`
-      // }`;
+  if (!updatedAppointment)
+    return {
+      message: `Failed to update your appointment, please try again.`,
+    };
 
-      // await sendNotificationBySMS({ userId, messageContent });
+  // const messageContent = `Hi there, it's Shifaa.
+  // ${
+  //   appointment.status === "scheduled"
+  //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
+  //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
+  //     ${appointment.cancellationReason}`
+  // }`;
 
-      // const messageContent = `Hi there, it's Shifaa.
-      // ${
-      //   appointment.status === "scheduled"
-      //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
-      //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
-      //     ${appointment.cancellationReason}`
-      // }`;
+  // await sendNotificationBySMS({ userId, messageContent });
 
-      // const subject =
-      //   appointment.status === "scheduled"
-      //     ? "Confirm your appointment - Shifaa Healthcare System"
-      //     : "Cancling your appointment - Shifaa Healthcare System";
+  // const messageContent = `Hi there, it's Shifaa.
+  // ${
+  //   appointment.status === "scheduled"
+  //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
+  //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
+  //     ${appointment.cancellationReason}`
+  // }`;
 
-      // await sendNotificationByEmail({
-      //   userId,
-      //   messageContent,
-      //   subject,
-      // });
+  // const subject =
+  //   appointment.status === "scheduled"
+  //     ? "Confirm your appointment - Shifaa Healthcare System"
+  //     : "Cancling your appointment - Shifaa Healthcare System";
 
-      revalidatePath("/admin");
-      return parseStringify(updatedAppointment);
-    }
-  } catch (error) {
-    throw error;
-  }
+  // await sendNotificationByEmail({
+  //   userId,
+  //   messageContent,
+  //   subject,
+  // });
+
+  revalidatePath("/admin");
+  return parseStringify(updatedAppointment);
 };
 
 // DELETE APPOINTMENT
 export const deleteAppointment = async (appointmentId: string) => {
-  try {
-    const deletedAppointment = await tablesDB.deleteRow({
-      databaseId: PATIENT_DATABASE_ID as string,
-      tableId: APPOINTMENT_TABLE_ID as string,
-      rowId: appointmentId,
-    });
+  const deletedAppointment = await tablesDB.deleteRow({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    rowId: appointmentId,
+  });
 
-    if (deletedAppointment) {
-      revalidatePath("/admin");
-      return parseStringify(deletedAppointment);
-    }
-  } catch (error) {
-    throw error;
-  }
+  if (!deletedAppointment)
+    return {
+      message: `Failed to delete appointment, please try again.`,
+    };
+
+  revalidatePath("/admin");
+  return parseStringify(deletedAppointment);
 };
 
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
-  try {
-    const currentAppointment = await tablesDB.listRows({
-      databaseId: PATIENT_DATABASE_ID as string,
-      tableId: APPOINTMENT_TABLE_ID as string,
-      queries: [Query.equal("$id", appointmentId)],
-    });
+  const currentAppointment = await tablesDB.listRows({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    queries: [Query.equal("$id", appointmentId)],
+  });
 
-    return parseStringify(currentAppointment.rows[0]);
-  } catch (error) {
-    throw error;
-  }
+  if (!currentAppointment)
+    return {
+      message: `Failed to get your appointment, please refresh the page.`,
+    };
+
+  return parseStringify(currentAppointment.rows[0]);
 };
 
 // GET ALL APPOINTMENTS
 export const getRecentAppointments = async () => {
-  try {
-    const recentAppointments = await tablesDB.listRows({
-      databaseId: PATIENT_DATABASE_ID as string,
-      tableId: APPOINTMENT_TABLE_ID as string,
-      queries: [
-        Query.select(["*", "patient.*"]),
-        Query.orderDesc("$createdAt"),
-      ],
-    });
+  const recentAppointments = await tablesDB.listRows({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    queries: [Query.select(["*", "patient.*"]), Query.orderDesc("$createdAt")],
+  });
 
-    const initialCounts = {
-      scheduledCount: 0,
-      pendingCount: 0,
-      cancelledCount: 0,
-    };
+  const initialCounts = {
+    scheduledCount: 0,
+    pendingCount: 0,
+    cancelledCount: 0,
+  };
 
-    const counts = recentAppointments.rows.reduce((acc, appointment) => {
-      if (appointment.status === "scheduled") {
-        acc.scheduledCount += 1;
-      }
-      if (appointment.status === "pending") {
-        acc.pendingCount += 1;
-      }
-      if (appointment.status === "cancelled") {
-        acc.cancelledCount += 1;
-      }
-      return acc;
-    }, initialCounts);
+  const counts = recentAppointments.rows.reduce((acc, appointment) => {
+    if (appointment.status === "scheduled") {
+      acc.scheduledCount += 1;
+    }
+    if (appointment.status === "pending") {
+      acc.pendingCount += 1;
+    }
+    if (appointment.status === "cancelled") {
+      acc.cancelledCount += 1;
+    }
+    return acc;
+  }, initialCounts);
 
-    const appointmentsData = {
-      total: recentAppointments.total,
-      ...counts,
-      rows: recentAppointments.rows,
-    };
+  const appointmentsData = {
+    total: recentAppointments.total,
+    ...counts,
+    rows: recentAppointments.rows,
+  };
 
-    return parseStringify(appointmentsData);
-  } catch (error) {
-    console.error("Appwrite Fetch Error:", error);
+  if (!recentAppointments) {
     // Must return default values to prevent the entire page from breaking.
     return {
       total: 0,
@@ -181,6 +175,8 @@ export const getRecentAppointments = async () => {
       rows: [],
     };
   }
+
+  return parseStringify(appointmentsData);
 };
 
 // SEND SMS MESSAGE
@@ -191,18 +187,19 @@ export const sendNotificationBySMS = async ({
   userId: string;
   messageContent: string;
 }) => {
-  try {
-    const message = await messaging.createSMS(
-      ID.unique(),
-      messageContent,
-      [],
-      [userId],
-    );
+  const message = await messaging.createSMS(
+    ID.unique(),
+    messageContent,
+    [],
+    [userId],
+  );
 
-    return parseStringify(message);
-  } catch (error) {
-    throw error;
-  }
+  if (!message)
+    return {
+      message: `Failed to send SMS message.`,
+    };
+
+  return parseStringify(message);
 };
 
 // SEND EMAIL
@@ -215,22 +212,21 @@ export const sendNotificationByEmail = async ({
   messageContent: string;
   subject: string;
 }) => {
-  try {
-    const message = await messaging.createEmail({
-      messageId: ID.unique(),
-      content: messageContent,
-      subject,
-      users: [userId],
-      topics: [],
-      targets: [],
-      draft: false,
-      html: false,
-    });
-    console.log(`*********** Email sended **********`);
-    console.log(parseStringify(message));
+  const message = await messaging.createEmail({
+    messageId: ID.unique(),
+    content: messageContent,
+    subject,
+    users: [userId],
+    topics: [],
+    targets: [],
+    draft: false,
+    html: false,
+  });
 
-    return parseStringify(message);
-  } catch (error) {
-    throw error;
-  }
+  if (!message)
+    return {
+      message: `Failed to send email.`,
+    };
+
+  return parseStringify(message);
 };
