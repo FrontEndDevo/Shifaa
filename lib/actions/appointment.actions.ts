@@ -181,8 +181,6 @@ export const getRecentAppointments = async () => {
     };
   }
 
-  revalidatePath("/admin");
-
   return parseStringify(appointmentsData);
 };
 
