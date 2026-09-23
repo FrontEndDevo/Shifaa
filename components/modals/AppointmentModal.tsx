@@ -45,8 +45,8 @@ const AppointmentModal = ({
         </DialogHeader>
 
         <AppointmentForm
-          userId={appointment?.userId}
-          patientId={appointment?.patient.$id}
+          userId={appointment?.userId ?? ""}
+          patientId={appointment?.patient.$id ?? ""}
           type={type}
           appointment={appointment}
           setOpen={setOpen}
