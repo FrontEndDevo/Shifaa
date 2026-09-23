@@ -42,7 +42,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
         </div>
       </section>
       <Image
-        src="/assets/images/onboarding-img.png"
+        src="/assets/images/onboarding-img.jpg"
         alt="patient"
         width={1000}
         height={1000}
