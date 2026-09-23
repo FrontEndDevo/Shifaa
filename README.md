@@ -37,6 +37,27 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 - **UI Components & Styling:** Tailwind CSS, Shadcn UI
 - **Form Validation:** React Hook Form, Zod
 
+---
+
+## 📐 Technical Architecture & Trade-offs
+
+During development, several key architectural challenges were solved to optimize performance and user experience:
+
+- **Appwrite Relational Data Population:** Resolved SDK relation limitations by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested objects without making secondary network round-trips.
+- **Bulk Update Limitations on Relationships:** Identified Appwrite's restriction on bulk row updates (`updateRows`) for schemas containing relationships, safely refactoring mutation handlers to use direct single-row updates (`updateRow`).
+- **Dynamic Page Caching & Hydration:** Forced dynamic route evaluation (`export const dynamic = "force-dynamic"`) and revalidation rules on administrative routes to overcome Next.js 16 production caching defaults and guarantee real-time data freshness.
+- **Flicker-Free Passkey Authentication:** Designed client-side passkey verification states (`isChecking` / `isNavigating`) combined with Next.js `loading.tsx` Suspense boundaries to prevent layout shifts during admin access.
+
+---
+
+## 🔒 Security & Data Integrity
+
+- **Passkey Protection:** Admin dashboard routes are gated behind secure passkey verification to prevent unauthorized access.
+- **Strict Type Safety:** Zod schemas applied across all forms to guarantee sanitization of medical records, phone numbers, and emergency contact payloads before API transmission.
+- **Environment Isolation:** Server-side API keys (`NEXT_APPWRITE_KEY`) are kept isolated from client bundles to prevent privilege escalation.
+
+---
+
 ## 📸 Application Screenshots & Key Workflows
 
 ---
@@ -131,22 +152,3 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 
 - Dynamic relationship population (`Query.select`) to display patient and physician data seamlessly.
 - Custom pagination controls, real-time revalidation, and status filtering.
-
----
-
-## 📐 Technical Architecture & Trade-offs
-
-During development, several key architectural challenges were solved to optimize performance and user experience:
-
-- **Appwrite Relational Data Population:** Resolved SDK relation limitations by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested objects without making secondary network round-trips.
-- **Bulk Update Limitations on Relationships:** Identified Appwrite's restriction on bulk row updates (`updateRows`) for schemas containing relationships, safely refactoring mutation handlers to use direct single-row updates (`updateRow`).
-- **Dynamic Page Caching & Hydration:** Forced dynamic route evaluation (`export const dynamic = "force-dynamic"`) and revalidation rules on administrative routes to overcome Next.js 16 production caching defaults and guarantee real-time data freshness.
-- **Flicker-Free Passkey Authentication:** Designed client-side passkey verification states (`isChecking` / `isNavigating`) combined with Next.js `loading.tsx` Suspense boundaries to prevent layout shifts during admin access.
-
----
-
-## 🔒 Security & Data Integrity
-
-- **Passkey Protection:** Admin dashboard routes are gated behind secure passkey verification to prevent unauthorized access.
-- **Strict Type Safety:** Zod schemas applied across all forms to guarantee sanitization of medical records, phone numbers, and emergency contact payloads before API transmission.
-- **Environment Isolation:** Server-side API keys (`NEXT_APPWRITE_KEY`) are kept isolated from client bundles to prevent privilege escalation.
