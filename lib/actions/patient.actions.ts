@@ -3,6 +3,7 @@
 import { ID, Query } from "node-appwrite";
 import { ICreateUserParams, IRegisterUserParams } from "@/types";
 import {
+  account,
   BUCKET_ID,
   NEXT_ENDPOINT,
   PATIENT_DATABASE_ID,
@@ -15,15 +16,28 @@ import {
 import { parseStringify } from "../utils";
 import { InputFile } from "node-appwrite/file";
 
-// Create a new user:
-export const createUser = async (user: ICreateUserParams) => {
+// User Login:
+export const userLogin = async (user: ICreateUserParams) => {
   try {
-    const newUser = await users.create({
+    const loggedUser = await account.createEmailPasswordSession({
+      email: user.email,
+      password: user.password,
+    });
+
+    return parseStringify(loggedUser);
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+// Create Register:
+export const userRegister = async (user: ICreateUserParams) => {
+  try {
+    const newUser = await account.create({
       userId: ID.unique(),
       email: user.email,
-      phone: user.phone.trim(),
-      password: "password",
-      name: user.name,
+      password: user.password,
+      
     });
 
     return parseStringify(newUser);
