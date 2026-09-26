@@ -23,6 +23,7 @@ const InputField = <TFieldValues extends FieldValues>({
   control,
   fieldType,
   name,
+  type,
   label,
   placeholder,
   iconSrc,
@@ -66,6 +67,7 @@ const InputField = <TFieldValues extends FieldValues>({
 
                   <Input
                     {...field}
+                    type={type}
                     value={field.value ?? ""}
                     aria-invalid={fieldState.invalid}
                     placeholder={placeholder}
