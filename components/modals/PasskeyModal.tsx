@@ -23,66 +23,52 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-// Utilities:
-import { decryptKey, encryptKey } from "@/lib/encryption";
+// Authorization:
+import {
+  checkAdminSession,
+  verifyAndSetPasskey,
+} from "@/lib/actions/auth.actions";
 
 const PasskeyModal = () => {
   const router = useRouter();
 
   const [passkey, setPasskey] = useState("");
   const [error, setError] = useState("");
-
-  // Initialize states lazily so we know what to render immediately on first paint
-  const [isChecking, setIsChecking] = useState(() => {
-    const getEncryptedKey =
-      typeof window !== "undefined" ? localStorage.getItem("accessKey") : null;
-    const passkey = getEncryptedKey ? decryptKey(getEncryptedKey) : null;
-    // If valid, keep isChecking true so it returns null and doesn't flash the modal
-    return passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString();
-  });
-
-  const [open, setOpen] = useState(() => {
-    const getEncryptedKey =
-      typeof window !== "undefined" ? localStorage.getItem("accessKey") : null;
-    const passkey = getEncryptedKey ? decryptKey(getEncryptedKey) : null;
-
-    // If invalid, open the modal immediately
-    return passkey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString();
-  });
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const getEncryptedKey = localStorage.getItem("accessKey");
-    const decryptedPasskey = getEncryptedKey
-      ? decryptKey(getEncryptedKey)
-      : null;
+    const adminHandler = async () => {
+      const isAdminAuthorized = await checkAdminSession();
+      if (isAdminAuthorized) {
+        router.replace("/admin");
+      } else {
+        setOpen(true);
+      }
+    };
 
-    if (
-      decryptedPasskey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY?.toString()
-    ) {
-      router.replace("/admin");
-    }
+    adminHandler();
   }, [router]);
 
   const closeModalHandler = () => {
-    setIsChecking(false);
     setOpen(false);
+    router.replace("/");
   };
 
-  const validatePasskeyHandler = (
+  const validatePasskeyHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
 
-    if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
-      const encryptedKey = encryptKey(passkey);
-      localStorage.setItem("accessKey", encryptedKey);
+    const verifyAndSetAdminPasskey = await verifyAndSetPasskey(passkey);
+
+    if (verifyAndSetAdminPasskey.success) {
       router.replace("/admin");
     } else {
       setError("Invalid passkey. Please try again.");
     }
   };
 
-  if (isChecking) return null;
+  if (!open) return null;
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
