@@ -1,7 +1,6 @@
 export interface ICreateUserParams {
-  name: string;
   email: string;
-  phone: string;
+  password: string;
 }
 
 export type Gender = "Male" | "Female" | "Other";

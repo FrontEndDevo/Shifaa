@@ -1,4 +1,4 @@
-import { UserFormSchema } from "./UserFormSchema";
+import { LoginFormSchema } from "./LoginFormSchema";
 import { PatientFormValidation } from "./PatientFormSchema";
 
-export { UserFormSchema, PatientFormValidation };
+export { LoginFormSchema, PatientFormValidation };
