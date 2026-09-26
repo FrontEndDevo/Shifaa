@@ -1,7 +1,7 @@
 "use client";
 
 // Hooks:
-import usePatientForm from "./usePatientForm";
+import usePatientLoginForm from "./usePatientLoginForm";
 
 // Components:
 import InputField from "../common/InputField";
@@ -10,9 +10,9 @@ import SubmitButton from "../common/SubmitButton";
 // Types
 import { InputFieldType } from "@/types/form.types";
 
-const PatientForm = () => {
+const PatientLoginForm = () => {
   const { isLoading, onSubmitHandler, handleSubmit, control } =
-    usePatientForm();
+    usePatientLoginForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -24,33 +24,28 @@ const PatientForm = () => {
       <InputField
         control={control}
         fieldType={InputFieldType.INPUT}
-        name="name"
-        label="full Name"
-        placeholder="John Doe"
-        iconSrc="/assets/icons/user.svg"
-        iconAlt="user"
-      />
-
-      <InputField
-        control={control}
-        fieldType={InputFieldType.INPUT}
+        type="email"
         name="email"
         label="Email"
-        placeholder="John_Doe@gmail.com"
+        placeholder="Enter your email"
         iconSrc="/assets/icons/email.svg"
         iconAlt="email"
       />
 
       <InputField
         control={control}
-        fieldType={InputFieldType.PHONE_INPUT}
-        name="phone"
-        label="Phone Number"
-        placeholder="Enter phone number"
+        fieldType={InputFieldType.INPUT}
+        type="password"
+        name="password"
+        label="Password"
+        placeholder="Enter your password"
+        iconSrc="/assets/icons/password.svg"
+        iconAlt="password"
       />
+
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
   );
 };
 
-export default PatientForm;
+export default PatientLoginForm;
