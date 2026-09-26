@@ -6,33 +6,34 @@ import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { UserFormSchema } from "@/validation/schema/UserFormSchema";
+import { LoginFormSchema } from "@/validation/schema/LoginFormSchema";
 
 // API actions::
-import { createUser } from "@/lib/actions/patient.actions";
+import { userLogin } from "@/lib/actions/patient.actions";
 
-const usePatientForm = () => {
+const usePatientLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const { handleSubmit, control } = useForm<z.infer<typeof UserFormSchema>>({
-    resolver: zodResolver(UserFormSchema),
+  const { handleSubmit, control } = useForm<z.infer<typeof LoginFormSchema>>({
+    resolver: zodResolver(LoginFormSchema),
     mode: "onBlur",
     defaultValues: {
-      name: "",
       email: "",
-      phone: "",
+      password: "",
     },
   });
 
-  const onSubmitHandler = async (data: z.infer<typeof UserFormSchema>) => {
+  const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
     setIsLoading(true);
     try {
-      const user = await createUser(data);
+      const user = await userLogin(data);
 
-      if (user) {
-        router.replace(`/patients/${user.$id}/register`);
-      }
+      console.log(user);
+
+      // if (user) {
+      //   router.replace(`/patients/${user.$id}/register`);
+      // }
     } catch (error) {
       throw error;
     } finally {
@@ -43,4 +44,4 @@ const usePatientForm = () => {
   return { isLoading, onSubmitHandler, handleSubmit, control };
 };
 
-export default usePatientForm;
+export default usePatientLoginForm;
