@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Forms:
-import PatientForm from "@/components/forms/PatientForm/PatientForm";
+import PatientLoginForm from "@/components/forms/PatientLoginForm/PatientLoginForm";
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
@@ -25,7 +25,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
       <section className="container remove-scrollbar my-auto">
         <div className="sub-container max-w-[496px]">
           <Shifaa />
-          <PatientForm />
+          <PatientLoginForm />
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-gray-600 xl:text-left">
