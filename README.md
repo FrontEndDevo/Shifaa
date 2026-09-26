@@ -23,7 +23,7 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 - **Real-time Analytics Dashboard:** Summary cards tracking total, scheduled, pending, and cancelled medical appointments.
 - **Interactive Data Table:** Advanced filtration, custom pagination, and responsive layout built with TanStack Table and Shadcn UI.
 
-- **Persistent Admin Authentication:** Uses AES encryption from the crypto-js library to securely encrypt the admin passkey before storing it in localStorage. This allows returning admins to access the dashboard without re-entering their passkey on every visit.
+* **Admin Authentication & Refactoring:** Initially implemented client-side passkey encryption using `crypto-js` library stored in `localStorage`. Refactored the architecture to production-level standards by migrating to server-validated **`httpOnly` HTTP Cookies** combined with **Next.js Middleware** route guards. Passkey verification is handled entirely via Server Actions, completely isolating secrets from the client bundle, eliminating XSS vulnerabilities, and ensuring zero-flicker route protection.
 
 - **Optimized UX & Performance:** Fully responsive layout with custom loading states and zero dynamic layout shifts.
 
