@@ -19,6 +19,7 @@ export interface IFormField<TFieldValues extends FieldValues> {
   control: Control<TFieldValues>;
   fieldType: InputFieldType;
   name: Path<TFieldValues>;
+  type?:string,
   label?: string;
   placeholder?: string;
   iconSrc?: string;
