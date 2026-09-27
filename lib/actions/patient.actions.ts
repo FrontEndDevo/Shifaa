@@ -1,7 +1,8 @@
 "use server";
 
+// Appwrite:
 import { ID, Query } from "node-appwrite";
-import { ICreateUserParams, IRegisterUserParams } from "@/types";
+import { InputFile } from "node-appwrite/file";
 import {
   account,
   BUCKET_ID,
@@ -13,43 +14,42 @@ import {
   tablesDB,
   users,
 } from "../appwrite.config";
+
+// Utilities:
 import { parseStringify } from "../utils";
-import { InputFile } from "node-appwrite/file";
+
+// Types:
+import { ICreateUserParams, IRegisterUserParams } from "@/types";
 
 // User Login:
-export const userLogin = async (user: ICreateUserParams) => {
-  try {
+export const checkOrRegisterUser = async (user: ICreateUserParams) => {
+  const userExists = await users.list({
+    queries: [Query.equal("email", [user.email])],
+  });
+
+  // If user does exist? Login...
+  if (userExists.total > 0) {
     const loggedUser = await account.createEmailPasswordSession({
       email: user.email,
       password: user.password,
     });
 
-    return parseStringify(loggedUser);
-  } catch (error: any) {
-    throw error;
-  }
-};
-
-// Create Register:
-export const userRegister = async (user: ICreateUserParams) => {
-  try {
-    const newUser = await account.create({
+    return {
+      isNewUser: false,
+      user: parseStringify(loggedUser),
+    };
+  } else {
+    // If user does (not) exist? Sign up...
+    const registeredUser = await account.create({
       userId: ID.unique(),
       email: user.email,
       password: user.password,
-      
+      name: "name",
     });
-
-    return parseStringify(newUser);
-  } catch (error: any) {
-    if (error && error?.code === 409) {
-      const documents = await users.list({
-        queries: [Query.equal("email", user.email)],
-      });
-
-      return documents?.users[0];
-    }
-    throw error;
+    return {
+      isNewUser: true,
+      user: parseStringify(registeredUser),
+    };
   }
 };
 
@@ -107,6 +107,10 @@ export const getPatient = async (userId: string) => {
       tableId: PATIENT_TABLE_ID as string,
       queries: [Query.equal("userId", userId)],
     });
+
+    if (!patients.rows || patients.rows.length === 0) {
+      return null;
+    }
 
     return parseStringify(patients.rows[0]);
   } catch (error) {
