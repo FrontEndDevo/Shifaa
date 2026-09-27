@@ -14,10 +14,7 @@ import { PatientFormDefaultValues } from "@/constants";
 // API actions:
 import { registerPatient } from "@/lib/actions/patient.actions";
 
-// Types
-import { IUser } from "@/types";
-
-const useRegisterForm = ({ userInfo }: { userInfo: IUser }) => {
+const useRegisterForm = ({ userId }: { userId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -51,25 +48,12 @@ const useRegisterForm = ({ userInfo }: { userInfo: IUser }) => {
 
     try {
       const patientData = {
-        userId: userInfo.$id,
+        userId,
         name: values.name,
-        email: values.email,
         phone: values.phone,
         birthDate: new Date(values.birthDate),
         gender: values.gender,
-        address: values.address,
-        occupation: values.occupation,
-        emergencyContactName: values.emergencyContactName,
-        emergencyContactNumber: values.emergencyContactNumber,
-        primaryPhysician: values.primaryPhysician,
-        insuranceProvider: values.insuranceProvider,
-        insurancePolicyNumber: values.insurancePolicyNumber,
-        allergies: values.allergies,
-        currentMedication: values.currentMedication,
-        familyMedicalHistory: values.familyMedicalHistory,
-        pastMedicalHistory: values.pastMedicalHistory,
         identificationType: values.identificationType,
-        identificationNumber: values.identificationNumber,
         identificationDocument: values.identificationDocument
           ? formData
           : undefined,
@@ -78,7 +62,9 @@ const useRegisterForm = ({ userInfo }: { userInfo: IUser }) => {
 
       const patient = await registerPatient(patientData);
 
-      if (patient) router.replace(`/patients/${userInfo.$id}/new-appointment`);
+      console.log(patient);
+
+      if (patient) router.replace(`/patients/${userId}/new-appointment`);
     } catch (error) {
       throw error;
     } finally {
