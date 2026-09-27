@@ -62,8 +62,6 @@ const useRegisterForm = ({ userId }: { userId: string }) => {
 
       const patient = await registerPatient(patientData);
 
-      console.log(patient);
-
       if (patient) router.replace(`/patients/${userId}/new-appointment`);
     } catch (error) {
       throw error;
