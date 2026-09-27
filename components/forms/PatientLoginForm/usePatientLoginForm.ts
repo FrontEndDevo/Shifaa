@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { LoginFormSchema } from "@/validation/schema/LoginFormSchema";
 
 // API actions::
-import { userLogin } from "@/lib/actions/patient.actions";
+import { checkOrRegisterUser } from "@/lib/actions/patient.actions";
 
 const usePatientLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,13 +27,15 @@ const usePatientLoginForm = () => {
   const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
     setIsLoading(true);
     try {
-      const user = await userLogin(data);
+      const getUser = await checkOrRegisterUser(data);
 
-      console.log(user);
-
-      // if (user) {
-      //   router.replace(`/patients/${user.$id}/register`);
-      // }
+      if (getUser.isNewUser) {
+        // Complete patient information:
+        router.replace(`/patients/${getUser.user.$id}/register`);
+      } else {
+        // Go direct to set an appointment:
+        router.replace(`/patients/${getUser.user.$id}/new-appointment`);
+      }
     } catch (error) {
       throw error;
     } finally {
