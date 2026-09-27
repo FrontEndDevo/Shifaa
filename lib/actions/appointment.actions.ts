@@ -71,7 +71,7 @@ export const updateAppointment = async ({
   //   appointment.status === "scheduled"
   //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
   //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
-  //     ${appointment.cancellationReason}`
+  //     ${appointment.reason}`
   // }`;
 
   // await sendNotificationBySMS({ userId, messageContent });
@@ -81,7 +81,7 @@ export const updateAppointment = async ({
   //   appointment.status === "scheduled"
   //     ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}`
   //     : `We regret to inform you that your appointment has been cancelled. The reason for that is:
-  //     ${appointment.cancellationReason}`
+  //     ${appointment.reason}`
   // }`;
 
   // const subject =

@@ -10,7 +10,7 @@ export type CreateAppointmentParams = {
   userId: string;
   patient: string;
   primaryPhysician: string;
-  cancellationReason: string;
+  reason: string;
   schedule: Date;
   status: Status;
   note: string | undefined;
@@ -19,13 +19,12 @@ export type CreateAppointmentParams = {
 // Used in (updateAppointment) action
 export type UpdateAppointmentParams = {
   appointmentId: string | undefined;
+  userId: string;
   appointment: {
     primaryPhysician: string;
     schedule: Date;
     status: Status;
-    cancellationReason: string | null;
   };
-  userId: string;
 };
 
 export interface Appointment extends Models.Document {

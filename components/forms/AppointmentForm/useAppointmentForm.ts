@@ -69,7 +69,7 @@ const useAppointmentForm = ({
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
           schedule: new Date(values.schedule),
-          cancellationReason: values.reason!,
+          reason: values.reason!,
           note: values.note,
           status: status as Status,
         };
@@ -97,7 +97,6 @@ const useAppointmentForm = ({
             primaryPhysician: values.primaryPhysician,
             schedule: new Date(values.schedule),
             status: status as Status,
-            cancellationReason: values.cancellationReason ?? null,
           },
           userId,
         };
