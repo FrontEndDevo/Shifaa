@@ -1,7 +1,11 @@
-import RegisterForm from "@/components/forms/RegisterForm/RegisterForm";
-import { getUser } from "@/lib/actions/patient.actions";
-import { SearchParamProps } from "@/types";
+// Next Components:
 import Image from "next/image";
+
+// Components:
+import RegisterForm from "@/components/forms/RegisterForm/RegisterForm";
+
+// Types:
+import { SearchParamProps } from "@/types";
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
@@ -9,15 +13,13 @@ import Shifaa from "@/components/layout/Shifaa";
 const Register = async ({ params }: SearchParamProps) => {
   const { userId } = await params;
 
-  const userInfo = await getUser(userId);
-
   return (
     <div className="h-screen flex max-h-screen">
       <section className="container remove-scrollbar">
         <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
           <Shifaa />
 
-          <RegisterForm userInfo={userInfo} />
+          <RegisterForm userId={userId} />
 
           <p className="justify-items-end text-gray-600 xl:text-left my-10">
             © 2026 Shifaa
