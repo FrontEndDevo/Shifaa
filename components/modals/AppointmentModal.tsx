@@ -31,13 +31,13 @@ const AppointmentModal = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button
-          variant="ghost"
-          className={`capitalize ${type === "schedule" && "text-green-500 hover:text-green-400"} ${type === "delete" && "text-red-500 hover:text-red-300"}`}
+        <div
+          className={`capitalize mx-2 text-sm ${type === "schedule" && "text-green-500 hover:text-green-400"} ${type === "delete" && "text-red-500 hover:text-red-300"}`}
         >
           {type}
-        </Button>
+        </div>
       </DialogTrigger>
+
       <DialogContent className="shad-dialog sm:max-w-md">
         <DialogHeader className="mb-4 space-y-3">
           <DialogTitle className="capitalize">{title}</DialogTitle>
