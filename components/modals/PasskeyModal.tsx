@@ -27,7 +27,7 @@ import {
 import {
   checkAdminSession,
   verifyAndSetPasskey,
-} from "@/lib/actions/auth.actions";
+} from "@/validation/auth.actions";
 
 const PasskeyModal = () => {
   const router = useRouter();
