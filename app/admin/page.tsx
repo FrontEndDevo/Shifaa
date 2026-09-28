@@ -14,64 +14,60 @@ import Shifaa from "@/components/layout/Shifaa";
 
 // API Actions Hooks:
 import { useGetRecentAppointments } from "@/hooks/useAppointments";
+import QueryWrapper from "@/components/shared/QueryWrapper";
 
 const Admin = () => {
   const { data: appointments, isLoading, isError } = useGetRecentAppointments();
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col space-y-14">
-      <header className="admin-header">
-        <Shifaa />
+    <QueryWrapper
+      isLoading={isLoading}
+      isError={isError}
+      data={appointments}
+      errorMessage="Failed to fetch the appointments, please try again."
+    >
+      <div className="mx-auto flex max-w-7xl flex-col space-y-14">
+        <header className="admin-header">
+          <Shifaa />
 
-        <p className="text-xl font-semibold">Admin Dashboard</p>
-      </header>
+          <p className="text-xl font-semibold">Admin Dashboard</p>
+        </header>
 
-      {isLoading && (
-        <div className="flex justify-center items-center h-screen">
-          <p>Loading appointments...</p>
-        </div>
-      )}
+        {appointments && (
+          <main className="admin-main">
+            <section className="w-full space-y-4">
+              <h1 className="header">Welcome 👋</h1>
+              <p className="text-dark-700">
+                Start the day with managing new appointments
+              </p>
+            </section>
 
-      {isError && (
-        <div className="flex justify-center items-center h-screen">
-          <p>Failed to fetch the appointments, please try again.</p>
-        </div>
-      )}
+            <section className="admin-stat">
+              <StatAppointment
+                type="appointments"
+                count={appointments.scheduledCount}
+                label="Scheduled appointments"
+                icon={"/assets/icons/appointments.svg"}
+              />
+              <StatAppointment
+                type="pending"
+                count={appointments.pendingCount}
+                label="Pending appointments"
+                icon={"/assets/icons/pending.svg"}
+              />
+              <StatAppointment
+                type="cancelled"
+                count={appointments.cancelledCount}
+                label="Cancelled appointments"
+                icon={"/assets/icons/cancelled.svg"}
+              />
+            </section>
 
-      {appointments && (
-        <main className="admin-main">
-          <section className="w-full space-y-4">
-            <h1 className="header">Welcome 👋</h1>
-            <p className="text-dark-700">
-              Start the day with managing new appointments
-            </p>
-          </section>
-
-          <section className="admin-stat">
-            <StatAppointment
-              type="appointments"
-              count={appointments.scheduledCount}
-              label="Scheduled appointments"
-              icon={"/assets/icons/appointments.svg"}
-            />
-            <StatAppointment
-              type="pending"
-              count={appointments.pendingCount}
-              label="Pending appointments"
-              icon={"/assets/icons/pending.svg"}
-            />
-            <StatAppointment
-              type="cancelled"
-              count={appointments.cancelledCount}
-              label="Cancelled appointments"
-              icon={"/assets/icons/cancelled.svg"}
-            />
-          </section>
-
-          <DataTable columns={columns} data={appointments.rows} />
-        </main>
-      )}
-    </div>
+            <DataTable columns={columns} data={appointments.rows} />
+          </main>
+        )}
+      </div>
+    </QueryWrapper>
   );
 };
 
