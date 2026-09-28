@@ -1,21 +1,22 @@
 "use client";
 
-// React Hooks
-import { useState } from "react";
+// Next Hooks:
 import { useRouter } from "next/navigation";
 
-// Validation
+// Validation:
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { PatientFormValidation } from "@/validation/schema";
 import { PatientFormDefaultValues } from "@/constants";
 
-// API actions:
-import { registerPatient } from "@/lib/actions/patient.actions";
+// API Actions Hooks:
+import { useRegisterPatient } from "@/hooks/usePatient";
 
 const useRegisterForm = ({ userId }: { userId: string }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutateAsync: registerPatientMutation, isPending } =
+    useRegisterPatient();
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof PatientFormValidation>>({
@@ -31,7 +32,6 @@ const useRegisterForm = ({ userId }: { userId: string }) => {
     values: z.infer<typeof PatientFormValidation>,
   ) => {
     let formData;
-    setIsLoading(true);
 
     if (
       values.identificationDocument &&
@@ -60,16 +60,14 @@ const useRegisterForm = ({ userId }: { userId: string }) => {
         privacyConsent: values.privacyConsent,
       };
 
-      const patient = await registerPatient(patientData);
+      const patient = await registerPatientMutation(patientData);
 
       if (patient) router.replace(`/patients/${userId}/new-appointment`);
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
-  return { isLoading, form, onSubmitHandler };
+  return { isPending, form, onSubmitHandler };
 };
 
 export default useRegisterForm;
