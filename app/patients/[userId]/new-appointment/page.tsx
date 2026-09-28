@@ -1,5 +1,8 @@
 "use client";
 
+// React Hooks:
+import { useEffect } from "react";
+
 // Next Components:
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -7,14 +10,16 @@ import { useParams } from "next/navigation";
 // Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
 
-// Shadcn UI:
-import { Spinner } from "@/components/ui/spinner";
-
 // API actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
 
+// Shadcn UI:
+import { toast } from "@/components/ui/toast";
+
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
+
+// Components:
 import QueryWrapper from "@/components/shared/QueryWrapper";
 
 const NewAppointment = () => {
@@ -23,6 +28,15 @@ const NewAppointment = () => {
   const userId = params.userId as string;
 
   const { data: patient, isLoading, isError } = useGetPatient(userId);
+
+  useEffect(() => {
+    if (isError)
+      toast.add({
+        type: "error",
+        title: "Failed to load patient data.",
+        description: "Try to refresh the page.",
+      });
+  }, [isError]);
 
   return (
     <QueryWrapper
