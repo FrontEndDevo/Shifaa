@@ -1,8 +1,5 @@
 "use server";
 
-// Next:
-import { revalidatePath } from "next/cache";
-
 // Appwrite.io:
 import { ID, Query } from "node-appwrite";
 import {
@@ -95,7 +92,6 @@ export const updateAppointment = async ({
   //   subject,
   // });
 
-  revalidatePath("/admin");
   return parseStringify(updatedAppointment);
 };
 
@@ -112,16 +108,13 @@ export const deleteAppointment = async (appointmentId: string) => {
       message: `Failed to delete appointment, please try again.`,
     };
 
-  revalidatePath("/admin");
   return parseStringify(deletedAppointment);
 };
 
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
   if (!appointmentId || appointmentId === "undefined")
-    return {
-      message: `Appointment ID is missing or invalid.`,
-    };
+    throw new Error(`Appointment ID is missing or invalid.`);
 
   const currentAppointment = await tablesDB.listRows({
     databaseId: PATIENT_DATABASE_ID as string,
@@ -130,9 +123,7 @@ export const getAppointment = async (appointmentId: string) => {
   });
 
   if (!currentAppointment)
-    return {
-      message: `Failed to get your appointment, please refresh the page.`,
-    };
+    throw new Error(`Failed to get your appointment, please refresh the page.`);
 
   return parseStringify(currentAppointment.rows[0]);
 };
@@ -144,6 +135,17 @@ export const getRecentAppointments = async () => {
     tableId: APPOINTMENT_TABLE_ID as string,
     queries: [Query.select(["*", "patient.*"]), Query.orderDesc("$createdAt")],
   });
+
+  if (!recentAppointments) {
+    // Must return default values to prevent the entire page from breaking.
+    return {
+      total: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      rows: [],
+    };
+  }
 
   const initialCounts = {
     scheduledCount: 0,
@@ -169,17 +171,6 @@ export const getRecentAppointments = async () => {
     ...counts,
     rows: recentAppointments.rows,
   };
-
-  if (!recentAppointments) {
-    // Must return default values to prevent the entire page from breaking.
-    return {
-      total: 0,
-      scheduledCount: 0,
-      pendingCount: 0,
-      cancelledCount: 0,
-      rows: [],
-    };
-  }
 
   return parseStringify(appointmentsData);
 };
