@@ -1,5 +1,4 @@
-// React Hooks:
-import { useState } from "react";
+// Next Hooks:
 import { useRouter } from "next/navigation";
 
 // Validation:
@@ -12,12 +11,13 @@ import { getAppointmentSchema } from "@/validation/schema";
 import { TAppointmentFormProps } from "@/types/appointment.types";
 import { Status } from "@/types";
 
-// API actions:
+// API Actions Hooks:
 import {
-  createAppointment,
-  deleteAppointment,
-  updateAppointment,
-} from "@/lib/actions/appointment.actions";
+  useCreateAppointment,
+  useDeleteAppointment,
+  useUpdateAppointment,
+} from "@/hooks/useAppointments";
+import { ButtonLabel, StatusType } from "./AppointmentUtils";
 
 const useAppointmentForm = ({
   userId,
@@ -26,8 +26,29 @@ const useAppointmentForm = ({
   type,
   setOpen,
 }: TAppointmentFormProps) => {
+  const {
+    mutate: createAppointmentMutate,
+    isPending: isCreating,
+    isError: createError,
+  } = useCreateAppointment();
+
+  const {
+    mutate: updateAppointmentMutate,
+    isPending: isUpdating,
+    isError: updateError,
+  } = useUpdateAppointment();
+
+  const {
+    mutate: deleteAppointmentMutate,
+    isPending: isDeleting,
+    isError: deleteError,
+  } = useDeleteAppointment();
+
+  const isLoading = isCreating || isUpdating || isDeleting;
+
+  const hasError = createError || updateError || deleteError;
+
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
 
   const AppointmentFormValidation = getAppointmentSchema(type);
 
@@ -46,20 +67,7 @@ const useAppointmentForm = ({
   const onSubmit = async (
     values: z.infer<typeof AppointmentFormValidation>,
   ) => {
-    setIsLoading(true);
-
-    let status;
-    switch (type) {
-      case "create":
-        status = "pending";
-        break;
-      case "schedule":
-        status = "scheduled";
-        break;
-      case "cancel":
-        status = "cancelled";
-        break;
-    }
+    const status = StatusType(type);
 
     try {
       // This part of code is used in the NewAppointment page to create new patient appointment:
@@ -74,22 +82,37 @@ const useAppointmentForm = ({
           status: status as Status,
         };
 
-        const appointmentToCreate = await createAppointment(
-          creatingAppointmentData,
-        );
+        // Fetch data (without) React Query.
+        // const appointmentToCreate = await createAppointment(
+        //   creatingAppointmentData,
+        // );
+        // if (appointmentToCreate) {
+        //   form.reset();
+        //   router.replace(
+        //     `/patients/${userId}/new-appointment/success?appointmentId=${appointmentToCreate.$id}`,
+        //   );
+        // }
 
-        if (appointmentToCreate) {
-          form.reset();
-          router.replace(
-            `/patients/${userId}/new-appointment/success?appointmentId=${appointmentToCreate.$id}`,
-          );
-        }
+        // Fetch data (with) React Query.
+        createAppointmentMutate(creatingAppointmentData, {
+          onSuccess: (newAppointment) => {
+            form.reset();
+            router.replace(
+              `/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`,
+            );
+          },
+        });
       } else if (type === "delete" && appointment?.$id) {
-        const appointmentToDelete = await deleteAppointment(appointment?.$id);
+        // Fetch data (without) React Query.
+        // const appointmentToDelete = await deleteAppointment(appointment?.$id);
+        // if (appointmentToDelete) {
+        // setOpen?.(false);
+        // }
 
-        if (appointmentToDelete) {
-          setOpen?.(false);
-        }
+        // Fetch data (with) React Query.
+        deleteAppointmentMutate(appointment.$id, {
+          onSuccess: () => setOpen?.(false),
+        });
       } else {
         const updatingAppointmentData = {
           appointmentId: appointment?.$id,
@@ -101,38 +124,36 @@ const useAppointmentForm = ({
           userId,
         };
 
-        const appointmentToUpdate = await updateAppointment(
-          updatingAppointmentData,
-        );
+        // Fetch data (without) React Query.
+        // const appointmentToUpdate = await updateAppointment(
+        //   updatingAppointmentData,
+        // );
+        // if (appointmentToUpdate) {
+        //   form.reset();
+        //   setOpen?.(false);
+        // }
 
-        if (appointmentToUpdate) {
-          form.reset();
-          setOpen?.(false);
-        }
+        // Fetch data (with) React Query.
+        updateAppointmentMutate(
+          { ...updatingAppointmentData },
+          {
+            onSuccess: (newAppointment) => {
+              if (newAppointment?.$id) {
+                form.reset();
+                setOpen?.(false);
+              }
+            },
+          },
+        );
       }
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  let buttonLabel;
-  switch (type) {
-    case "cancel":
-      buttonLabel = "Cancel Appointment";
-      break;
-    case "delete":
-      buttonLabel = "Delete Appointment forever";
-      break;
-    case "schedule":
-      buttonLabel = "Schedule Appointment";
-      break;
-    default:
-      buttonLabel = "Submit Apppointment";
-  }
+  const buttonLabel = ButtonLabel(type);
 
-  return { isLoading, buttonLabel, onSubmit, form };
+  return { isLoading, hasError, buttonLabel, onSubmit, form };
 };
 
 export default useAppointmentForm;
