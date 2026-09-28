@@ -10,6 +10,9 @@ import { LoginFormSchema } from "@/validation/schema/LoginFormSchema";
 // API Actions Hooks:
 import { useCheckOrRegister } from "@/hooks/usePatient";
 
+// Shadcn UI:
+import { toast } from "@/components/ui/toast";
+
 const usePatientLoginForm = () => {
   const { mutateAsync: loginPatientMutation, isPending } = useCheckOrRegister();
 
@@ -25,19 +28,38 @@ const usePatientLoginForm = () => {
   });
 
   const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
-    try {
-      const getUser = await loginPatientMutation(data);
+    toast.promise(
+      loginPatientMutation(data).then((getUser) => {
+        const isNew = Boolean(getUser?.isNewUser);
 
-      if (getUser.isNewUser) {
-        // Complete patient information:
-        router.replace(`/patients/${getUser.user.$id}/register`);
-      } else {
-        // Go direct to set an appointment:
-        router.replace(`/patients/${getUser.user.$id}/new-appointment`);
-      }
-    } catch (error) {
-      throw error;
-    }
+        if (isNew) {
+          // Complete patient information:
+          router.replace(`/patients/${getUser.user.$id}/register`);
+          return {
+            title: "Sign Up Successfully.",
+            description: "Account created! Please complete your profile.",
+          };
+        } else {
+          // Go direct to set an appointment:
+          router.replace(`/patients/${getUser.user.$id}/new-appointment`);
+          return {
+            title: "Login Successfully.",
+            description: "Welcome back!",
+          };
+        }
+      }),
+      {
+        loading: {
+          title: "Authenticating...",
+          description: "Please wait while we process your account...",
+        },
+        success: (message) => message,
+        error: {
+          title: "Authenticating Proccess Failed",
+          description: "Something went wrong, Please try again.",
+        },
+      },
+    );
   };
 
   return { isPending, onSubmitHandler, handleSubmit, control };
