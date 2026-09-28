@@ -23,7 +23,7 @@ export function useGetRecentAppointments() {
   const query = useQuery({
     queryKey: ["appointments"],
     queryFn: () => getRecentAppointments(),
-    refetchInterval: 1000 * 60,
+    refetchInterval: 1000 * 60 * 2, // 2 minutes to fetch new data.
   });
   return query;
 }
