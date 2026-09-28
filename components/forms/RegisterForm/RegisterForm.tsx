@@ -20,7 +20,7 @@ import { InputFieldType } from "@/types/form.types";
 import { GenderOptions, IdentificationTypes } from "@/constants/index";
 
 const RegisterForm = ({ userId }: { userId: string }) => {
-  const { isLoading, form, onSubmitHandler } = useRegisterForm({ userId });
+  const { isPending, form, onSubmitHandler } = useRegisterForm({ userId });
 
   return (
     <form onSubmit={form.handleSubmit(onSubmitHandler)}>
@@ -161,7 +161,7 @@ const RegisterForm = ({ userId }: { userId: string }) => {
         />
       </section>
 
-      <SubmitButton isLoading={isLoading}>Register</SubmitButton>
+      <SubmitButton isLoading={isPending}>Register</SubmitButton>
     </form>
   );
 };
