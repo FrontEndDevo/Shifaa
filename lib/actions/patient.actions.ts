@@ -53,17 +53,6 @@ export const checkOrRegisterUser = async (user: ICreateUserParams) => {
   }
 };
 
-// Get specefic user by ID:
-export const getUser = async (userId: string) => {
-  try {
-    const user = await users.get({ userId });
-
-    return parseStringify(user);
-  } catch (error) {
-    throw error;
-  }
-};
-
 // Register a new user with full information:
 export const registerPatient = async (patientData: IRegisterUserParams) => {
   try {
