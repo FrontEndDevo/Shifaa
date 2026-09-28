@@ -1,8 +1,15 @@
+// Next.js:
 import type { Metadata } from "next";
-import { cn } from "@/lib/utils";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import "./globals.css";
+
+// Shadcn:
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toast";
+
 import { ThemeProvider } from "@/components/providers/theme-provider";
+
+// React Query:
 import { QueryProvider } from "@/components/providers/query-provider";
 
 const fontSans = FontSans({
@@ -37,6 +44,7 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="dark">
             {children}
+            <Toaster />
           </ThemeProvider>
         </QueryProvider>
       </body>
