@@ -13,6 +13,9 @@ import { PatientFormDefaultValues } from "@/constants";
 // API Actions Hooks:
 import { useRegisterPatient } from "@/hooks/usePatient";
 
+// Shadcn UI:
+import { toast } from "@/components/ui/toast";
+
 const useRegisterForm = ({ userId }: { userId: string }) => {
   const { mutateAsync: registerPatientMutation, isPending } =
     useRegisterPatient();
@@ -46,26 +49,42 @@ const useRegisterForm = ({ userId }: { userId: string }) => {
       formData.append("fileName", values.identificationDocument[0].name);
     }
 
-    try {
-      const patientData = {
-        userId,
-        name: values.name,
-        phone: values.phone,
-        birthDate: new Date(values.birthDate),
-        gender: values.gender,
-        identificationType: values.identificationType,
-        identificationDocument: values.identificationDocument
-          ? formData
-          : undefined,
-        privacyConsent: values.privacyConsent,
-      };
+    const patientData = {
+      userId,
+      name: values.name,
+      phone: values.phone,
+      birthDate: new Date(values.birthDate),
+      gender: values.gender,
+      identificationType: values.identificationType,
+      identificationDocument: values.identificationDocument
+        ? formData
+        : undefined,
+      privacyConsent: values.privacyConsent,
+    };
 
-      const patient = await registerPatientMutation(patientData);
-
-      if (patient) router.replace(`/patients/${userId}/new-appointment`);
-    } catch (error) {
-      throw error;
-    }
+    toast.promise(
+      registerPatientMutation(patientData).then((patient) => {
+        if (patient) {
+          router.replace(`/patients/${userId}/new-appointment`);
+        }
+      }),
+      {
+        loading: {
+          title: "Saving...",
+          description: "Saving your information...",
+        },
+        success: {
+          title: "Registration Successful!",
+          description:
+            "Patient profile created successfully. Proceeding to appointment booking.",
+        },
+        error: () => ({
+          title: "Registration Failed!",
+          description:
+            "Failed to create patient profile. Please check the entered data and try again.",
+        }),
+      },
+    );
   };
   return { isPending, form, onSubmitHandler };
 };
