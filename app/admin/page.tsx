@@ -1,6 +1,6 @@
 "use client";
-// export const dynamic = "force-dynamic";
-// export const revalidate = 0;
+// React Hooks:
+import { useEffect } from "react";
 
 // Data Table:
 import { DataTable } from "@/components/admin/DataTable";
@@ -8,16 +8,28 @@ import { columns } from "@/components/admin/columns";
 
 // Components:
 import StatAppointment from "@/components/admin/StatAppointment";
+import QueryWrapper from "@/components/shared/QueryWrapper";
+
+// Shadcn UI:
+import { toast } from "@/components/ui/toast";
 
 // Shifaa Layout:
 import Shifaa from "@/components/layout/Shifaa";
 
 // API Actions Hooks:
 import { useGetRecentAppointments } from "@/hooks/useAppointments";
-import QueryWrapper from "@/components/shared/QueryWrapper";
 
 const Admin = () => {
   const { data: appointments, isLoading, isError } = useGetRecentAppointments();
+
+  useEffect(() => {
+    if (isError)
+      toast.add({
+        type: "error",
+        title: "Failed to fetch appointments.",
+        description: "Refresh the page and try again.",
+      });
+  }, [isError]);
 
   return (
     <QueryWrapper
