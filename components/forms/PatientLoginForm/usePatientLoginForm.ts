@@ -1,5 +1,4 @@
-// React Hooks:
-import { useState } from "react";
+// Next Hooks:
 import { useRouter } from "next/navigation";
 
 // Validation:
@@ -8,11 +7,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoginFormSchema } from "@/validation/schema/LoginFormSchema";
 
-// API actions::
-import { checkOrRegisterUser } from "@/lib/actions/patient.actions";
+// API Actions Hooks:
+import { useCheckOrRegister } from "@/hooks/usePatient";
 
 const usePatientLoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutateAsync: loginPatientMutation, isPending } = useCheckOrRegister();
+
   const router = useRouter();
 
   const { handleSubmit, control } = useForm<z.infer<typeof LoginFormSchema>>({
@@ -25,9 +25,8 @@ const usePatientLoginForm = () => {
   });
 
   const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
-    setIsLoading(true);
     try {
-      const getUser = await checkOrRegisterUser(data);
+      const getUser = await loginPatientMutation(data);
 
       if (getUser.isNewUser) {
         // Complete patient information:
@@ -38,12 +37,10 @@ const usePatientLoginForm = () => {
       }
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  return { isLoading, onSubmitHandler, handleSubmit, control };
+  return { isPending, onSubmitHandler, handleSubmit, control };
 };
 
 export default usePatientLoginForm;
