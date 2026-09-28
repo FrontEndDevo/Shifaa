@@ -1,5 +1,6 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+"use client";
+// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
 
 // Data Table:
 import { DataTable } from "@/components/admin/DataTable";
@@ -11,11 +12,11 @@ import StatAppointment from "@/components/admin/StatAppointment";
 // Shifaa Layout:
 import Shifaa from "@/components/layout/Shifaa";
 
-// API actions:
-import { getRecentAppointments } from "@/lib/actions/appointment.actions";
+// API Actions Hooks:
+import { useGetRecentAppointments } from "@/hooks/useAppointments";
 
-const Admin = async () => {
-  const appointments = await getRecentAppointments();
+const Admin = () => {
+  const { data: appointments, isLoading, isError } = useGetRecentAppointments();
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -25,37 +26,51 @@ const Admin = async () => {
         <p className="text-xl font-semibold">Admin Dashboard</p>
       </header>
 
-      <main className="admin-main">
-        <section className="w-full space-y-4">
-          <h1 className="header">Welcome 👋</h1>
-          <p className="text-dark-700">
-            Start the day with managing new appointments
-          </p>
-        </section>
+      {isLoading && (
+        <div className="flex justify-center items-center h-screen">
+          <p>Loading appointments...</p>
+        </div>
+      )}
 
-        <section className="admin-stat">
-          <StatAppointment
-            type="appointments"
-            count={appointments.scheduledCount}
-            label="Scheduled appointments"
-            icon={"/assets/icons/appointments.svg"}
-          />
-          <StatAppointment
-            type="pending"
-            count={appointments.pendingCount}
-            label="Pending appointments"
-            icon={"/assets/icons/pending.svg"}
-          />
-          <StatAppointment
-            type="cancelled"
-            count={appointments.cancelledCount}
-            label="Cancelled appointments"
-            icon={"/assets/icons/cancelled.svg"}
-          />
-        </section>
+      {isError && (
+        <div className="flex justify-center items-center h-screen">
+          <p>Failed to fetch the appointments, please try again.</p>
+        </div>
+      )}
 
-        <DataTable columns={columns} data={appointments.rows} />
-      </main>
+      {appointments && (
+        <main className="admin-main">
+          <section className="w-full space-y-4">
+            <h1 className="header">Welcome 👋</h1>
+            <p className="text-dark-700">
+              Start the day with managing new appointments
+            </p>
+          </section>
+
+          <section className="admin-stat">
+            <StatAppointment
+              type="appointments"
+              count={appointments.scheduledCount}
+              label="Scheduled appointments"
+              icon={"/assets/icons/appointments.svg"}
+            />
+            <StatAppointment
+              type="pending"
+              count={appointments.pendingCount}
+              label="Pending appointments"
+              icon={"/assets/icons/pending.svg"}
+            />
+            <StatAppointment
+              type="cancelled"
+              count={appointments.cancelledCount}
+              label="Cancelled appointments"
+              icon={"/assets/icons/cancelled.svg"}
+            />
+          </section>
+
+          <DataTable columns={columns} data={appointments.rows} />
+        </main>
+      )}
     </div>
   );
 };
