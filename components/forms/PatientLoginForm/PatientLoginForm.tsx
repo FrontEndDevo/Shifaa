@@ -11,7 +11,7 @@ import SubmitButton from "../common/SubmitButton";
 import { InputFieldType } from "@/types/form.types";
 
 const PatientLoginForm = () => {
-  const { isLoading, onSubmitHandler, handleSubmit, control } =
+  const { isPending, onSubmitHandler, handleSubmit, control } =
     usePatientLoginForm();
 
   return (
@@ -43,7 +43,7 @@ const PatientLoginForm = () => {
         iconAlt="password"
       />
 
-      <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+      <SubmitButton isLoading={isPending}>Get Started</SubmitButton>
     </form>
   );
 };
