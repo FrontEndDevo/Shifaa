@@ -1,47 +1,60 @@
+"use client";
+
 // Next Components:
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 // Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
 
-// API actions::
-import { getPatient } from "@/lib/actions/patient.actions";
+// Shadcn UI:
+import { Spinner } from "@/components/ui/spinner";
 
-// Types
-import { SearchParamProps } from "@/types";
+// API actions Hooks:
+import { useGetPatient } from "@/hooks/usePatient";
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
+import QueryWrapper from "@/components/shared/QueryWrapper";
 
-const NewAppointment = async ({ params }: SearchParamProps) => {
-  const { userId } = await params;
+const NewAppointment = () => {
+  const params = useParams();
 
-  const patient = await getPatient(userId);
+  const userId = params.userId as string;
+
+  const { data: patient, isLoading, isError } = useGetPatient(userId);
 
   return (
-    <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[860px] flex-1 justify-between">
-          <Shifaa />
+    <QueryWrapper
+      isLoading={isLoading}
+      isError={isError}
+      data={patient}
+      errorMessage="Failed to load patient information."
+    >
+      <div className="flex h-screen max-h-screen">
+        <section className="remove-scrollbar container my-auto">
+          <div className="sub-container max-w-[860px] flex-1 justify-between">
+            <Shifaa />
 
-          <AppointmentForm
-            patientId={patient?.$id}
-            userId={userId}
-            type="create"
-          />
+            <AppointmentForm
+              patientId={patient?.$id}
+              userId={userId}
+              type="create"
+            />
 
-          <p className="copyright mt-10 py-12">© 2026 Shifaa</p>
-        </div>
-      </section>
+            <p className="copyright mt-10 py-12">© 2026 Shifaa</p>
+          </div>
+        </section>
 
-      <Image
-        src="/assets/images/appointment-img.png"
-        height={1500}
-        width={1500}
-        alt="appointment"
-        className="side-img max-w-[390px] bg-bottom"
-      />
-    </div>
+        <Image
+          src="/assets/images/appointment-img.png"
+          height={1500}
+          width={1500}
+          alt="appointment"
+          className="side-img max-w-[390px] bg-bottom"
+        />
+      </div>
+    </QueryWrapper>
   );
 };
 
