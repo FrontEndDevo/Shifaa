@@ -30,13 +30,14 @@ export const AppointmentForm = ({
   appointment,
   setOpen,
 }: TAppointmentFormProps) => {
-  const { isLoading, buttonLabel, onSubmit, form } = useAppointmentForm({
-    userId,
-    patientId,
-    appointment,
-    type,
-    setOpen,
-  });
+  const { isLoading, hasError, buttonLabel, onSubmit, form } =
+    useAppointmentForm({
+      userId,
+      patientId,
+      appointment,
+      type,
+      setOpen,
+    });
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
@@ -121,6 +122,12 @@ export const AppointmentForm = ({
         <p>
           Are you sure you want to delete this appointment? This action cannot
           be undone.
+        </p>
+      )}
+
+      {hasError && (
+        <p className="text-red-400 text-sm">
+          Something went wrong, please try again.
         </p>
       )}
 
