@@ -176,7 +176,7 @@ const InputField = <TFieldValues extends FieldValues>({
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel>{label}</FieldLabel>
 
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <div>
                   <SelectTrigger className="shad-select-trigger">
                     <SelectValue placeholder={placeholder} />
