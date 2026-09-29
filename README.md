@@ -12,7 +12,8 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 ## 🌐 Live Demo & Preview
 
 - **Live Demo:** [https://shifaa-pearl.vercel.app](https://shifaa-pearl.vercel.app/)
-
+- 
+- **Passkey to access admin page:** [123456]
 ---
 
 ## ✨ Key Features
