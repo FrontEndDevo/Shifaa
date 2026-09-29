@@ -18,7 +18,7 @@ import {
   UpdateAppointmentParams,
 } from "@/types/appointment.types";
 
-// GET APPOINTMENT HOOK
+// GET ALL RECENT APPOINTMENTS HOOK
 export function useGetRecentAppointments() {
   const query = useQuery({
     queryKey: ["appointments"],
