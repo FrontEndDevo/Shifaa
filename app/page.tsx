@@ -15,6 +15,7 @@ import { SearchParamProps } from "@/types";
 import PasskeyModal from "@/components/modals/PasskeyModal";
 import SpinnerButton from "@/components/shared/SpinnerButton";
 import Footer from "@/components/layout/footer/Footer";
+import FAQs from "@/components/feedback/FAQs";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const { admin } = await searchParams;
@@ -51,6 +52,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
           className="side-img max-w-[50%]"
         />
       </div>
+      <FAQs />
       <Footer />
     </>
   );
