@@ -50,8 +50,8 @@ export interface IFooterLinksSectionProps {
 }
 
 export interface IFooterProps {
-  newsletter: INewsletterData;
-  footerLinks: FooterLinksSectionData[];
-  contactLinks: ContactLinks;
+  newsletter?: INewsletterData;
+  footerLinks?: FooterLinksSectionData[];
+  contactLinks?: ContactLinks;
   className?: string;
 }
