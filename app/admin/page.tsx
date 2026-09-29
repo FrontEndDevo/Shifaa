@@ -17,7 +17,7 @@ import { toast } from "@/components/ui/toast";
 import Shifaa from "@/components/layout/Shifaa";
 
 // API Actions Hooks:
-import { useGetRecentAppointments } from "@/hooks/useAppointments";
+import { useGetRecentAppointments } from "@/components/forms/AppointmentForm/hooks/useAppointments";
 
 const Admin = () => {
   const { data: appointments, isLoading, isError } = useGetRecentAppointments();
