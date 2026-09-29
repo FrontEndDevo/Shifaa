@@ -4,7 +4,7 @@
 import { useParams, useSearchParams } from "next/navigation";
 
 // API Actions Hooks:
-import { useGetAppointment } from "@/hooks/useAppointments";
+import { useGetAppointment } from "@/components/forms/AppointmentForm/hooks/useAppointments";
 
 export default function useSuccessPage() {
   const params = useParams();
