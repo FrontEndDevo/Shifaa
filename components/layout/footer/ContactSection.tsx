@@ -17,7 +17,7 @@ const ContactSection = ({ links }: ContactSectionProps) => {
 
   return (
     <div>
-      <h2 className="mb-6 text-sm leading-tight font-medium text-muted-foreground uppercase">
+      <h2 className="text-center mb-6 text-sm leading-tight font-medium text-muted-foreground uppercase">
         Contact
       </h2>
       <div className="space-y-6">

@@ -36,7 +36,9 @@ const Footer = ({
     <section className={cn("pt-8 pb-8 xl:pt-12", className)}>
       <div className="container space-y-10">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
-          <NewsletterSection {...newsletter} />
+          <div className="md:col-span-2 col-span-1 text-center xl:text-start xl:col-span-1">
+            <NewsletterSection {...newsletter} />
+          </div>
           <FooterLinksSection sections={footerLinks} />
           <ContactSection links={contactLinks} />
         </div>
