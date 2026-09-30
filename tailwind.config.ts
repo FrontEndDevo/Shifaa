@@ -27,10 +27,7 @@ const config = {
           500: "#24AE7C",
           600: "#0D2A1F",
         },
-        blue: {
-          500: "#79B5EC",
-          600: "#152432",
-        },
+
         red: {
           500: "#F37877",
           600: "#3E1716",
@@ -78,6 +75,6 @@ const config = {
     },
   },
   plugins: [tailwindcssAnimate],
-}satisfies Config;
+} satisfies Config;
 
 export default config;
