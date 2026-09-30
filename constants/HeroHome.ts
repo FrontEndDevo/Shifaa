@@ -8,7 +8,7 @@ export const SHIFAA_DATA = {
 };
 
 const commonClasses =
-  "absolute lg:scale-55 xl:scale-100 border-[1px] rounded-3xl shadow-xl";
+  "absolute lg:scale-55 xl:scale-100 border-[1px] rounded-2xl shadow-xl";
 
 export const HERO_CARDS = [
   {
@@ -23,7 +23,7 @@ export const HERO_CARDS = [
     alt: "Card 2",
     width: 170,
     height: 170,
-    className: `${commonClasses} top-0 right-1/16 xl:right-10 border-black rotate-12`,
+    className: `${commonClasses} top-0 xl:right-1/16 xl:right-10 border-black rotate-12`,
   },
   {
     src: "/assets/images/hero/hero_cards/hero_card_3.jpg",
