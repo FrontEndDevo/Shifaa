@@ -6,7 +6,7 @@ import { HERO_CARDS } from "@/constants/HeroHome";
 
 const HeroCards = () => {
   return (
-    <div className="relative flex flex-1 h-full w-full lg:w-auto">
+    <div className="relative flex flex-1 gap-8 h-full w-full lg:w-auto">
       {HERO_CARDS.map((card) => (
         <Image
           key={card.alt}
