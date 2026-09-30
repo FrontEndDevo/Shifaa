@@ -12,11 +12,15 @@ import Shifaa from "@/components/layout/Shifaa";
 import { SearchParamProps } from "@/types";
 
 // Modal Components:
+import Navbar from "@/components/layout/navbar/Navbar";
+import Hero from "@/components/hero/Hero";
 import PasskeyModal from "@/components/modals/PasskeyModal";
 import SpinnerButton from "@/components/shared/SpinnerButton";
-import Footer from "@/components/layout/footer/Footer";
 import FAQs from "@/components/feedback/FAQs";
-import Navbar from "@/components/layout/navbar/Navbar";
+import Footer from "@/components/layout/footer/Footer";
+
+// Constants:
+import { SHIFAA_DATA } from "@/constants/HeroHome";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const { admin } = await searchParams;
@@ -24,6 +28,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   return (
     <>
       <Navbar />
+      <Hero {...SHIFAA_DATA} />
       <div className="h-screen flex max-h-screen">
         {admin && <PasskeyModal />}
 
