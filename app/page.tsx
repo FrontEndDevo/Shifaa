@@ -16,12 +16,14 @@ import PasskeyModal from "@/components/modals/PasskeyModal";
 import SpinnerButton from "@/components/shared/SpinnerButton";
 import Footer from "@/components/layout/footer/Footer";
 import FAQs from "@/components/feedback/FAQs";
+import Navbar from "@/components/layout/navbar/Navbar";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const { admin } = await searchParams;
 
   return (
     <>
+      <Navbar />
       <div className="h-screen flex max-h-screen">
         {admin && <PasskeyModal />}
 
