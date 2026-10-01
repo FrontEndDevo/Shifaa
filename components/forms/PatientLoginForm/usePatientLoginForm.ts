@@ -13,6 +13,9 @@ import { useCheckOrRegister } from "@/hooks/usePatient";
 // Shadcn UI:
 import { toast } from "@/components/ui/toast";
 
+// React Query:
+import { useQueryClient } from "@tanstack/react-query";
+
 const usePatientLoginForm = () => {
   const { mutateAsync: loginPatientMutation, isPending } = useCheckOrRegister();
 
@@ -27,21 +30,21 @@ const usePatientLoginForm = () => {
     },
   });
 
+  const queryClient = useQueryClient();
+
   const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
     toast.promise(
       loginPatientMutation(data).then((getUser) => {
-        const isNew = Boolean(getUser?.isNewUser);
-
-        if (isNew) {
+        if (getUser.isNewUser) {
           // Complete patient information:
-          router.replace(`/patients/${getUser.user.$id}/register`);
+          router.replace(`/patients/${getUser.user.userId}/register`);
           return {
             title: "Sign Up Successfully.",
             description: "Account created! Please complete your profile.",
           };
         } else {
           // Go direct to set an appointment:
-          router.replace(`/patients/${getUser.user.$id}/new-appointment`);
+          router.replace(`/patients/${getUser.user.userId}/new-appointment`);
           return {
             title: "Login Successfully.",
             description: "Welcome back!",
@@ -60,6 +63,9 @@ const usePatientLoginForm = () => {
         },
       },
     );
+
+    
+    await queryClient.invalidateQueries({ queryKey: ["patient", "me"] });
   };
 
   return { isPending, onSubmitHandler, handleSubmit, control };
