@@ -1,7 +1,6 @@
 "use client";
 
 // Shadcn UI:
-import { cn } from "cn";
 import {
   Select,
   SelectContent,
@@ -30,10 +29,9 @@ const Footer = ({
   newsletter = NEWSLETTER_DATA,
   footerLinks = FOOTER_LINKS,
   contactLinks = CONTACT_LINKS,
-  className,
 }: IFooterProps) => {
   return (
-    <section className={cn("pt-8 pb-8 xl:pt-12", className)}>
+    <section className="pt-8 pb-8 xl:pt-12 border-t-2">
       <div className="container space-y-10">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
           <div className="md:col-span-2 col-span-1 text-center xl:text-start xl:col-span-1">
