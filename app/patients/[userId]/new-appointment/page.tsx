@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 // Next Components:
 import Image from "next/image";
-import { useParams } from "next/navigation";
 
 // Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
@@ -23,11 +22,7 @@ import Shifaa from "@/components/layout/Shifaa";
 import QueryWrapper from "@/components/shared/QueryWrapper";
 
 const NewAppointment = () => {
-  const params = useParams();
-
-  const userId = params.userId as string;
-
-  const { data: patient, isLoading, isError } = useGetPatient(userId);
+  const { data: patient, isLoading, isError } = useGetPatient();
 
   useEffect(() => {
     if (isError)
@@ -52,7 +47,7 @@ const NewAppointment = () => {
 
             <AppointmentForm
               patientId={patient?.$id}
-              userId={userId}
+              userId={patient?.userId}
               type="create"
             />
 
