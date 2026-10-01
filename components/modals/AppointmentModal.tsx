@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
 
 // Components:
 import { AppointmentForm } from "../forms/AppointmentForm/AppointmentForm";
@@ -46,7 +45,7 @@ const AppointmentModal = ({
 
         <AppointmentForm
           userId={appointment?.userId ?? ""}
-          patientId={appointment?.patient.$id ?? ""}
+          patientId={appointment?.patient?.$id ?? ""}
           type={type}
           appointment={appointment}
           setOpen={setOpen}
