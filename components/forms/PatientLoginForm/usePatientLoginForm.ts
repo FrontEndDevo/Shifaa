@@ -37,7 +37,7 @@ const usePatientLoginForm = () => {
       loginPatientMutation(data).then((getUser) => {
         if (getUser.isNewUser) {
           // Complete patient information:
-          router.replace(`/patients/${getUser.user.userId}/register`);
+          router.replace(`/auth/${getUser.user.userId}/register`);
           return {
             title: "Sign Up Successfully.",
             description: "Account created! Please complete your profile.",
@@ -64,7 +64,6 @@ const usePatientLoginForm = () => {
       },
     );
 
-    
     await queryClient.invalidateQueries({ queryKey: ["patient", "me"] });
   };
 

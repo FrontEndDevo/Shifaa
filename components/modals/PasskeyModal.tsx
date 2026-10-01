@@ -40,7 +40,7 @@ const PasskeyModal = () => {
     const adminHandler = async () => {
       const isAdminAuthorized = await checkAdminSession();
       if (isAdminAuthorized) {
-        router.replace("/admin");
+        router.replace("/auth/admin");
       } else {
         setOpen(true);
       }
@@ -62,7 +62,7 @@ const PasskeyModal = () => {
     const verifyAndSetAdminPasskey = await verifyAndSetPasskey(passkey);
 
     if (verifyAndSetAdminPasskey.success) {
-      router.replace("/admin");
+      router.replace("/auth/admin");
     } else {
       setError("Invalid passkey. Please try again.");
     }
