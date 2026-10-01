@@ -12,11 +12,11 @@ import {
 import { ICreateUserParams, IRegisterUserParams } from "@/types";
 
 // GET PATIENT HOOK
-export function useGetPatient(userId: string) {
+export function useGetPatient() {
   return useQuery({
-    queryKey: ["patient"],
-    queryFn: () => getPatient(userId),
-    enabled: !!userId,
+    queryKey: ["patient", "me"],
+    queryFn: () => getPatient(),
+    staleTime: 1000 * 60 * 60 * 24,
   });
 }
 
