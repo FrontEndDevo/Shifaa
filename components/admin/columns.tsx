@@ -44,7 +44,7 @@ export const columns = columnHelper.columns([
     accessorKey: "phone",
     header: "Phone",
     cell: ({ row }) => (
-      <h3 className="text-sm">{row.original.patient.phone}</h3>
+      <h3 className="text-sm">{row.original.patient?.phone}</h3>
     ),
   },
 
@@ -53,7 +53,7 @@ export const columns = columnHelper.columns([
     header: "Status",
     cell: ({ row }) => (
       <div>
-        <StatusBadge status={row.original.status} />
+        <StatusBadge status={row.original?.status} />
       </div>
     ),
   },
@@ -63,7 +63,7 @@ export const columns = columnHelper.columns([
     header: "Appointment",
     cell: ({ row }) => (
       <p className="text-sm min-w-[100px]">
-        {formatDateTime(row.original.schedule).dateTime}
+        {formatDateTime(row.original?.schedule).dateTime}
       </p>
     ),
   },
@@ -75,7 +75,7 @@ export const columns = columnHelper.columns([
       const appointment = row.original;
 
       const doctor = Doctors.find(
-        (doctor) => doctor.name === appointment.primaryPhysician,
+        (doctor) => doctor.name === appointment?.primaryPhysician,
       );
 
       return (
