@@ -8,7 +8,7 @@ const StatusBadge = ({ status }: { status: Status }) => {
     <div
       className={clsx("status-badge mx-auto", {
         "bg-green-600": status === "scheduled",
-        "bg-blue-600": status === "pending",
+        "bg-blue-900": status === "pending",
         "bg-red-600": status === "cancelled",
       })}
     >
