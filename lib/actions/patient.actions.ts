@@ -20,37 +20,45 @@ import { parseStringify } from "../utils";
 
 // Types:
 import { ICreateUserParams, IRegisterUserParams } from "@/types";
+import { cookies } from "next/headers";
 
 // User Login:
 export const checkOrRegisterUser = async (user: ICreateUserParams) => {
+  // Check if user exists or not.
   const userExists = await users.list({
     queries: [Query.equal("email", [user.email])],
   });
 
-  // If user does exist? Login...
-  if (userExists.total > 0) {
-    const loggedUser = await account.createEmailPasswordSession({
-      email: user.email,
-      password: user.password,
-    });
-
-    return {
-      isNewUser: false,
-      user: parseStringify(loggedUser),
-    };
-  } else {
+  let isNewUser = false;
+  if (userExists.total === 0) {
     // If user does (not) exist? Sign up...
-    const registeredUser = await account.create({
+    await account.create({
       userId: ID.unique(),
       email: user.email,
       password: user.password,
       name: "name",
     });
-    return {
-      isNewUser: true,
-      user: parseStringify(registeredUser),
-    };
+
+    isNewUser = true;
   }
+
+  // Logging in after creating account to get userId.
+  const loggedUser = await account.createEmailPasswordSession({
+    email: user.email,
+    password: user.password,
+  });
+
+  // Store userId in Cookies:
+  const cookieStore = await cookies();
+  cookieStore.set("patient-user-id", loggedUser.userId, {
+    path: "/",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 60 * 60 * 24 * 7,
+  });
+
+  return parseStringify({ isNewUser, user: loggedUser });
 };
 
 // Register a new user with full information:
@@ -89,8 +97,17 @@ export const registerPatient = async (patientData: IRegisterUserParams) => {
 };
 
 // Get specefic patient info by ID:
-export const getPatient = async (userId: string) => {
+export const getPatient = async () => {
   try {
+    const cookieStore = await cookies();
+    const userIdCookie = cookieStore.get("patient-user-id");
+
+    if (!userIdCookie || !userIdCookie.value) {
+      return null;
+    }
+
+    const userId = userIdCookie.value;
+
     const patients = await tablesDB.listRows({
       databaseId: PATIENT_DATABASE_ID as string,
       tableId: PATIENT_TABLE_ID as string,
@@ -103,6 +120,12 @@ export const getPatient = async (userId: string) => {
 
     return parseStringify(patients.rows[0]);
   } catch (error) {
-    throw error;
+    return null;
   }
 };
+
+export async function logoutUser() {
+  const cookieStore = await cookies();
+  cookieStore.delete("appwrite-session");
+  cookieStore.delete("user-id");
+}
