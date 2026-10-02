@@ -33,7 +33,7 @@ const Login = async ({ searchParams }: SearchParamProps) => {
             <PatientLoginForm />
 
             <div className="text-14-regular mt-20 flex justify-between">
-              <p className="justify-items-end text-gray-600 xl:text-left mb-2">
+              <p className="justify-items-end text-gray-600 xl:text-left">
                 © 2026 Shifaa
               </p>
               {!admin ? (
