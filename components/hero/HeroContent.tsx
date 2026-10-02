@@ -12,12 +12,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
-const HeroContent = ({
-  headline,
-  description,
-  primaryButtonText,
-  secondaryButtonText,
-}: HeroContentProps) => {
+const HeroContent = ({ headline, description }: HeroContentProps) => {
   return (
     <div className="w-full px-4 lg:px-0 flex flex-col items-center justify-center gap-6 text-center">
       <h1
@@ -34,10 +29,7 @@ const HeroContent = ({
         {description}
       </p>
 
-      <CTAButtons
-        primaryButtonText={primaryButtonText}
-        secondaryButtonText={secondaryButtonText}
-      />
+      <CTAButtons />
     </div>
   );
 };

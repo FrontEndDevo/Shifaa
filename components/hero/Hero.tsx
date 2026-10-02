@@ -22,12 +22,7 @@ const backgroundPattern = {
   backgroundSize: "40px 40px, 40px 40px, 40px 40px, 40px 40px",
 };
 
-const Hero = ({
-  headline,
-  description,
-  primaryButtonText,
-  secondaryButtonText,
-}: HeroContentProps) => {
+const Hero = ({ headline, description }: HeroContentProps) => {
   return (
     <>
       <style jsx>{`
@@ -50,12 +45,7 @@ const Hero = ({
       >
         <HeroBackground />
         <div className="relative flex flex-col items-center justify-center h-full w-full pt-16 pb-10 lg:px-[10%] z-40 gap-8">
-          <HeroContent
-            headline={headline}
-            description={description}
-            primaryButtonText={primaryButtonText}
-            secondaryButtonText={secondaryButtonText}
-          />
+          <HeroContent headline={headline} description={description} />
 
           <TooltipProvider>
             <HeroTestimonials />
