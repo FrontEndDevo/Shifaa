@@ -1,4 +1,11 @@
-import { CalendarDays, Info, Stethoscope, History, Phone } from "lucide-react";
+import {
+  CalendarDays,
+  Info,
+  Stethoscope,
+  History,
+  Phone,
+  BadgeQuestionMark,
+} from "lucide-react";
 
 export const NAV_MENU = [
   {
@@ -39,6 +46,12 @@ export const NAV_MENU = [
         description: "Get in touch with our healthcare team",
         icon: Phone,
         url: "/contact",
+      },
+      {
+        title: "FAQs",
+        description: "Let us answer all your questions about our services",
+        icon: BadgeQuestionMark,
+        url: "/faqs",
       },
     ],
   },
