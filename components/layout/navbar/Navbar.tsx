@@ -14,10 +14,15 @@ import Shifaa from "../Shifaa";
 
 // Components:
 import NavItems from "./NavItems";
-import NavBookAppointmentBtn from "./NavBookAppointmentBtn";
+import NavActionButton from "./NavActionButton";
+
+// API Actions Hooks:
+import { useGetPatient } from "@/hooks/usePatient";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data } = useGetPatient();
 
   return (
     <header className="sticky top-0 right-0 z-50 border-b bg-dark-300">
@@ -33,7 +38,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:block">
-          <NavBookAppointmentBtn />
+          <NavActionButton userId={data?.userId} />
         </div>
 
         {/* ================= MOBILE / TABLET ================= */}
@@ -56,7 +61,7 @@ const Navbar = () => {
               <NavItems key={item.title} item={item} />
             ))}
             <div className="flex justify-center col-span-2">
-              <NavBookAppointmentBtn />
+              <NavActionButton />
             </div>
           </div>
         </div>
