@@ -36,7 +36,7 @@ const Services = () => {
           return (
             <div key={idx} className="group bg-white p-4 rounded-xl">
               <ServiceIcon
-                className={`w-14 h-14 p-4 rounded-xl transition duration-150 bg-${service.coloring}-200 text-${service.coloring}-400 group-hover:bg-${service.coloring}-400 group-hover:text-white`}
+                className={`w-12 h-12 p-4 rounded-xl transition duration-150 bg-${service.coloring}-200 text-${service.coloring}-400 group-hover:bg-${service.coloring}-400 group-hover:text-white`}
               />
 
               <p className="text-sm text-gray-500 my-10">{service.content}</p>
