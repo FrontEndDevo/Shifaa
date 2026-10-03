@@ -1,6 +1,7 @@
 // Modal Components:
 import Navbar from "@/components/layout/navbar/Navbar";
 import Hero from "@/components/hero/Hero";
+import Services from "@/components/services/Services";
 import Footer from "@/components/layout/footer/Footer";
 
 // Constants:
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
 
       <Hero {...SHIFAA_DATA} />
+      <Services />
 
       <Footer />
     </>
