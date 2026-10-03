@@ -19,8 +19,8 @@ const Services = () => {
         </div>
 
         <div className="my-10">
-          <h3 className="text-xl uppercase font-bold mb-2">
-            Comprehensive cardiac care services
+          <h3 className="text-xl font-bold mb-2">
+            Comprehensive Shifaa services
           </h3>
           <p className="text-base text-gray-500 mx-auto max-w-xl mb-2">
             From diagnostics to rehabilitation, we offer a full spectrum of
