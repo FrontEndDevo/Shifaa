@@ -37,7 +37,7 @@ const Login = async ({ searchParams }: SearchParamProps) => {
                 © 2026 Shifaa
               </p>
               {!admin ? (
-                <Link href="/?admin=true" className="text-green-500">
+                <Link href="?admin=true" className="text-green-500">
                   Admin
                 </Link>
               ) : (
