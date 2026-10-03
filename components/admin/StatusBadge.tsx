@@ -1,7 +1,14 @@
-import { StatusIcon } from "@/constants";
-import { Status } from "@/types";
-import clsx from "clsx";
+// Next Components:
 import Image from "next/image";
+
+// Constants:
+import { StatusIcon } from "@/constants";
+
+// Types:
+import { Status } from "@/types";
+
+// Styling:
+import clsx from "clsx";
 
 const StatusBadge = ({ status }: { status: Status }) => {
   return (
