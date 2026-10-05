@@ -14,24 +14,6 @@ export const NAV_MENU = [
   },
 
   {
-    title: "Doctors",
-    url: "/doctors",
-    items: [
-      {
-        title: "Find a Doctor",
-        description: "Browse doctors and find the right specialist for you",
-        icon: Stethoscope,
-        url: "/doctors",
-      },
-      {
-        title: "Specialties",
-        description: "Explore our available medical specialties",
-        icon: Stethoscope,
-        url: "/specialties",
-      },
-    ],
-  },
-  {
     title: "About",
     url: "/about",
     items: [
@@ -55,22 +37,42 @@ export const NAV_MENU = [
       },
     ],
   },
+
   {
-    title: "Appointments",
-    url: "/my-appointments",
+    title: "Doctors",
+    url: "/doctors",
     items: [
       {
-        title: "My Appointments",
-        description: "View and manage your upcoming appointments",
-        icon: CalendarDays,
-        url: "/my-appointments",
+        title: "Find a Doctor",
+        description: "Browse doctors and find the right specialist for you",
+        icon: Stethoscope,
+        url: "/doctors",
       },
-      {
-        title: "Appointment History",
-        description: "View your previous appointments",
-        icon: History,
-        url: "/my-appointments/history",
-      },
+      // {
+      //   title: "Specialties",
+      //   description: "Explore our available medical specialties",
+      //   icon: Stethoscope,
+      //   url: "/specialties",
+      // },
     ],
   },
+
+  // {
+  //   title: "Appointments",
+  //   url: "/my-appointments",
+  //   items: [
+  //     {
+  //       title: "My Appointments",
+  //       description: "View and manage your upcoming appointments",
+  //       icon: CalendarDays,
+  //       url: "/my-appointments",
+  //     },
+  //     {
+  //       title: "Appointment History",
+  //       description: "View your previous appointments",
+  //       icon: History,
+  //       url: "/my-appointments/history",
+  //     },
+  //   ],
+  // },
 ];
