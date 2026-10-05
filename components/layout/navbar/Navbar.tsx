@@ -61,7 +61,7 @@ const Navbar = () => {
               <NavItems key={item.title} item={item} />
             ))}
             <div className="flex justify-center col-span-2">
-              <NavActionButton />
+              <NavActionButton userId={data?.userId} />
             </div>
           </div>
         </div>
