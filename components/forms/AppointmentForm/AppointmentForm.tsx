@@ -7,7 +7,7 @@ import Image from "next/image";
 import { SelectItem } from "@/components/ui/select";
 
 // Constants:
-import { Doctors } from "@/constants";
+import { DOCTORS } from "@/constants/Doctor";
 
 // Components:
 import SubmitButton from "../common/SubmitButton";
@@ -59,7 +59,7 @@ export const AppointmentForm = ({
             label="Doctor"
             placeholder="Select a doctor"
           >
-            {Doctors.map((doctor, i) => (
+            {DOCTORS.map((doctor, i) => (
               <SelectItem key={doctor.name + i} value={doctor.name}>
                 <div className="flex cursor-pointer items-center gap-2">
                   <Image
