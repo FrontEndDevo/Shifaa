@@ -4,29 +4,21 @@ import { Star } from "lucide-react";
 // Types:
 import { WHY_CHOOSE_US_DATA } from "@/constants/WhyChooseUsSection";
 
+// Components:
+import SectionHeading from "../common/SectionHeading";
+
 const WhyChooseUs = () => {
   return (
-    <section className="container text-center py-20 bg-dark-400">
-      <div>
-        <div className="bg-red-200 mx-auto py-1 px-4 rounded-full flex gap-1 w-fit">
-          <Star className="h-5 w-5 text-red-400" />
-          <p className="text-sm uppercase text-red-700 font-semibold tracking-wider">
-            Why Choose Us
-          </p>
-        </div>
+    <section className="text-center py-20 bg-dark-400">
+      <SectionHeading
+        icon={Star}
+        heading="Why Choose Us"
+        title="The Shifaa healthcare Difference"
+        desctiption="Excellence in cardiac care with a patient-first approach backed by
+            cutting-edge technology."
+      />
 
-        <div className="my-10">
-          <h3 className="text-xl font-bold mb-2">
-            The Shifaa healthcare Difference
-          </h3>
-          <p className="text-base text-gray-500 mx-auto max-w-xl mb-2">
-            Excellence in cardiac care with a patient-first approach backed by
-            cutting-edge technology.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {WHY_CHOOSE_US_DATA.map((item, idx) => {
           const ChooseIcon = item.icon;
 
