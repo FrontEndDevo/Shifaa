@@ -87,7 +87,7 @@ export const columns = columnHelper.columns([
             height={100}
             className="size-8 rounded-full"
           />
-          <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+          <p className="whitespace-nowrap">{doctor?.name}</p>
         </div>
       );
     },
