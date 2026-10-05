@@ -2,9 +2,7 @@
 import Image from "next/image";
 
 // Components:
-import Navbar from "@/components/layout/navbar/Navbar";
 import RegisterForm from "@/components/forms/RegisterForm/RegisterForm";
-import Footer from "@/components/layout/footer/Footer";
 
 // Types:
 import { SearchParamProps } from "@/types";
@@ -17,7 +15,7 @@ const Register = async ({ params }: SearchParamProps) => {
 
   return (
     <div className="h-screen flex max-h-screen">
-      <section className="container remove-scrollbar">
+      <section className="container remove-scrollbar my-20">
         <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
           <Shifaa />
 
@@ -33,7 +31,7 @@ const Register = async ({ params }: SearchParamProps) => {
         alt="patient"
         width={1000}
         height={1000}
-        className="side-img max-w-[50%]"
+        className="side-img hidden lg:block max-w-[50%]"
       />
     </div>
   );
