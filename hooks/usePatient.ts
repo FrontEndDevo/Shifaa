@@ -1,5 +1,5 @@
 // React Query:
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // API Actions:
 import {
@@ -22,9 +22,14 @@ export function useGetPatient() {
 
 // REGISTER PATIENT HOOK
 export function useRegisterPatient() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (patientData: IRegisterUserParams) =>
       registerPatient(patientData),
+    onSuccess: (patient) => {
+      queryClient.setQueryData(["patient", "me"], patient);
+    },
   });
 }
 
