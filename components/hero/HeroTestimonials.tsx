@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/tooltip";
 
 // Constants:
-import { Doctors } from "@/constants";
+import { DOCTORS } from "@/constants/Doctor";
 
 const HeroTestimonials = () => {
   return (
     <div className="flex lg:items-center justify-center flex-col-reverse lg:flex-row lg:justify-start space-x-4 gap-2">
       <div className="flex -space-x-2">
-        {Doctors.map((doctor, index) => {
+        {DOCTORS.map((doctor, index) => {
           return (
             <Tooltip key={index}>
               <TooltipTrigger>
@@ -32,7 +32,7 @@ const HeroTestimonials = () => {
                 />
               </TooltipTrigger>
               <TooltipContent>
-                <p>Dr. {doctor.name}</p>
+                <p>{doctor.name}</p>
               </TooltipContent>
             </Tooltip>
           );
@@ -50,7 +50,7 @@ const HeroTestimonials = () => {
         </div>
 
         <span className="text-xs lg:text-xs xl:text-sm text-slate-600 dark:text-slate-400">
-          Over {Doctors.length * 3}+ doctors at your service.
+          Over {DOCTORS.length * 3}+ doctors at your service.
         </span>
       </div>
     </div>
