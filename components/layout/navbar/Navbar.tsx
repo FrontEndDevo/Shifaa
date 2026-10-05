@@ -15,6 +15,7 @@ import Shifaa from "../Shifaa";
 // Components:
 import NavItems from "./NavItems";
 import NavActionButton from "./NavActionButton";
+import NavAvatar from "@/components/avatar/NavAvatar";
 
 // API Actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
@@ -37,20 +38,26 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden lg:block">
-          <NavActionButton userId={data?.userId} />
-        </div>
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:block">
+            <NavActionButton userId={data?.userId} />
+          </div>
 
-        {/* ================= MOBILE / TABLET ================= */}
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="rounded-md p-2 transition-colors hover:bg-muted lg:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+          <div className="">
+            <NavAvatar username={data?.name} />
+          </div>
+
+          {/* ================= MOBILE / TABLET Menu Icon ================= */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="rounded-md p-2 transition-colors hover:bg-muted lg:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile / Tablet Menu */}
