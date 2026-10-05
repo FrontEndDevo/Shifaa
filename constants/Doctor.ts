@@ -242,36 +242,6 @@ export const DOCTORS: Doctor[] = [
   },
 
   {
-    doctorId: "dr-karim-adel",
-    name: "Dr. Karim Adel",
-    specialty: "Psychiatrist",
-    image: "/assets/images/doctors/dr-karim-adel.jpg",
-    experience: 11,
-    bio: "Dr. Karim Adel is a psychiatrist specializing in adult mental health, anxiety, depression, stress-related conditions, and behavioral health. He takes a patient-centered approach focused on practical and sustainable treatment.",
-    education: [
-      "MD, Ain Shams University",
-      "Psychiatry Residency, Abbassia Mental Health Hospital",
-      "Clinical Psychiatry Fellowship, University of Manchester",
-    ],
-    certifications: [
-      "Egyptian Board of Psychiatry",
-      "Royal College of Psychiatrists Member",
-    ],
-    languages: ["English", "Arabic"],
-    consultationFee: 600,
-    rating: 4.8,
-    reviewCount: 189,
-    availableToday: false,
-    services: [
-      "Psychiatric Consultation",
-      "Anxiety Treatment",
-      "Depression Management",
-      "Stress Management",
-      "Behavioral Therapy",
-    ],
-  },
-
-  {
     doctorId: "dr-reem-fathy",
     name: "Dr. Reem Fathy",
     specialty: "Dentist",
