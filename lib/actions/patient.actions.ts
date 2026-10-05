@@ -1,5 +1,8 @@
 "use server";
 
+// Cookies:
+import { cookies } from "next/headers";
+
 // Appwrite:
 import { ID, Query } from "node-appwrite";
 import { InputFile } from "node-appwrite/file";
@@ -20,7 +23,6 @@ import { parseStringify } from "../utils";
 
 // Types:
 import { ICreateUserParams, IRegisterUserParams } from "@/types";
-import { cookies } from "next/headers";
 
 // User Login:
 export const checkOrRegisterUser = async (user: ICreateUserParams) => {
@@ -124,8 +126,7 @@ export const getPatient = async () => {
   }
 };
 
-export async function logoutUser() {
+export const logoutUser = async () => {
   const cookieStore = await cookies();
-  cookieStore.delete("appwrite-session");
-  cookieStore.delete("user-id");
-}
+  cookieStore.delete("patient-user-id");
+};
