@@ -5,7 +5,10 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 // Types:
-import { NavItem, NavSubItem } from "@/types/navbar.types";
+import { NavItem } from "@/types/navbar.types";
+
+// Components:
+import DropdownMenu from "@/components/common/DropdownMenu";
 
 const NavItems = ({ item }: { item: NavItem }) => {
   const Icon = item.icon;
@@ -26,33 +29,7 @@ const NavItems = ({ item }: { item: NavItem }) => {
           </button>
 
           {/* Dropdown */}
-          <div className="invisible absolute left-0 top-full bg-dark-300 z-40 w-fit lg:w-80 pr-10 translate-y-2 rounded-lg border bg-popover p-2 text-popover-foreground opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-            {item.items.map((subItem: NavSubItem) => {
-              const SubIcon = subItem.icon;
-
-              return (
-                <Link
-                  key={subItem.title}
-                  href={subItem.url}
-                  className="flex gap-3 static left-0 top-full z-30 rounded-md p-3 transition-colors hover:bg-muted"
-                >
-                  {SubIcon && (
-                    <SubIcon className="mt-0.5 size-5 shrink-0 text-primary" />
-                  )}
-
-                  <div>
-                    <div className="text-sm font-semibold">{subItem.title}</div>
-
-                    {subItem.description && (
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {subItem.description}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          <DropdownMenu data={item.items} />
         </div>
       ) : (
         <Link
