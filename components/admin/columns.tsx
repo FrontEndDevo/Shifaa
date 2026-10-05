@@ -20,7 +20,7 @@ import { formatDateTime } from "@/lib/utils";
 import { Appointment } from "@/types/appointment.types";
 
 // Constants:
-import { Doctors } from "@/constants";
+import { DOCTORS } from "@/constants/Doctor";
 
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Appointment>();
@@ -74,7 +74,7 @@ export const columns = columnHelper.columns([
     cell: ({ row }) => {
       const appointment = row.original;
 
-      const doctor = Doctors.find(
+      const doctor = DOCTORS.find(
         (doctor) => doctor.name === appointment?.primaryPhysician,
       );
 
@@ -85,7 +85,7 @@ export const columns = columnHelper.columns([
             alt="doctor"
             width={100}
             height={100}
-            className="size-8"
+            className="size-8 rounded-full"
           />
           <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
         </div>
