@@ -14,6 +14,6 @@ export const AVATAR: AvatarProps[] = [
   {
     title: "my appointments",
     icon: Calendar,
-    url: "/my-appointments",
+    url: "/profile",
   },
 ];
