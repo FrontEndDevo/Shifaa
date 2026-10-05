@@ -38,14 +38,12 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           <div className="hidden lg:block">
             <NavActionButton userId={data?.userId} />
           </div>
 
-          <div className="">
-            <NavAvatar username={data?.name} />
-          </div>
+          {data?.userId && <NavAvatar username={data?.name} />}
 
           {/* ================= MOBILE / TABLET Menu Icon ================= */}
           <button
