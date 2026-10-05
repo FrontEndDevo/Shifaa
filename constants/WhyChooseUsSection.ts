@@ -1,5 +1,5 @@
 // Types:
-import { ChooseUsProps } from "@/types/whychooseus.types";
+import { ChooseUsProps } from "@/types/whyChooseus.types";
 
 // Lucide Icons:
 import { Building, HeartHandshake, Microscope, Users } from "lucide-react";
