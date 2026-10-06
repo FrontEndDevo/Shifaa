@@ -35,7 +35,14 @@ export function useRegisterPatient() {
 
 // CHECK OR REGISTER USER HOOK
 export function useCheckOrRegister() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (user: ICreateUserParams) => checkOrRegisterUser(user),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["patient", "me"],
+      });
+    },
   });
 }
