@@ -175,6 +175,61 @@ export const getRecentAppointments = async () => {
   return parseStringify(appointmentsData);
 };
 
+// GET ALL APPOINTMENTS FOR A SPECIFIC PATIENT
+export const getPatientAppointments = async (userId: string) => {
+  if (!userId || userId === "undefined") {
+    throw new Error(`User ID is missing or invalid.`);
+  }
+
+  const appointments = await tablesDB.listRows({
+    databaseId: PATIENT_DATABASE_ID as string,
+    tableId: APPOINTMENT_TABLE_ID as string,
+    queries: [
+      Query.equal("userId", userId),
+      Query.select(["*", "patient.*"]),
+      Query.orderDesc("$createdAt"),
+    ],
+  });
+
+  if (!appointments) {
+    return {
+      total: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      rows: [],
+    };
+  }
+
+  const initialCounts = {
+    scheduledCount: 0,
+    pendingCount: 0,
+    cancelledCount: 0,
+  };
+
+  const counts = appointments.rows.reduce((acc, appointment) => {
+    if (appointment.status === "scheduled") {
+      acc.scheduledCount += 1;
+    }
+
+    if (appointment.status === "pending") {
+      acc.pendingCount += 1;
+    }
+
+    if (appointment.status === "cancelled") {
+      acc.cancelledCount += 1;
+    }
+
+    return acc;
+  }, initialCounts);
+
+  return parseStringify({
+    total: appointments.total,
+    ...counts,
+    rows: appointments.rows,
+  });
+};
+
 // SEND SMS MESSAGE
 export const sendNotificationBySMS = async ({
   userId,
