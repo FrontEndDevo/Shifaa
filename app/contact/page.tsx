@@ -114,7 +114,7 @@ const ContactPage = () => {
                         size="sm"
                         className="bg-blue-500 text-lg py-1 px-4 hover:bg-blue-400 rounded text-slate-950 font-semibold"
                       >
-                        <Link href="/login">Login</Link>
+                        <Link href="/auth/login">Login</Link>
                       </Button>
                     </div>
                   ) : (
