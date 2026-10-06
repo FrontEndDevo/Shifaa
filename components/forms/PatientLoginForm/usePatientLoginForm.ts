@@ -35,6 +35,8 @@ const usePatientLoginForm = () => {
   const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
     toast.promise(
       loginPatientMutation(data).then((getUser) => {
+        router.refresh();
+
         if (getUser.isNewUser) {
           // Complete patient information:
           router.replace(`/auth/${getUser.user.userId}/register`);
@@ -44,7 +46,7 @@ const usePatientLoginForm = () => {
           };
         } else {
           // Go direct to set an appointment:
-          router.replace(`/patients/${getUser.user.userId}/new-appointment`);
+          router.replace(`/`);
           return {
             title: "Login Successfully.",
             description: "Welcome back!",
