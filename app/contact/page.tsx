@@ -27,7 +27,7 @@ const ContactPage = () => {
 
   const isAuthenticated = !!data;
 
-  const submitContactFormHandler = (e) => {
+  const submitContactFormHandler = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Sending message...");
   };
@@ -54,7 +54,7 @@ const ContactPage = () => {
               />
             </div>
 
-            <div className="grid gap-4 grid-cols-2 my-10">
+            <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 my-10">
               <div>
                 <div className="flex gap-2">
                   <HeartPlus height="44" width="44" className="text-red-700" />
@@ -82,6 +82,7 @@ const ContactPage = () => {
                   ))}
                 </div>
               </div>
+
               <form
                 onSubmit={submitContactFormHandler}
                 className="border-2 border-blue-600 p-2 rounded-lg"
