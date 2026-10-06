@@ -12,7 +12,7 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 ## 🌐 Live Demo & Preview
 
 - **Live Demo:** [https://shifaa-pearl.vercel.app](https://shifaa-pearl.vercel.app/)
--
+
 - **Passkey to access admin page:** [123456]
 
 ---
@@ -47,7 +47,7 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 During development, several key architectural challenges were solved to optimize performance, real-time consistency, and user experience:
 
 - **Global Cached State & Cache Invalidation:** Standardized on TanStack React Query with centralized query keys (`["patient", "me"]`) to deliver instant local access to patient data. Integrated automatic `queryClient.invalidateQueries` and `router.refresh()` sequence upon authentication mutations to enforce immediate, seamless UI updates without full page reloads.
-- **Server-Side Authentication via HttpOnly Cookies:** Abandoned client-side session dependence (`account.get()`) in favor of storing the patient `userId` inside encrypted `HttpOnly` cookies (`patient-user-id`). This architecture allows Server Components and Server Actions to query patient records directly with elevated server privileges (`authenticated_admin_session`) while mitigating XSS threats.
+- **Server-Side Authentication via HttpOnly Cookies:** Abandoned client-side session dependence (`account.get()`) in favor of storing the patient `userId` inside encrypted `HttpOnly` cookies (`appwrite-session`). This architecture allows Server Components and Server Actions to query patient records directly with elevated server privileges (`authenticated_admin_session`) while mitigating XSS threats.
 - **Appwrite Relational Data Population:** Resolved Appwrite SDK relational fetching limits by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested patient and doctor objects without executing secondary network round-trips.
 - **Bulk Update Limitations on Relationships:** Workaround for Appwrite's constraint on bulk row updates (`updateRows`) over relationship schemas by refactoring mutation handlers to use concurrent single-row updates (`updateRow`).
 - **Dynamic Page Caching & Real-time Revalidation:** Forced dynamic route evaluation alongside React Query background revalidation (`refetchInterval` / `refetchOnWindowFocus`) to bypass Next.js App Router static caching and guarantee real-time synchronization between Admin and Patient portals.
