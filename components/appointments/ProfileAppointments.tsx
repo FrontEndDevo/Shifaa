@@ -13,7 +13,7 @@ type ProfileAppointmentsProps = {
 
 const ProfileAppointments = ({ appointments }: ProfileAppointmentsProps) => {
   return (
-    <div className="max-w-(--breakpoint-sm) px-6 py-12 md:mx-auto md:py-20">
+    <div className="max-w-(--breakpoint-sm) px-6 py-12 md:mx-auto md:py-20 w-full">
       <div className="relative">
         {appointments?.map((appointment, index) => {
           const statusColor =
