@@ -17,12 +17,14 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
       />
 
       <div className="px-2 text-center">
-        <h2 className="text-md my-2 font-bold capitalize">{doctor.name}</h2>
-        <span className="text-sm capitalize text-blue-500 font-semibold">
+        <h2 className="text-xs md:text-md my-1 md:my-2 font-bold capitalize">
+          {doctor.name}
+        </h2>
+        <span className="text-xs md:text-sm capitalize text-blue-500 font-semibold">
           {doctor.specialty}
         </span>
-        <div className="flex justify-between items-center my-2 flex-col lg:flex-row">
-          <p className="text-sm">consultation Fee:</p>
+        <div className="flex justify-between items-center my-1 md:my-2 flex-col lg:flex-row">
+          <p className="text-xs md:text-sm">consultation Fee:</p>
           <p className="text-xs text-green-400">
             ${doctor.consultationFee.toFixed(2)}
           </p>
@@ -31,7 +33,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
       <div className="flex justify-center">
         <Link
           href={`/doctors/${doctor.doctorId}/doctor`}
-          className="m-2 bg-blue-500 rounded px-2 py-1 font-semibold hover:bg-blue-700 transition duration-150"
+          className="m-2 bg-blue-500 text-sm md:text-base rounded px-2 py-1 font-semibold hover:bg-blue-700 transition duration-150"
         >
           Read more
         </Link>

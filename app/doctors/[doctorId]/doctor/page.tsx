@@ -48,7 +48,7 @@ const DoctorPage = () => {
     <>
       <Navbar />
       <section className="py-20 bg-dark-400">
-        <div className="container flex items-center gap-6">
+        <div className="container flex lg:flex-row flex-col items-center gap-6">
           <div className="bg-white p-8 rounded-2xl border-4 border-blue-400 shadow-2xl shadow-blue-700">
             <DoctorAvailability availableToday={availableToday} />
             <Image
@@ -116,7 +116,7 @@ const DoctorPage = () => {
               <div className="w-1/2 mx-auto h-[2px] bg-indigo-700 my-6" />
 
               {/* Services & Languages */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center lg:justify-items-start text-center gap-4">
                 <ServicesAndLanguages
                   data={services}
                   icon={Check}
@@ -130,7 +130,7 @@ const DoctorPage = () => {
                 />
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center md:flex-row flex-col gap-4 justify-between">
                 <p className="text-lg font-semibold">
                   Consultation Fee:{" "}
                   <span className="text-green-500">
