@@ -9,6 +9,7 @@ import { InputFile } from "node-appwrite/file";
 import {
   account,
   BUCKET_ID,
+  client,
   NEXT_ENDPOINT,
   PATIENT_DATABASE_ID,
   PATIENT_TABLE_ID,
@@ -102,13 +103,23 @@ export const registerPatient = async (patientData: IRegisterUserParams) => {
 export const getPatient = async () => {
   try {
     const cookieStore = await cookies();
-    const userIdCookie = cookieStore.get("appwrite-session");
+    const sessionCookie = cookieStore.get("appwrite-session");
 
-    if (!userIdCookie || !userIdCookie.value) {
+    if (!sessionCookie || !sessionCookie.value) {
       return null;
     }
 
-    const userId = userIdCookie.value;
+    const sessionSecret = sessionCookie.value;
+
+    client.setSession(sessionSecret);
+
+    const loggedInUser = await account.get();
+
+    if (!loggedInUser || !loggedInUser.$id) {
+      return null;
+    }
+
+    const userId = loggedInUser.$id;
 
     const patients = await tablesDB.listRows({
       databaseId: PATIENT_DATABASE_ID as string,
