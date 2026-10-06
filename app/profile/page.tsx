@@ -23,6 +23,9 @@ import Footer from "@/components/layout/footer/Footer";
 import { useGetPatient } from "@/hooks/usePatient";
 import { useGetPatientAppointments } from "@/components/forms/AppointmentForm/hooks/useAppointments";
 
+// Utilities:
+import { getInitials } from "@/lib/utils";
+
 const Profile = () => {
   const { data: patient } = useGetPatient();
 
@@ -63,7 +66,7 @@ const Profile = () => {
                 src="https://github.com/shadcn.png"
               /> */}
                 <AvatarFallback className="font-medium text-2xl">
-                  {patient?.name.charAt(0).toUpperCase()}
+                  {getInitials(patient?.name)}
                 </AvatarFallback>
               </Avatar>
             </div>

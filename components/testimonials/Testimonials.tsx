@@ -13,6 +13,9 @@ import { PATIENTS_TESTIMONIALS } from "@/constants/Testimonials";
 // Components:
 import SectionHeading from "../common/SectionHeading";
 
+// Utilities:
+import { getInitials } from "@/lib/utils";
+
 const Testimonials = () => {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 sm:py-20">
@@ -49,7 +52,7 @@ const Testimonials = () => {
                   ) : (
                     <Avatar className="size-10">
                       <AvatarFallback className="bg-primary font-medium text-primary-foreground text-xl">
-                        {name.charAt(0).toUpperCase()}
+                        {getInitials(name)}
                       </AvatarFallback>
                     </Avatar>
                   )}
