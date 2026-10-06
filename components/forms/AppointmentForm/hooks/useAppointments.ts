@@ -24,7 +24,8 @@ export function useGetRecentAppointments() {
   const query = useQuery({
     queryKey: ["appointments"],
     queryFn: () => getRecentAppointments(),
-    refetchInterval: 1000 * 60 * 2, // 2 minutes to fetch new data.
+    refetchInterval: 1000 * 5, // 5 seconds to fetch new data.
+    refetchOnWindowFocus: true,
   });
   return query;
 }
@@ -86,5 +87,7 @@ export function useGetPatientAppointments(appointmentId: string) {
     queryKey: ["patient-appointments", appointmentId],
     queryFn: () => getPatientAppointments(appointmentId),
     enabled: !!appointmentId,
+    refetchInterval: 1000 * 5, // 5 seconds to fetch new data.
+    refetchOnWindowFocus: true,
   });
 }
