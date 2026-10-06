@@ -5,7 +5,8 @@ export function middleware(request: NextRequest) {
 
   const userId = request.cookies.get("patient-user-id")?.value;
 
-  const isProtectedRoute = path.startsWith("/new-appointment");
+  const isProtectedRoute =
+    path.startsWith("/new-appointment") || path.startsWith("/profile");
 
   // Protected pages, when unauth... redirect to login.
   if (isProtectedRoute && !userId) {
@@ -23,5 +24,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/new-appointment/:path*", "/login", "/register"],
+  matcher: [
+    "/admin/:path*",
+    "/new-appointment/:path*",
+    "/login",
+    "/register",
+    "/profile",
+  ],
 };
