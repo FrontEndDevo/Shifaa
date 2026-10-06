@@ -24,7 +24,7 @@ const Login = async ({ searchParams }: SearchParamProps) => {
     <>
       <Navbar />
 
-      <section className="h-screen flex max-h-screen">
+      <section className="md:h-screen flex max-h-screen">
         {admin && <PasskeyModal />}
 
         <section className="container remove-scrollbar my-auto">
