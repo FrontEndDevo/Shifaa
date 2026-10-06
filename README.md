@@ -12,21 +12,20 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 ## 🌐 Live Demo & Preview
 
 - **Live Demo:** [https://shifaa-pearl.vercel.app](https://shifaa-pearl.vercel.app/)
-- 
+-
 - **Passkey to access admin page:** [123456]
+
 ---
 
 ## ✨ Key Features
 
-- **Patient Management:** Multi-step onboarding with profile validation and medical record handling.
-- **Appointment Scheduling System:** Interactive booking form with doctor selection and schedule picking.
-- **Passkey-Protected Admin Portal:** Secure administrative route with client-side passkey verification to prevent layout flickering.
-- **Real-time Analytics Dashboard:** Summary cards tracking total, scheduled, pending, and cancelled medical appointments.
-- **Interactive Data Table:** Advanced filtration, custom pagination, and responsive layout built with TanStack Table and Shadcn UI.
-
-* **Admin Authentication & Refactoring:** Initially implemented client-side passkey encryption using `crypto-js` library stored in `localStorage`. Refactored the architecture to production-level standards by migrating to server-validated **`httpOnly` HTTP Cookies** combined with **Next.js Middleware** route guards. Passkey verification is handled entirely via Server Actions, completely isolating secrets from the client bundle, eliminating XSS vulnerabilities, and ensuring zero-flicker route protection.
-
-- **Optimized UX & Performance:** Fully responsive layout with custom loading states and zero dynamic layout shifts.
+- **Patient Management & Onboarding:** Multi-step onboarding with profile validation, identification checking, tracking, and patient account status management.
+- **Appointment Scheduling System:** Interactive booking flow with real-time doctor availability, schedule selection, and instant booking confirmation.
+- **Server-Authenticated Admin Portal:** Production-level administrative route protection leveraging **Server Actions**, **HttpOnly Cookies**, and **Next.js Middleware** to eliminate layout flicker and prevent unauthorized access.
+- **Real-time Analytics Dashboard:** Live metric cards tracking total, scheduled, pending, and cancelled medical appointments in real time.
+- **Interactive Data Table:** Advanced status filtration, custom server/client pagination, and responsive layout built with **TanStack Table** and **Shadcn UI**.
+- **Reactive UI State Transitions:** Automatic Navbar state shifts (Login/Register buttons vs. Patient Avatar Dropdown) synchronized globally via React Query query invalidations upon login or logout.
+- **Optimized UX & Performance:** Fully responsive dark-themed UI (Slate/Blue/Emerald palette), custom loading skeletons, and zero cumulative layout shifts (CLS).
 
 ---
 
@@ -34,28 +33,32 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 
 - **Framework:** Next.js (App Router, Server Components, Server Actions)
 - **Language:** TypeScript
+- **State Management & Caching:** TanStack React Query (v5)
 - **Backend & Database:** Appwrite Cloud (Databases, Tables, Authentication)
-- **UI Components & Styling:** Tailwind CSS, Shadcn UI
-- **Form Validation:** React Hook Form, Zod
+- **Authentication & Security:** HttpOnly Cookies, Next.js Middleware
+- **UI Components & Styling:** Tailwind CSS, Shadcn UI, Lucide Icons
+- **Form Handling & Validation:** React Hook Form, Zod
+- **Notifications:** Toast Notifications
 
 ---
 
 ## 📐 Technical Architecture & Trade-offs
 
-During development, several key architectural challenges were solved to optimize performance and user experience:
+During development, several key architectural challenges were solved to optimize performance, real-time consistency, and user experience:
 
-- **Appwrite Relational Data Population:** Resolved SDK relation limitations by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested objects without making secondary network round-trips.
-- **Bulk Update Limitations on Relationships:** Identified Appwrite's restriction on bulk row updates (`updateRows`) for schemas containing relationships, safely refactoring mutation handlers to use direct single-row updates (`updateRow`).
-- **Dynamic Page Caching & Hydration:** Forced dynamic route evaluation (`export const dynamic = "force-dynamic"`) and revalidation rules on administrative routes to overcome Next.js 16 production caching defaults and guarantee real-time data freshness.
-- **Flicker-Free Passkey Authentication:** Designed client-side passkey verification states (`isChecking` / `isNavigating`) combined with Next.js `loading.tsx` Suspense boundaries to prevent layout shifts during admin access.
+- **Global Cached State & Cache Invalidation:** Standardized on TanStack React Query with centralized query keys (`["patient", "me"]`) to deliver instant local access to patient data. Integrated automatic `queryClient.invalidateQueries` and `router.refresh()` sequence upon authentication mutations to enforce immediate, seamless UI updates without full page reloads.
+- **Server-Side Authentication via HttpOnly Cookies:** Abandoned client-side session dependence (`account.get()`) in favor of storing the patient `userId` inside encrypted `HttpOnly` cookies (`patient-user-id`). This architecture allows Server Components and Server Actions to query patient records directly with elevated server privileges (`authenticated_admin_session`) while mitigating XSS threats.
+- **Appwrite Relational Data Population:** Resolved Appwrite SDK relational fetching limits by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested patient and doctor objects without executing secondary network round-trips.
+- **Bulk Update Limitations on Relationships:** Workaround for Appwrite's constraint on bulk row updates (`updateRows`) over relationship schemas by refactoring mutation handlers to use concurrent single-row updates (`updateRow`).
+- **Dynamic Page Caching & Real-time Revalidation:** Forced dynamic route evaluation alongside React Query background revalidation (`refetchInterval` / `refetchOnWindowFocus`) to bypass Next.js App Router static caching and guarantee real-time synchronization between Admin and Patient portals.
 
 ---
 
 ## 🔒 Security & Data Integrity
 
-- **Passkey Protection:** Admin dashboard routes are gated behind secure passkey verification to prevent unauthorized access.
-- **Strict Type Safety:** Zod schemas applied across all forms to guarantee sanitization of medical records, phone numbers, and emergency contact payloads before API transmission.
-- **Environment Isolation:** Server-side API keys (`NEXT_APPWRITE_KEY`) are kept isolated from client bundles to prevent privilege escalation.
+- **HttpOnly Cookie Isolation:** Sensitive user session markers and server API keys (`authenticated_admin_session`) are restricted exclusively to server execution contexts, preventing credential leakage to client bundles.
+- **Route Guard Middleware:** Next.js Middleware acts as the primary barrier, intercepting unauthorized attempts to access protected routes and redirecting with context-aware URL query parameters.
+- **Strict Payload Validation:** Comprehensive Zod schemas applied across login, registration, contact, and scheduling forms to enforce sanitization of emergency contacts, phone formats, and medical details before API transmission.
 
 ---
 
@@ -63,12 +66,60 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 1. Initial Patient Identification (Home Page)
+### 1. Interactive Homepage (/)
 
-> Clean entry page acting as a lightweight identification step. Collects basic patient details (Name, Email, Phone) to check existing records or initiate a new onboarding process.
+The primary entry point featuring hero sections, value propositions, key statistics, quick appointment call-to-actions, and dynamic showcase components.
 
 <div align="center">
-  <img src="./public/assets/screenshots/home.png" alt="Home" width="90%" style="border-radius: 8px;" />
+  <img src="./public/assets/screenshots/home.png" alt="Homepage" width="90%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- High-converting Hero Section with direct routing to booking flows.
+- Real-time medical specialties grid and quick platform statistics.
+- Direct status check for returning patients.
+
+---
+
+### 2. Medical Team & Specialists Directory (/doctors)
+
+> Comprehensive directory listing all verified healthcare providers with filtering by specialty, availability, and rating.
+
+<div align="center">
+  <img src="./public/assets/screenshots/find-doctor.png" alt="find-doctor" width="90%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- Dynamic search and filter by a doctor name.
+- Direct accessibility badges (Real-time availability status).
+- Quick booking triggers linking straight to the physician's schedule.
+
+---
+
+### 3. Physician Detailed Profile (/doctors/[doctorId])
+
+> Specialized doctor page detailing qualifications, educations, experience, available today, and rate.
+
+<div align="center">
+  <img src="./public/assets/screenshots/doctor.png" alt="doctor page" width="90%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- Integrated schedule picker for selecting appointment slots.
+- Biography, certifications, and accepted health insurance providers.
+- Direct embedded booking modal.
+
+---
+
+### 4. Initial Patient Identification (Login Page)
+
+> Clean login page acting as a lightweight identification step. Collects basic patient details (Email & Password) to check existing records or initiate a new onboarding process (Create Account).
+
+<div align="center">
+  <img src="./public/assets/screenshots/login.png" alt="Login" width="90%" style="border-radius: 8px;" />
 </div>
 
 **Key Features:**
@@ -78,9 +129,9 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 2. Patient Onboarding & Registration
+### 5. Patient Onboarding & Registration
 
-> Interactive multi-step form built with **React Hook Form** and **Zod** schema validation. Captures patient details, identification documents, and medical emergency history smoothly.
+> Interactive multi-step form built with **React Hook Form** and **Zod** schema validation. Captures patient details and identification documents.
 
 <div align="center">
   <img src="./public/assets/screenshots/patient-info.png" alt="Patient Registration" width="90%" style="border-radius: 8px;" />
@@ -93,9 +144,9 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 3. Doctor Selection & Appointment Request
+### 6. Doctor Selection & Appointment Request (/new-appointment)
 
-> Intuitive booking interface allowing registered patients to select their primary physician, schedule date and time, and specify medical reasons or allergies.
+> Intuitive booking interface allowing registered patients to select their primary physician, schedule date and time, and specify medical reasons or comments/notes.
 
 <div align="center">
   <img src="./public/assets/screenshots/new-appointment-responsive.png" alt="Appointment Form" width="90%" style="border-radius: 8px;" />
@@ -108,7 +159,7 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 4. Admin Authentication & Security
+### 7. Admin Authentication & Security
 
 > Client-side passkey verification modal (`PasskeyModal`) ensuring authorized access to administrative routes without server-side layout flickering or hydration shifts.
 
@@ -123,13 +174,12 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 5. Appointment Confirmation & Success Page
+### 8. Appointment Confirmation & Success Page (/success)
 
 > Dedicated confirmation screen displayed immediately after a successful booking request. Features appointment details, selected doctor, schedule timestamp, and clear next steps for the patient.
 
 <div align="center">
-  <img src="./public/assets/screenshots/success-appointment.png" alt="Success Appointment" width="90%" style="border-radius: 8px;" />
-  <img src="./public/assets/screenshots/success-appointment-responsive.png" alt="Success Appointment Responsive" width="90%" style="border-radius: 8px;" />
+  <img src="./public/assets/screenshots/success-appointment-responsive.png" alt="Success Appointment" width="90%" style="border-radius: 8px;" />
 </div>
 
 **Key Features:**
@@ -139,7 +189,7 @@ During development, several key architectural challenges were solved to optimize
 
 ---
 
-### 6. Administrative Dashboard & Data Management
+### 9. Administrative Dashboard & Data Management (/admin)
 
 > Comprehensive control panel showing real-time appointment metrics (Total, Scheduled, Pending, Cancelled) and an interactive data table powered by **TanStack Table**.
 
@@ -153,3 +203,37 @@ During development, several key architectural challenges were solved to optimize
 
 - Dynamic relationship population (`Query.select`) to display patient and physician data seamlessly.
 - Custom pagination controls, real-time revalidation, and status filtering.
+
+---
+
+### 10. Patient Inquiry & Support Form (/contact)
+
+> Secure communication portal with role-aware form behavior based on patient authentication status.
+
+<div align="center">
+  <img src="./public/assets/screenshots/contact.png" alt="Contact" width="90%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- Pre-fills patient data automatically when authenticated.
+- Interactive message dispatch with toast feedback notifications.
+- Emergency contacts and clinic map integration.
+
+---
+
+### 11. Platform Overview & Mission (/about)
+
+> Brand story page outlining Shifaa's medical vision, core values, technology stack, and healthcare impact.
+
+<div align="center">
+  <img src="./public/assets/screenshots/about.png" alt="About" width="90%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- Interactive timeline showing platform growth and achievements.
+- Core pillars cards (Security, Speed, Accessibility, Care Quality).
+- Leadership and medical advisory board showcase.
+
+---
