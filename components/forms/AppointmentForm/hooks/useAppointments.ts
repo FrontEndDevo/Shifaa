@@ -8,6 +8,7 @@ import {
   createAppointment,
   deleteAppointment,
   getAppointment,
+  getPatientAppointments,
   getRecentAppointments,
   updateAppointment,
 } from "@/lib/actions/appointment.actions";
@@ -75,6 +76,15 @@ export function useGetAppointment(appointmentId: string) {
   return useQuery({
     queryKey: ["appointment", appointmentId],
     queryFn: () => getAppointment(appointmentId),
+    enabled: !!appointmentId,
+  });
+}
+
+// GET PATIENT APPOINTMENTS HOOK
+export function useGetPatientAppointments(appointmentId: string) {
+  return useQuery({
+    queryKey: ["patient-appointments", appointmentId],
+    queryFn: () => getPatientAppointments(appointmentId),
     enabled: !!appointmentId,
   });
 }
