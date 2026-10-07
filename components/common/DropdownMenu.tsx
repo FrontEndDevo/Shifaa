@@ -15,6 +15,7 @@ import { Button } from "@base-ui/react";
 
 // API Actions Hooks:
 import { logoutUser } from "@/lib/actions/patient.actions";
+import { toast } from "../ui/toast";
 
 export type DropdownMenuProps = {
   data: {
@@ -36,8 +37,19 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
         queryKey: ["patient", "me"],
       });
 
+      toast.add({
+        type: "success",
+        title: "Logout Successfully",
+      });
+
       router.refresh();
       router.replace("/auth/login");
+    },
+    onError: () => {
+      toast.add({
+        type: "error",
+        title: "Failed to Logout, please try again.",
+      });
     },
   });
 
