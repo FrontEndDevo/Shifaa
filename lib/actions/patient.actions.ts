@@ -53,7 +53,7 @@ export const checkOrRegisterUser = async (user: ICreateUserParams) => {
 
   // Store userId in Cookies:
   const cookieStore = await cookies();
-  cookieStore.set("appwrite-session", loggedUser.secret, {
+  cookieStore.set("patient-user-id", loggedUser.userId, {
     path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -103,23 +103,13 @@ export const registerPatient = async (patientData: IRegisterUserParams) => {
 export const getPatient = async () => {
   try {
     const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("appwrite-session");
+    const userIdCookie = cookieStore.get("patient-user-id");
 
-    if (!sessionCookie || !sessionCookie.value) {
+    if (!userIdCookie || !userIdCookie.value) {
       return null;
     }
 
-    const sessionSecret = sessionCookie.value;
-
-    client.setSession(sessionSecret);
-
-    const loggedInUser = await account.get();
-
-    if (!loggedInUser || !loggedInUser.$id) {
-      return null;
-    }
-
-    const userId = loggedInUser.$id;
+    const userId = userIdCookie.value;
 
     const patients = await tablesDB.listRows({
       databaseId: PATIENT_DATABASE_ID as string,
@@ -139,5 +129,5 @@ export const getPatient = async () => {
 
 export const logoutUser = async () => {
   const cookieStore = await cookies();
-  cookieStore.delete("appwrite-session");
+  cookieStore.delete("patient-user-id");
 };
