@@ -3,16 +3,18 @@
 import { cookies } from "next/headers";
 
 export async function verifyAndSetPasskey(enteredPasskey: string) {
-  const secretPasskey = process.env.ADMIN_PASSKEY;
+  const secretPasskey = process.env.VITE_ADMIN_PASSKEY;
 
   if (!secretPasskey) {
-    throw new Error("ADMIN_PASSKEY is not defined on the server environment.");
+    throw new Error("Admin passkey is not defined on the server environment.");
   }
 
   if (enteredPasskey === secretPasskey) {
     const cookieStore = await cookies();
 
-    cookieStore.set("admin_access_token", "authenticated_admin_session", {
+    const adminKeyword = process.env.ADMIN_KEYWORD;
+
+    cookieStore.set("admin_access_token", adminKeyword ?? "", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
@@ -27,8 +29,21 @@ export async function verifyAndSetPasskey(enteredPasskey: string) {
 }
 
 export async function checkAdminSession() {
+  const adminKeyword = process.env.ADMIN_KEYWORD;
+
+  if (!adminKeyword) {
+    console.error(
+      "Security Warning: ADMIN_SECRET_KEY is not defined in the environment.",
+    );
+    return false;
+  }
+
   const cookieStore = await cookies();
   const token = cookieStore.get("admin_access_token")?.value;
 
-  return !!token;
+  if (!token) {
+    return false;
+  }
+
+  return token === adminKeyword;
 }
