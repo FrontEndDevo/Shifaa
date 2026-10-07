@@ -47,7 +47,7 @@ Shifaa is an end-to-end medical appointment booking and administrative managemen
 During development, several key architectural challenges were solved to optimize performance, real-time consistency, and user experience:
 
 - **Global Cached State & Cache Invalidation:** Standardized on TanStack React Query with centralized query keys (`["patient", "me"]`) to deliver instant local access to patient data. Integrated automatic `queryClient.invalidateQueries` and `router.refresh()` sequence upon authentication mutations to enforce immediate, seamless UI updates without full page reloads.
-- **Server-Side Authentication via HttpOnly Cookies:** Abandoned client-side session dependence (`account.get()`) in favor of storing the patient `userId` inside encrypted `HttpOnly` cookies (`appwrite-session`). This architecture allows Server Components and Server Actions to query patient records directly with elevated server privileges (`authenticated_admin_session`) while mitigating XSS threats.
+- **Server-Side Authentication via HttpOnly Cookies:** Abandoned client-side session dependence (`account.get()`) in favor of storing the patient `userId` inside encrypted `HttpOnly` cookies (`patient-user-id`). This architecture allows Server Components and Server Actions to query patient records directly with elevated server privileges (`authenticated_admin_session`) while mitigating XSS threats.
 - **Appwrite Relational Data Population:** Resolved Appwrite SDK relational fetching limits by implementing explicit `Query.select(["*", "patient.*"])` pipelines to fetch populated nested patient and doctor objects without executing secondary network round-trips.
 - **Bulk Update Limitations on Relationships:** Workaround for Appwrite's constraint on bulk row updates (`updateRows`) over relationship schemas by refactoring mutation handlers to use concurrent single-row updates (`updateRow`).
 - **Dynamic Page Caching & Real-time Revalidation:** Forced dynamic route evaluation alongside React Query background revalidation (`refetchInterval` / `refetchOnWindowFocus`) to bypass Next.js App Router static caching and guarantee real-time synchronization between Admin and Patient portals.
@@ -159,22 +159,7 @@ The primary entry point featuring hero sections, value propositions, key statist
 
 ---
 
-### 7. Admin Authentication & Security
-
-> Client-side passkey verification modal (`PasskeyModal`) ensuring authorized access to administrative routes without server-side layout flickering or hydration shifts.
-
-<div align="center">
-  <img src="./public/assets/screenshots/admin-passkey.png" alt="Passkey Verification Modal" width="70%" style="border-radius: 8px;" />
-</div>
-
-**Key Features:**
-
-- Custom 6-digit OTP Input slot layout using Shadcn UI.
-- Responsive dialog layout optimized for mobile and desktop viewports.
-
----
-
-### 8. Appointment Confirmation & Success Page (/success)
+### 7. Appointment Confirmation & Success Page (/success)
 
 > Dedicated confirmation screen displayed immediately after a successful booking request. Features appointment details, selected doctor, schedule timestamp, and clear next steps for the patient.
 
@@ -186,6 +171,21 @@ The primary entry point featuring hero sections, value propositions, key statist
 
 - Dynamic route driven by appointment ID URL parameters.
 - Informative UX notifying the patient to expect a confirmation call or email from the clinic receptionist.
+
+---
+
+### 8. Admin Authentication & Security
+
+> Client-side passkey verification modal (`PasskeyModal`) ensuring authorized access to administrative routes without server-side layout flickering or hydration shifts.
+
+<div align="center">
+  <img src="./public/assets/screenshots/admin-passkey.png" alt="Passkey Verification Modal" width="70%" style="border-radius: 8px;" />
+</div>
+
+**Key Features:**
+
+- Custom 6-digit OTP Input slot layout using Shadcn UI.
+- Responsive dialog layout optimized for mobile and desktop viewports.
 
 ---
 
