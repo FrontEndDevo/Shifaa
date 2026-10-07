@@ -21,10 +21,11 @@ export function middleware(request: NextRequest) {
   }
 
   const adminPasskey = request.cookies.get("admin_access_token")?.value;
+  const adminKeyword = process.env.ADMIN_KEYWORD;
   const isProtectedAdmin = path.startsWith("/admin");
 
   // User is not the Admin.
-  if (isProtectedAdmin && !adminPasskey) {
+  if (isProtectedAdmin && adminPasskey !== adminKeyword) {
     if (sessionSecret) {
       return NextResponse.redirect(new URL("/", request.url));
     } else {
