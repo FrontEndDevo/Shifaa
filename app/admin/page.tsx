@@ -1,4 +1,8 @@
 "use client";
+
+// Next Components:
+import Link from "next/link";
+
 // React Hooks:
 import { useEffect } from "react";
 
@@ -43,6 +47,13 @@ const Admin = () => {
           <Shifaa />
 
           <p className="text-xl font-semibold">Admin Dashboard</p>
+
+          <Link
+            href="/"
+            className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded transition duration-100"
+          >
+            Home
+          </Link>
         </header>
 
         {appointments && (
