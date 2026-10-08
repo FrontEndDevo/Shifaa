@@ -40,7 +40,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-8">
           <div className="hidden lg:block">
-            <NavActionButton userId={data?.userId} />
+            <NavActionButton userId={data?.userId} status={data?.status} />
           </div>
 
           {data?.userId && <NavAvatar username={data?.name} />}
@@ -66,7 +66,7 @@ const Navbar = () => {
               <NavItems key={item.title} item={item} />
             ))}
             <div className="flex justify-center col-span-2">
-              <NavActionButton userId={data?.userId} />
+              <NavActionButton userId={data?.userId} status={data?.status} />
             </div>
           </div>
         </div>
