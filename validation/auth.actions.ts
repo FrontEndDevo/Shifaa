@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 
 export async function verifyAndSetPasskey(enteredPasskey: string) {
-  const secretPasskey = process.env.VITE_ADMIN_PASSKEY;
+  const secretPasskey = process.env.ADMIN_PASSKEY;
 
   if (!secretPasskey) {
     throw new Error("Admin passkey is not defined on the server environment.");
