@@ -9,7 +9,6 @@ import { InputFile } from "node-appwrite/file";
 import {
   account,
   BUCKET_ID,
-  client,
   NEXT_ENDPOINT,
   PATIENT_DATABASE_ID,
   PATIENT_TABLE_ID,
@@ -106,7 +105,7 @@ export const getPatient = async () => {
     const userIdCookie = cookieStore.get("patient-user-id");
 
     if (!userIdCookie || !userIdCookie.value) {
-      return null;
+      return { userId: null, status: "UNAUTHENTICATED" };
     }
 
     const userId = userIdCookie.value;
@@ -118,10 +117,10 @@ export const getPatient = async () => {
     });
 
     if (!patients.rows || patients.rows.length === 0) {
-      return null;
+      return { userId: userIdCookie.value, status: "NEEDS_ONBOARDING" };
     }
 
-    return parseStringify(patients.rows[0]);
+    return parseStringify({ ...patients.rows[0], status: "IS_PATIENT" });
   } catch (error) {
     return null;
   }
