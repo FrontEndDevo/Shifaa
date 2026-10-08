@@ -6,7 +6,9 @@ export function middleware(request: NextRequest) {
   const sessionSecret = request.cookies.get("patient-user-id")?.value;
 
   const areProtectedRoutes =
-    path.startsWith("/new-appointment") || path.startsWith("/profile");
+    path.startsWith("/profile") ||
+    path.startsWith("/patients") ||
+    path.includes("/register");
 
   // Protected pages -> redirect to login.
   if (areProtectedRoutes && !sessionSecret) {
@@ -20,6 +22,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  // Protect Admin Dashboard:
   const adminPasskey = request.cookies.get("admin_access_token")?.value;
   const adminKeyword = process.env.ADMIN_KEYWORD;
   const isProtectedAdmin = path.startsWith("/admin");
@@ -37,10 +40,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/new-appointment/:path*",
-    "/auth/:path*",
-    "/profile",
-  ],
+  matcher: ["/admin", "/patients/:path*", "/auth/:path*", "/profile"],
 };
