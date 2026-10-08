@@ -17,7 +17,11 @@ export function CTAButtons() {
 
   const getStartedHandler = () => {
     if (data?.userId) {
-      router.push(`/patients/${data?.userId}/new-appointment`);
+      if (data?.status === "IS_PATIENT") {
+        router.push(`/patients/${data?.userId}/new-appointment`);
+      } else {
+        router.push(`/auth/${data?.userId}/register`);
+      }
     } else {
       router.push(`/auth/login`);
     }
@@ -26,6 +30,17 @@ export function CTAButtons() {
   const findDoctorHandler = () => {
     router.push("/doctors");
   };
+
+  let heroActionBtnName = null;
+  switch (data?.status) {
+    case "IS_PATIENT":
+      heroActionBtnName = "Book Your Appointment";
+      break;
+
+    default:
+      heroActionBtnName = "Get Started";
+      break;
+  }
 
   return (
     <div className="flex flex-col sm:flex-row gap-6 lg:gap-4 justify-center items-center lg:justify-start">
@@ -39,9 +54,9 @@ export function CTAButtons() {
 
       <Button
         onClick={getStartedHandler}
-        className={`font-serif ${data?.userId ? "bg-emerald-600 hover:bg-emerald-900" : "bg-blue-600 hover:bg-blue-900"} text-white px-12 py-6 text-xl lg:text-2xl xl:text-3xl rounded-full cursor-pointer transition-all duration-200`}
+        className={`font-serif ${data?.status === "IS_PATIENT" ? "bg-emerald-600 hover:bg-emerald-900" : "bg-blue-600 hover:bg-blue-900"} text-white px-12 py-6 text-xl lg:text-2xl xl:text-3xl rounded-full cursor-pointer transition-all duration-200`}
       >
-        {data?.userId ? "Book Your Appointment" : "Get Started"}
+        {heroActionBtnName}
       </Button>
     </div>
   );
