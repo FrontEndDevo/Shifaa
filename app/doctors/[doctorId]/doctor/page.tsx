@@ -137,7 +137,7 @@ const DoctorPage = () => {
                     ${consultationFee.toFixed(2)}
                   </span>
                 </p>
-                <NavActionButton userId={data?.userId} />
+                <NavActionButton userId={data?.userId} status={data.status} />
               </div>
             </div>
           </div>
