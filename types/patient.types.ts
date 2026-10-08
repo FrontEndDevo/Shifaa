@@ -6,6 +6,11 @@ enum Gender {
   OTHER = "other",
 }
 
+export type TPatientStatus =
+  | "IS_PATIENT"
+  | "NEEDS_ONBOARDING"
+  | "UNAUTHENTICATED";
+
 export interface Patient extends Models.Document {
   userId: string;
   name: string;
