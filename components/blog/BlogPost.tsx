@@ -1,5 +1,6 @@
 // Next Components:
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // Lucide Icons:
 import { Calendar, ChevronRight } from "lucide-react";
@@ -10,8 +11,9 @@ import { Badge } from "@/components/ui/badge";
 
 // Types:
 import { BlogArticle } from "@/types/articles.types";
+
+// Utilities:
 import { formatDateTime } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 const BlogPost = ({ post }: { post: BlogArticle }) => {
   const { slug, title, image, category, readTime, publishedAt } = post;
