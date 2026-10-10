@@ -1,6 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Types:
+import { BlogArticle } from "@/types/articles.types";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -76,4 +79,26 @@ export const formatDateTime = (dateString: Date | string) => {
     dateOnly: formattedDate,
     timeOnly: formattedTime,
   };
+};
+
+export const blogPostsFilter = ({
+  posts,
+  filter,
+}: {
+  posts: BlogArticle[];
+  filter: string;
+}) => {
+  switch (filter) {
+    case "Latest":
+      return posts.sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+      );
+    case "Category":
+      return posts.sort((a, b) =>
+        String(a.category).localeCompare(String(b.category), "en"),
+      );
+    case "Popular":
+      return posts.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+  }
 };
