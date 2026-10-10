@@ -75,4 +75,8 @@ export const NAV_MENU = [
   //     },
   //   ],
   // },
+  {
+    title: "Blog",
+    url: "/blog",
+  },
 ];
