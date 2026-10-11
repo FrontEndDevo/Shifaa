@@ -16,6 +16,7 @@ import SpinnerButton from "@/components/shared/SpinnerButton";
 import PasskeyModal from "@/components/modals/PasskeyModal";
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/navbar/Navbar";
+import AdminAccessBtn from "@/components/admin/AdminAccessBtn";
 
 const Login = async ({ searchParams }: SearchParamProps) => {
   const { admin } = await searchParams;
@@ -36,13 +37,7 @@ const Login = async ({ searchParams }: SearchParamProps) => {
               <p className="justify-items-end text-gray-600 xl:text-left">
                 © 2026 Shifaa
               </p>
-              {!admin ? (
-                <Link href="?admin=true" className="text-green-500">
-                  Admin
-                </Link>
-              ) : (
-                <SpinnerButton />
-              )}
+              {!admin ? <AdminAccessBtn /> : <SpinnerButton />}
             </div>
           </div>
         </section>
