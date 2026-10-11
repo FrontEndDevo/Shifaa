@@ -21,13 +21,11 @@ import {
 
 // GET ALL RECENT APPOINTMENTS HOOK
 export function useGetRecentAppointments() {
-  const query = useQuery({
+  return useQuery({
     queryKey: ["appointments"],
     queryFn: () => getRecentAppointments(),
     refetchInterval: 1000 * 5, // 5 seconds to fetch new data.
-    refetchOnWindowFocus: true,
   });
-  return query;
 }
 
 // CREATE APPOINTMENT HOOK
