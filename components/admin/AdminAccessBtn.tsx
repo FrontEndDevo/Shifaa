@@ -13,8 +13,6 @@ const AdminAccessBtn = () => {
   const queryClient = useQueryClient();
 
   const prefetchAdminAppointmentsHandler = async () => {
-    console.log(`mouse enter`);
-
     await queryClient.query({
       queryKey: ["appointments"],
       queryFn: () => getRecentAppointments(),
