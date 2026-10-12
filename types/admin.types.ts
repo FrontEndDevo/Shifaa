@@ -6,3 +6,12 @@ export type TAdminProps = {
   label: string;
   icon: string;
 };
+
+export type AdminFiltersProps = {
+  adminFilter: string;
+  filter: string;
+};
+
+export type SelectMenuProps = {
+  getAdminFilters: ({ adminFilter, filter }: AdminFiltersProps) => void;
+};
