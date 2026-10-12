@@ -46,7 +46,9 @@ const Admin = () => {
         <header className="admin-header">
           <Shifaa />
 
-          <p className="text-xl font-semibold">Admin Dashboard</p>
+          <p className="text-xl font-semibold hidden md:block">
+            Admin Dashboard
+          </p>
 
           <Link
             href="/"
