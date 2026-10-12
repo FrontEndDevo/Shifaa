@@ -1,8 +1,12 @@
 "use client";
 
-import React from "react";
+// React Hooks:
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
+// Next Components:
+import Image from "next/image";
+
+// React Table
 import {
   useTable,
   type ColumnDef,
@@ -10,6 +14,7 @@ import {
   type ColumnFiltersState,
 } from "@tanstack/react-table";
 
+// Shadcn UI:
 import {
   Table,
   TableBody,
@@ -18,9 +23,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { features, DataTableFeatures } from "./AdminFeatures";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
+
+// Components:
+import { features, DataTableFeatures } from "./AdminFeatures";
+import SelectMenu from "../shared/SelectMenu";
+
+// Types:
+import { AdminFiltersProps } from "@/types/admin.types";
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];
@@ -31,9 +42,7 @@ export function DataTable<TData extends RowData>({
   columns,
   data,
 }: DataTableProps<TData>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  );
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useTable({
     features,
@@ -45,17 +54,38 @@ export function DataTable<TData extends RowData>({
     },
   });
 
+  const getAdminFilters = ({ adminFilter, filter }: AdminFiltersProps) => {
+    if (adminFilter === "Status") {
+      table.resetColumnFilters();
+      table.getColumn("status")?.setFilterValue(filter);
+    } else if (adminFilter === "Doctors") {
+      table.resetColumnFilters();
+      table.getColumn("primaryPhysician")?.setFilterValue(filter);
+    } else {
+    }
+  };
+
+  // Filter table by patient name using input field.
+  const filterTableByPatientNameHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    table.resetColumnFilters();
+    table.getColumn("patient")?.setFilterValue(event.target.value);
+  };
+
+  const patientInputFilter =
+    (table.getColumn("patient")?.getFilterValue() as string) ?? "";
+
   return (
     <>
-      <div className="flex items-center justify-center py-4 w-full">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between py-4 w-full gap-10">
         <Input
           placeholder="Filter appointments by patient name..."
-          value={(table.getColumn("patient")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("patient")?.setFilterValue(event.target.value)
-          }
+          value={patientInputFilter}
+          onChange={filterTableByPatientNameHandler}
           className="max-w-sm border focus:border-green-500 border-green-500"
         />
+        <SelectMenu getAdminFilters={getAdminFilters} />
       </div>
 
       <div className="data-table">
