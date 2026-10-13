@@ -19,6 +19,7 @@ import NavAvatar from "@/components/avatar/NavAvatar";
 
 // API Actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
+import { ThemeToggle } from "../../providers/ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,8 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <NavActionButton userId={data?.userId} status={data?.status} />
           </div>
+
+          <ThemeToggle />
 
           {data?.userId && <NavAvatar username={data?.name} />}
 
