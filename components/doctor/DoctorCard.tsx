@@ -33,7 +33,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
       <div className="flex justify-center">
         <Link
           href={`/doctors/${doctor.doctorId}/doctor`}
-          className="m-2 bg-blue-500 text-sm md:text-base rounded px-2 py-1 font-semibold hover:bg-blue-700 transition duration-150"
+          className="m-2 bg-blue-500 text-page text-sm md:text-base rounded px-2 py-1 font-semibold hover:bg-blue-700 transition duration-150"
         >
           Read more
         </Link>

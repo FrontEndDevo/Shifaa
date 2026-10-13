@@ -90,7 +90,7 @@ export function DataTable<TData extends RowData>({
 
       <div className="data-table">
         <Table className="shad-table text-center">
-          <TableHeader className="bg-dark-200">
+          <TableHeader className="bg-deep">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="shad-table-row-header">
                 {headerGroup.headers.map((header) => {

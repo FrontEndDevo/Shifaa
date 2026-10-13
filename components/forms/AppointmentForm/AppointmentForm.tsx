@@ -44,9 +44,7 @@ export const AppointmentForm = ({
       {type === "create" && (
         <section className="my-12 space-y-4">
           <h1 className="header">New Appointment</h1>
-          <p className="text-dark-700">
-            Request a new appointment in 10 seconds.
-          </p>
+          <p className="text-soft">Request a new appointment in 10 seconds.</p>
         </section>
       )}
 
@@ -67,7 +65,7 @@ export const AppointmentForm = ({
                     width={32}
                     height={32}
                     alt={doctor.name}
-                    className="rounded-full border border-dark-500"
+                    className="rounded-full border border-line"
                   />
                   <p>{doctor.name}</p>
                 </div>

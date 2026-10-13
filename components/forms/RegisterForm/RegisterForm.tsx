@@ -26,7 +26,7 @@ const RegisterForm = ({ userId }: { userId: string }) => {
     <form onSubmit={form.handleSubmit(onSubmitHandler)}>
       <section className="my-12">
         <h1 className="header mb-2">Welcome again 👋🏻</h1>
-        <p className="text-dark-700">Tell us more about yourself.</p>
+        <p className="text-soft">Tell us more about yourself.</p>
       </section>
 
       {/* Name & Phone number */}
@@ -107,7 +107,7 @@ const RegisterForm = ({ userId }: { userId: string }) => {
           >
             {IdentificationTypes.map((type, i) => (
               <SelectItem
-                className="hover:bg-dark-200 transition duration-100 cursor-pointer"
+                className="hover:bg-deep transition duration-100 cursor-pointer"
                 key={type + i}
                 value={type}
               >

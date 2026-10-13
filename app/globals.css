@@ -36,7 +36,7 @@
   }
 
   .sidebar {
-    @apply remove-scrollbar w-full max-w-72 flex-col overflow-auto bg-dark-300 px-7 py-10;
+    @apply remove-scrollbar w-full max-w-72 flex-col overflow-auto bg-page px-7 py-10;
   }
 
   .header {
@@ -60,7 +60,7 @@
   }
 
   .copyright {
-    @apply text-sm justify-items-end text-center text-dark-600 xl:text-left;
+    @apply text-sm justify-items-end text-center text-faint xl:text-left;
   }
 
   /* ==== SUCCESS */
@@ -69,12 +69,12 @@
   }
 
   .request-details {
-    @apply flex w-full flex-col items-center gap-8 border-y-2 border-dark-400 py-8 md:w-fit md:flex-row;
+    @apply flex w-full flex-col items-center gap-8 border-y-2 border-card py-8 md:w-fit md:flex-row;
   }
 
   /* ===== ADMIN */
   .admin-header {
-    @apply sticky top-3 z-20 mx-3 flex items-center justify-between rounded-2xl bg-dark-200 px-[5%] py-5 shadow-lg xl:px-12;
+    @apply mx-3 flex items-center justify-between rounded-2xl bg-deep px-[5%] py-5 shadow-lg xl:px-12;
   }
 
   .admin-main {
@@ -87,20 +87,20 @@
 
   /* ==== FORM */
   .radio-group {
-    @apply flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-dark-500 bg-dark-400 p-3 cursor-pointer;
+    @apply flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-line bg-card p-3 cursor-pointer;
   }
 
   .checkbox-label {
-    @apply cursor-pointer text-sm font-medium text-dark-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:leading-none;
+    @apply cursor-pointer text-sm font-medium text-soft peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:leading-none;
   }
 
   /* ==== File Upload */
   .file-upload {
-    @apply text-12-regular flex cursor-pointer  flex-col items-center justify-center gap-3 rounded-md border border-dashed border-dark-500 bg-dark-400 p-5;
+    @apply text-12-regular flex cursor-pointer  flex-col items-center justify-center gap-3 rounded-md border border-dashed border-line bg-card p-5;
   }
 
   .file-upload_label {
-    @apply flex flex-col justify-center gap-2 text-center text-dark-600;
+    @apply flex flex-col justify-center gap-2 text-center text-faint;
   }
 
   /* ==== Stat Card */
@@ -115,7 +115,7 @@
 
   /* Data Table */
   .data-table {
-    @apply z-10 w-full overflow-hidden rounded-lg border border-dark-400 shadow-lg;
+    @apply z-10 w-full overflow-hidden rounded-lg border border-card shadow-lg;
   }
 
   .table-actions {
@@ -149,23 +149,23 @@
   }
 
   .shad-gray-btn {
-    @apply border border-dark-500 cursor-pointer bg-dark-400 text-white !important;
+    @apply border border-line cursor-pointer bg-card text-white !important;
   }
 
   .shad-textArea {
-    @apply bg-dark-400 placeholder:text-dark-600 border-dark-500 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
+    @apply bg-card placeholder:text-faint border-line focus-visible:ring-0 focus-visible:ring-offset-0 !important;
   }
 
   .shad-select-trigger {
-    @apply bg-dark-400  placeholder:text-dark-600 border-dark-500 h-11 focus:ring-0 focus:ring-offset-0 !important;
+    @apply bg-card  placeholder:text-faint border-line h-11 focus:ring-0 focus:ring-offset-0 !important;
   }
 
   .shad-select-content {
-    @apply bg-dark-400 border-dark-500 !important;
+    @apply bg-card border-line !important;
   }
 
   .shad-dialog {
-    @apply bg-dark-400 border-dark-500 !important;
+    @apply bg-card border-line !important;
   }
 
   .shad-dialog button {
@@ -181,11 +181,11 @@
   }
 
   .shad-table-row-header {
-    @apply border-b border-dark-400 text-light-200 hover:bg-transparent !important;
+    @apply border-b border-card text-main hover:bg-transparent !important;
   }
 
   .shad-table-row {
-    @apply border-b border-dark-400 text-light-200 !important;
+    @apply border-b border-card text-main !important;
   }
 
   .shad-otp {
@@ -193,21 +193,21 @@
   }
 
   .shad-otp-slot {
-    @apply text-4xl font-bold justify-center flex border border-dark-500 rounded-lg size-10 sm:size-14 gap-4 !important;
+    @apply text-4xl font-bold justify-center flex border border-line rounded-lg size-10 sm:size-14 gap-4 !important;
   }
 
   .shad-alert-dialog {
-    @apply py-4 bg-dark-400 border-dark-500 outline-none !important;
+    @apply py-4 bg-card border-line outline-none !important;
   }
 
   /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
   .input-phone {
-    @apply mt-2 h-11 rounded-md px-3 text-sm border bg-dark-400 placeholder:text-dark-600 border-dark-500 !important;
+    @apply mt-2 h-11 rounded-md px-3 text-sm border bg-card placeholder:text-faint border-line !important;
   }
 
   /* =====  REACT DATE PICKER OVERRIDES */
   .date-picker {
-    @apply overflow-hidden border-transparent w-full placeholder:text-dark-600  h-11 text-sm font-medium rounded-md px-3 outline-none !important;
+    @apply overflow-hidden border-transparent w-full placeholder:text-faint  h-11 text-sm font-medium rounded-md px-3 outline-none !important;
   }
 }
 
@@ -245,7 +245,8 @@
 }
 
 .react-datepicker__input-container input {
-  background-color: #1a1d21 !important;
+  background-color: rgb(var(--card)) !important;
+  color: rgb(var(--main)) !important;
   width: 100%;
   outline: none;
 }
@@ -273,11 +274,12 @@
 .PhoneInputInput {
   outline: none;
   margin-left: 4px;
-  background: #1a1d21;
+  background: transparent;
+  color: inherit;
   font-size: 14px;
   font-weight: 500;
 }
 
 .PhoneInputInput::placeholder {
-  color: #1a1d21;
+  color: rgb(var(--faint));
 }

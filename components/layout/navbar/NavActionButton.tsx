@@ -54,7 +54,7 @@ const NavActionButton = ({
       {status && (
         <Button
           onClick={navLinkHandler}
-          className={`group flex gap-2 py-1 px-4 ${userId ? "bg-emerald-600 hover:bg-emerald-800" : "bg-blue-600 hover:bg-blue-800"}`}
+          className={`group text-white flex gap-2 py-1 px-4 ${userId ? "bg-emerald-600 hover:bg-emerald-800" : "bg-blue-600 hover:bg-blue-800"}`}
         >
           <p className="font-mono text-base">{navBtnName}</p>
 

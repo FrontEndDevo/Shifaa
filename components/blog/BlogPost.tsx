@@ -38,7 +38,7 @@ const BlogPost = ({ post }: { post: BlogArticle }) => {
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between gap-3 font-bold">
-          <Badge className="bg-dark-500 rounded-full shadow-none hover:bg-dark-600">
+          <Badge className="bg-line rounded-full shadow-none hover:bg-faint">
             {category}
           </Badge>
           <span className="bg-slate-200 text-blue-500 py-1 px-2 rounded-full text-muted-foreground text-xs">

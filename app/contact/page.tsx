@@ -105,7 +105,7 @@ const ContactPage = () => {
                     rows={5}
                     disabled={!isAuthenticated}
                     placeholder="Type your message here."
-                    className="w-full rounded-xl border border-slate-700 p-4 text-slate-100 placeholder:text-slate-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full rounded-xl border border-line p-4 text-main placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                   />
                   {!isAuthenticated ? (
                     <div className="flex items-center justify-between rounded-lg border border-amber-500/20 bg-amber-500/10 p-2 text-sm text-amber-400">

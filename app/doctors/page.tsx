@@ -58,7 +58,7 @@ const Doctors = () => {
             name="find-doctor"
             id="find-doctor"
             placeholder="find a doctor"
-            className="px-4 py-1 rounded bg-dark-500 text-white outline-none focus:shadow-md focus:shadow-blue-500 w-full lg:w-fit"
+            className="px-4 py-1 rounded bg-line text-main outline-none dark:focus:shadow-md dark:focus:shadow-blue-500 w-full lg:w-fit"
           />
         </div>
 

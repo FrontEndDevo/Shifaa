@@ -33,7 +33,7 @@ const AppointmentsTable = ({
             width={48}
             height={48}
             alt={doctor.name}
-            className="rounded-full border border-dark-500"
+            className="rounded-full border border-line"
           />
           <h3 className="text-xl">{primaryPhysician}</h3>
         </div>

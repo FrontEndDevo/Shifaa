@@ -5,7 +5,7 @@ type HeadingProps = { category: string; title: string; description: string };
 const Heading = ({ category, title, description }: HeadingProps) => {
   return (
     <div>
-      <Badge className="mb-6 px-6 py-4 text-lg font-semibold bg-dark-500 rounded-full shadow-none hover:bg-dark-600">
+      <Badge className="mb-6 px-6 py-4 text-lg font-semibold bg-line rounded-full shadow-none hover:bg-faint">
         {category}
       </Badge>
 

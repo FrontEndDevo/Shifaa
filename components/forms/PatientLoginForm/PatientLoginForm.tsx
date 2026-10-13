@@ -18,7 +18,7 @@ const PatientLoginForm = () => {
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <div>
         <h1 className="header mb-2 mt-10">Hello there 👋🏻</h1>
-        <p className="text-dark-700">Schedule your first appointment</p>
+        <p className="text-soft">Schedule your first appointment</p>
       </div>
 
       <InputField

@@ -47,7 +47,7 @@ const DoctorPage = () => {
   return (
     <>
       <Navbar />
-      <section className="py-20 bg-dark-400">
+      <section className="py-20 bg-card">
         <div className="container flex lg:flex-row flex-col items-center gap-6">
           <div className="bg-white p-8 rounded-2xl border-4 border-blue-400 shadow-2xl shadow-blue-700">
             <DoctorAvailability availableToday={availableToday} />
@@ -58,16 +58,16 @@ const DoctorPage = () => {
               height={1000}
               className=""
             />
-            <h1 className="text-center text-2xl text-dark-400 font-bold my-4">
+            <h1 className="text-center text-2xl text-card font-bold my-4">
               {name}
             </h1>
           </div>
 
           <div>
             <SectionHeading
-              desctiption={bio}
-              heading="Meet the doctor"
               icon={UserRound}
+              description={bio}
+              heading="Meet the doctor"
               title={`${specialty} with ${experience} Experience.`}
             />
 

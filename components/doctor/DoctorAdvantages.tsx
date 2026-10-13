@@ -7,7 +7,7 @@ const DoctorAdvantages = ({
   color,
 }: DoctorAdvantagesProps) => {
   return (
-    <div className="bg-dark-500 p-2 rounded-lg">
+    <div className="bg-line p-2 rounded-lg">
       <h3 className={`${color} font-bold text-xl`}>{count}</h3>
       <p className="capitalize text-base mt-2 font-semibold">{advantage}</p>
     </div>

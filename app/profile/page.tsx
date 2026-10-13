@@ -45,7 +45,7 @@ const Profile = () => {
         data={appointments}
         errorMessage="Failed to fetch your appointments, Try to refresh page."
       >
-        <section className="min-h-dvh bg-muted/50 flex flex-col 2xl:flex-row items-start px-6 py-10 bg-dark-400">
+        <section className="min-h-dvh bg-muted/50 flex flex-col 2xl:flex-row items-start px-6 py-10 bg-card">
           {/* Profile */}
           <div className="relative mx-auto flex w-full max-w-md flex-col items-center rounded-xl border border-border/55 bg-background px-8 py-10 shadow-[0_0_10px_rgba(0,0,0,0.04)] dark:border-border/75 dark:shadow-[0_0_20px_rgba(0,0,0,0.4)]">
             {/* Edit Profile button */}

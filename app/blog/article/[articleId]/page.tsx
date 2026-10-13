@@ -70,7 +70,7 @@ const BlogArticlePage = () => {
               sizes="(max-width: 768px) 100vw, 1200px"
               className="object-cover transition-transform duration-700 hover:scale-[1.02]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-400 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
           </div>
 
           {/* Main content and sidebar */}
