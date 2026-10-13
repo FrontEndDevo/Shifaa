@@ -6,12 +6,12 @@ type ProfileStatusCountProps = {
 
 const ProfileStatusCount = ({
   title,
-  count,
+  count = 0,
   color,
 }: ProfileStatusCountProps) => {
   return (
     <div
-      className={`p-1 rounded bg-${color}-400 transition duration-150 hover:bg-${color}-600`}
+      className={`p-1 rounded bg-${color}-400 border-2 border-${color} transition duration-150 hover:bg-${color}-600`}
     >
       <h4 className="text-sm lg:text-base xl:text-lg font-mono font-semibold italic capitalize">
         {title}
