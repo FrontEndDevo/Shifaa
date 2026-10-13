@@ -16,10 +16,10 @@ import Shifaa from "../Shifaa";
 import NavItems from "./NavItems";
 import NavActionButton from "./NavActionButton";
 import NavAvatar from "@/components/avatar/NavAvatar";
+import DarkMode from "@/components/layout/DarkMode";
 
 // API Actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
-import { ThemeToggle } from "../../providers/ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const Navbar = () => {
   const { data } = useGetPatient();
 
   return (
-    <header className="sticky top-0 right-0 z-50 border-b bg-dark-300">
+    <header className="sticky top-0 right-0 z-50 border-b bg-page">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         {/* Logo */}
         <Shifaa class="w-8 h-8" text="text-xl" />
@@ -44,7 +44,7 @@ const Navbar = () => {
             <NavActionButton userId={data?.userId} status={data?.status} />
           </div>
 
-          <ThemeToggle />
+          <DarkMode />
 
           {data?.userId && <NavAvatar username={data?.name} />}
 
@@ -63,8 +63,8 @@ const Navbar = () => {
 
       {/* Mobile / Tablet Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 z-50 border-t bg-dark-300 shadow-xl lg:hidden">
-          <div className="gap-4 max-w-7xl bg-dark-300 py-4">
+        <div className="absolute top-full left-0 right-0 z-50 border-t bg-page shadow-xl lg:hidden">
+          <div className="gap-4 max-w-7xl bg-page py-4">
             {NAV_MENU.map((item) => (
               <NavItems key={item.title} item={item} />
             ))}
