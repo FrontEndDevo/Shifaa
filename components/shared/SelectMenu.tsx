@@ -52,7 +52,7 @@ const SelectMenu = ({ getAdminFilters }: SelectMenuProps) => {
               {primaryFilters.map((filter) => (
                 <SelectItem
                   key={filter}
-                  className="bg-dark-200 py-1"
+                  className="bg-deep py-1"
                   value={filter}
                 >
                   {filter}
@@ -78,7 +78,7 @@ const SelectMenu = ({ getAdminFilters }: SelectMenuProps) => {
               {filters.map((filter) => (
                 <SelectItem
                   key={filter}
-                  className="bg-dark-200 py-1"
+                  className="bg-deep py-1"
                   value={filter}
                 >
                   {filter}
