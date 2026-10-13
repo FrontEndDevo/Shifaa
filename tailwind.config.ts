@@ -26,13 +26,13 @@ const config = {
         green: { 500: "#24AE7C", 600: "#0D2A1F" },
         red: { 500: "#F37877", 600: "#3E1716", 700: "#F24E43" },
 
-        page: "rgb(var(--page) / <alpha-value>)", // كان dark-300
-        deep: "rgb(var(--deep) / <alpha-value>)", // كان dark-200
-        card: "rgb(var(--card) / <alpha-value>)", // كان dark-400
-        line: "rgb(var(--line) / <alpha-value>)", // كان dark-500
-        faint: "rgb(var(--faint) / <alpha-value>)", // كان dark-600
-        soft: "rgb(var(--soft) / <alpha-value>)", // كان dark-700
-        main: "rgb(var(--main) / <alpha-value>)", // كان light-200
+        page: "rgb(var(--page) / <alpha-value>)", // dark-300
+        deep: "rgb(var(--deep) / <alpha-value>)", // dark-200
+        card: "rgb(var(--card) / <alpha-value>)", // dark-400
+        line: "rgb(var(--line) / <alpha-value>)", // dark-500
+        faint: "rgb(var(--faint) / <alpha-value>)", // dark-600
+        soft: "rgb(var(--soft) / <alpha-value>)", // dark-700
+        main: "rgb(var(--main) / <alpha-value>)", // light-200
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
