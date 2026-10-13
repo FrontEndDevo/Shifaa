@@ -39,7 +39,7 @@ const InputField = <TFieldValues extends FieldValues>({
       return (
         <Field className="flex flex-col gap-1.5 w-full my-4">
           {label && (
-            <FieldLabel className="text-sm font-bold text-dark-700 dark:text-gray-300">
+            <FieldLabel className="text-sm font-bold text-soft dark:text-gray-300">
               {label}
             </FieldLabel>
           )}
@@ -49,10 +49,10 @@ const InputField = <TFieldValues extends FieldValues>({
             render={({ field, fieldState }) => (
               <div className="flex flex-col gap-1">
                 <div
-                  className={`flex items-center h-11 w-full rounded-md border bg-dark-400 px-3 transition-colors ${
+                  className={`flex items-center h-11 w-full rounded-md border bg-card px-3 transition-colors ${
                     fieldState.invalid
                       ? "border-red-500 focus-within:border-red-500"
-                      : "border-dark-500 focus-within:border-primary-500"
+                      : "border-line focus-within:border-primary-500"
                   }`}
                 >
                   {iconSrc && (
@@ -72,7 +72,7 @@ const InputField = <TFieldValues extends FieldValues>({
                     aria-invalid={fieldState.invalid}
                     placeholder={placeholder}
                     autoComplete="off"
-                    className="w-full border-0 focus:border-none bg-transparent p-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none text-white placeholder:text-dark-600"
+                    className="w-full border-0 focus:border-none bg-transparent p-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none text-main placeholder:text-faint"
                   />
                 </div>
 
@@ -141,7 +141,7 @@ const InputField = <TFieldValues extends FieldValues>({
       return (
         <div>
           <Label className="mb-2">{label}</Label>
-          <div className="flex h-fit items-center rounded-md border border-dark-500 bg-dark-400">
+          <div className="flex h-fit items-center rounded-md border border-line bg-card">
             <Image
               src="/assets/icons/calendar.svg"
               height={24}
