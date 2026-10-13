@@ -1,18 +1,16 @@
 "use client";
 
-// Next Components:
-import Link from "next/link";
-
 // React Hooks:
 import { useEffect } from "react";
 
-// Data Table:
+// Tanstack Table:
 import { DataTable } from "@/components/admin/DataTable";
 import { columns } from "@/components/admin/columns";
 
 // Components:
-import StatAppointment from "@/components/admin/StatAppointment";
+import Navbar from "@/components/layout/navbar/Navbar";
 import QueryWrapper from "@/components/shared/QueryWrapper";
+import StatAppointment from "@/components/admin/StatAppointment";
 
 // Shadcn UI:
 import { toast } from "@/components/ui/toast";
@@ -36,63 +34,60 @@ const Admin = () => {
   }, [isError]);
 
   return (
-    <QueryWrapper
-      isLoading={isLoading}
-      isError={isError}
-      data={appointments}
-      errorMessage="Failed to fetch the appointments, please try again."
-    >
-      <div className="mx-auto flex max-w-7xl flex-col space-y-14">
-        <header className="admin-header">
-          <Shifaa />
+    <>
+      <Navbar />
 
-          <p className="text-xl font-semibold hidden md:block">
-            Admin Dashboard
-          </p>
+      <QueryWrapper
+        isLoading={isLoading}
+        isError={isError}
+        data={appointments}
+        errorMessage="Failed to fetch the appointments, please try again."
+      >
+        <div className="mx-auto flex max-w-7xl flex-col space-y-14">
+          <header className="admin-header">
+            <Shifaa />
 
-          <Link
-            href="/"
-            className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded transition duration-100"
-          >
-            Home
-          </Link>
-        </header>
+            <p className="text-xl font-semibold hidden md:block">
+              Admin Dashboard
+            </p>
+          </header>
 
-        {appointments && (
-          <main className="admin-main">
-            <section className="w-full space-y-4">
-              <h1 className="header">Welcome 👋</h1>
-              <p className="text-dark-700">
-                Start the day with managing new appointments
-              </p>
-            </section>
+          {appointments && (
+            <main className="admin-main">
+              <section className="w-full space-y-4">
+                <h1 className="header">Welcome 👋</h1>
+                <p className="text-soft">
+                  Start the day with managing new appointments
+                </p>
+              </section>
 
-            <section className="admin-stat">
-              <StatAppointment
-                type="appointments"
-                count={appointments.scheduledCount}
-                label="Scheduled appointments"
-                icon={"/assets/icons/appointments.svg"}
-              />
-              <StatAppointment
-                type="pending"
-                count={appointments.pendingCount}
-                label="Pending appointments"
-                icon={"/assets/icons/pending.svg"}
-              />
-              <StatAppointment
-                type="cancelled"
-                count={appointments.cancelledCount}
-                label="Cancelled appointments"
-                icon={"/assets/icons/cancelled.svg"}
-              />
-            </section>
+              <section className="admin-stat">
+                <StatAppointment
+                  type="appointments"
+                  count={appointments.scheduledCount}
+                  label="Scheduled appointments"
+                  icon={"/assets/icons/appointments.svg"}
+                />
+                <StatAppointment
+                  type="pending"
+                  count={appointments.pendingCount}
+                  label="Pending appointments"
+                  icon={"/assets/icons/pending.svg"}
+                />
+                <StatAppointment
+                  type="cancelled"
+                  count={appointments.cancelledCount}
+                  label="Cancelled appointments"
+                  icon={"/assets/icons/cancelled.svg"}
+                />
+              </section>
 
-            <DataTable columns={columns} data={appointments.rows} />
-          </main>
-        )}
-      </div>
-    </QueryWrapper>
+              <DataTable columns={columns} data={appointments.rows} />
+            </main>
+          )}
+        </div>
+      </QueryWrapper>
+    </>
   );
 };
 
