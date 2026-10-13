@@ -6,6 +6,9 @@ import { ArrowRight, HeartCrack } from "lucide-react";
 
 // Constants:
 import { OUR_SERVICES } from "@/constants/OurServices";
+import { SERVICES_HEADING } from "@/constants/Headings";
+
+// Components:
 import SectionHeading from "../common/SectionHeading";
 
 const Services = () => {
@@ -13,10 +16,9 @@ const Services = () => {
     <section className="container text-center py-20">
       <SectionHeading
         icon={HeartCrack}
-        heading="our services"
-        title="Comprehensive Shifaa services"
-        desctiption="From diagnostics to rehabilitation, we offer a full spectrum of
-            cardiology services tailored to your heart health needs."
+        heading={SERVICES_HEADING.heading}
+        title={SERVICES_HEADING.title}
+        description={SERVICES_HEADING.description}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

@@ -10,14 +10,17 @@ import { INTEGRATIONS } from "@/constants/Integrations";
 // Components:
 import SectionHeading from "../common/SectionHeading";
 
+// Constants:
+import { INTEGRATIONS_HEADING } from "@/constants/Headings";
+
 const Integrations = () => {
   return (
     <section className="mx-auto flex max-w-7xl flex-col px-6 py-12 sm:py-14">
       <SectionHeading
         icon={Hospital}
-        heading="Integrations"
-        title="Everything connected in one place"
-        desctiption="Connect your healthcare tools and services to make appointments, patient care, and everyday workflows simpler and more efficient."
+        heading={INTEGRATIONS_HEADING.heading}
+        title={INTEGRATIONS_HEADING.title}
+        description={INTEGRATIONS_HEADING.description}
       />
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">

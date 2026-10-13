@@ -1,15 +1,18 @@
 // Next Components:
 import { useRouter } from "next/navigation";
 
+// Lucide Icons:
+import { CircleCheck, DollarSign } from "lucide-react";
+
 // Shadcn UI:
 import { cn } from "@/lib/utils";
-import { CircleCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 // Constants:
 import { PRICING_PLAN } from "@/constants/PricingPlan";
+import { PRICING_PLAN_HEADING } from "@/constants/Headings";
 
 // Components:
 import SectionHeading from "../common/SectionHeading";
@@ -17,20 +20,18 @@ import SectionHeading from "../common/SectionHeading";
 const PricingPlan = () => {
   const router = useRouter();
 
-  const { heading, title, description, icon, plans } = PRICING_PLAN;
-
   return (
-    <section className="bg-dark-400">
+    <section className="bg-card">
       <div className="container px-6 py-20">
         <SectionHeading
-          heading={heading}
-          title={title}
-          desctiption={description}
-          icon={icon}
+          icon={DollarSign}
+          heading={PRICING_PLAN_HEADING.heading}
+          title={PRICING_PLAN_HEADING.title}
+          description={PRICING_PLAN_HEADING.description}
         />
 
         <div className="mx-auto mt-12 grid max-w-(--breakpoint-lg) grid-cols-1 items-center gap-8 sm:mt-16 lg:grid-cols-3">
-          {plans.map((plan) => (
+          {PRICING_PLAN.map((plan) => (
             <div
               className={cn(
                 "relative rounded-lg border border-border/85 bg-card p-6 shadow-xs/3",
@@ -66,7 +67,7 @@ const PricingPlan = () => {
 
               <Button
                 onClick={() => router.push("/contact")}
-                className="mt-6 w-full border-emerald-800 hover:bg-emerald-800"
+                className="mt-6 w-full text-main hover:text-page dark:text-main border-emerald-800 hover:bg-emerald-800"
                 size="lg"
                 variant="outline"
               >

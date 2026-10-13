@@ -1,14 +1,8 @@
-import { LucideIcon } from "lucide-react";
-
-type SectionHeadingProps = {
-  icon: LucideIcon;
-  heading: string;
-  title: string;
-  desctiption: string;
-};
+// Types:
+import { SectionHeadingProps } from "@/types/headings.types";
 
 const SectionHeading = (props: SectionHeadingProps) => {
-  const { icon: LucideIcon, heading, title, desctiption } = props;
+  const { icon: LucideIcon, heading, title, description } = props;
   return (
     <div>
       <div className="bg-red-200 mx-auto py-1 px-4 rounded-full flex gap-1 w-fit">
@@ -21,7 +15,7 @@ const SectionHeading = (props: SectionHeadingProps) => {
         {title}
       </h2>
       <p className="text-balance text-center text-lg text-muted-foreground sm:text-2xl mb-6">
-        {desctiption}
+        {description}
       </p>
     </div>
   );

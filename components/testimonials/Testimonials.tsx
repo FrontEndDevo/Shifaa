@@ -9,6 +9,7 @@ import { NotebookPen } from "lucide-react";
 
 // Constants:
 import { PATIENTS_TESTIMONIALS } from "@/constants/Testimonials";
+import { TESTIMONIALS_HEADING } from "@/constants/Headings";
 
 // Components:
 import SectionHeading from "../common/SectionHeading";
@@ -21,9 +22,9 @@ const Testimonials = () => {
     <div className="mx-auto max-w-7xl px-6 py-12 sm:py-20">
       <SectionHeading
         icon={NotebookPen}
-        heading="Testimonials"
-        title="Patients Opinions"
-        desctiption="What our patients say about us"
+        heading={TESTIMONIALS_HEADING.heading}
+        title={TESTIMONIALS_HEADING.title}
+        description={TESTIMONIALS_HEADING.description}
       />
 
       <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
