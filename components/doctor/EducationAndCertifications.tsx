@@ -14,7 +14,7 @@ const EducationAndCertifications = ({
         {data.map((item, i) => (
           <p
             key={i}
-            className="text-center text-sm text-page font-semibold bg-gray-100 px-2 py-1 rounded"
+            className="text-center text-sm text-page bg-main font-semibold px-2 py-1 rounded"
           >
             {item}
           </p>
