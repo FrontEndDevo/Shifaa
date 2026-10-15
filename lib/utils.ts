@@ -1,6 +1,12 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Lucide Icons:
+import { Check, Languages, UserRound } from "lucide-react";
+
+// Constants:
+import { DOCTORS } from "@/constants/Doctor";
+
 // Types:
 import { BlogArticle } from "@/types/articles.types";
 
@@ -101,4 +107,65 @@ export const blogPostsFilter = ({
     case "Popular":
       return posts.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
   }
+};
+
+export const findDoctor = ({ doctorId }: { doctorId: string }) => {
+  const doctorInfo = DOCTORS.filter((doc) => doc.doctorId === doctorId)[0];
+
+  // Collect all doctor education & certifications to render them.
+  const doctorEducationAndCertifications = [
+    {
+      data: doctorInfo.education,
+      title: "Education",
+    },
+    {
+      data: doctorInfo.certifications,
+      title: "Certifications",
+    },
+  ];
+
+  // Collect all doctor advantages to render them.
+  const doctorAdvantages = [
+    {
+      advantage: "Years Experience",
+      count: doctorInfo.experience,
+      color: "text-red-500",
+    },
+    {
+      advantage: "certifications",
+      count: doctorInfo.certifications.length,
+      color: "text-emerald-500",
+    },
+    {
+      advantage: "services",
+      count: doctorInfo.services.length,
+      color: "text-blue-500",
+    },
+    {
+      advantage: "rate",
+      count: doctorInfo.rating,
+      color: "text-yellow-500",
+    },
+  ];
+
+  // Collect all doctor services & languages to render them.
+  const doctorServicesAndLanguages = [
+    {
+      data: doctorInfo.services,
+      icon: Check,
+      title: "Services",
+    },
+    {
+      data: doctorInfo.languages,
+      icon: Languages,
+      title: "Languages",
+    },
+  ];
+
+  return {
+    doctor: doctorInfo,
+    doctorEducationAndCertifications,
+    doctorAdvantages,
+    doctorServicesAndLanguages,
+  };
 };

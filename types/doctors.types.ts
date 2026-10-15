@@ -18,6 +18,12 @@ export type Doctor = {
   services: string[];
 };
 
+export type DoctorPhotoProps = {
+  availableToday: boolean;
+  image: string;
+  name: string;
+};
+
 export type EducationAndCertificationsProps = {
   data: string[];
   title: string;
