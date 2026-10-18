@@ -2,11 +2,14 @@
 import Image from "next/image";
 
 // Constants:
-import { ABOUT_CONTENT } from "@/constants/AboutUs";
+import { ABOUT_SECTIONS } from "@/constants/AboutUs";
 
 // Components:
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/navbar/Navbar";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 const MAX_COLUMNS = 3;
 const COLUMN_CHARS = 160;
@@ -19,9 +22,9 @@ const truncate = (content: string) => {
 };
 
 const AboutPage = () => {
-  const { heading, description, sections, whoWeAre } = ABOUT_CONTENT;
+  const t = useTranslations("About");
 
-  const columns = (sections ?? []).slice(0, MAX_COLUMNS);
+  const columns = ABOUT_SECTIONS.slice(0, MAX_COLUMNS);
 
   return (
     <>
@@ -31,49 +34,53 @@ const AboutPage = () => {
           <div className="flex flex-col gap-16 lg:gap-28">
             <div>
               <div className="flex flex-col gap-4 lg:gap-8">
-                <h2 className="text-4xl font-semibold tracking-tighter lg:text-6xl">
-                  {heading}
+                <h2 className="text-4xl font-semibold tracking-tighter rtl:tracking-normal lg:text-6xl">
+                  {t("heading")}
                 </h2>
-                <p className="text-sm md:text-base lg:text-lg leading-relaxed text-muted-foreground">
-                  {description}
+                <p className="text-sm leading-relaxed text-soft md:text-base lg:text-lg">
+                  {t("description")}
                 </p>
               </div>
               <Image
                 src="/assets/images/about/about_2.jpg"
-                alt="about us"
-                className="size-full max-h-96 rounded-2xl mt-6"
+                alt={t("images.hero")}
+                className="mt-6 size-full max-h-96 rounded-2xl"
                 width={1000}
                 height={1000}
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-6 md:grid-cols-2">
+            <div className="flex flex-col gap-6 lg:flex-row">
               <div className="flex flex-col gap-2">
-                <h3 className="text-3xl font-bold">{sections?.[1]?.title}</h3>
-                <p className="text-sm md:text-base lg:text-lg font-medium text-primary-foreground">
-                  {sections?.[1]?.content}
+                <h3 className="text-3xl font-bold">
+                  {t("sections.story.title")}
+                </h3>
+                <p className="text-sm font-medium text-soft md:text-base lg:text-lg">
+                  {t("sections.story.content")}
                 </p>
               </div>
 
               <Image
                 src="/assets/images/about/about_1.jpg"
-                alt="about 1"
+                alt={t("images.story")}
                 className="size-full max-h-96 rounded-2xl object-cover"
                 width={1000}
                 height={1000}
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row-reverse gap-6 md:grid-cols-2">
+            <div className="flex flex-col gap-6 lg:flex-row-reverse">
               <div className="flex flex-col gap-2">
-                <h3 className="text-3xl font-bold">{sections?.[2]?.title}</h3>
-                <p className="text-sm md:text-base lg:text-lg font-medium text-primary-foreground">
-                  {sections?.[2]?.content}
+                <h3 className="text-3xl font-bold">
+                  {t("sections.drives.title")}
+                </h3>
+                <p className="text-sm font-medium text-soft md:text-base lg:text-lg">
+                  {t("sections.drives.content")}
                 </p>
               </div>
               <Image
                 src="/assets/images/about/about_3.jpg"
-                alt="about 1"
+                alt={t("images.drives")}
                 className="size-full max-h-96 rounded-2xl object-cover"
                 width={1000}
                 height={1000}
@@ -81,28 +88,30 @@ const AboutPage = () => {
             </div>
 
             <div className="flex flex-col gap-10">
-              <div className="flex text-center flex-col gap-4">
-                <h3 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                  {whoWeAre.title}
+              <div className="flex flex-col gap-4 text-center">
+                <h3 className="text-3xl font-semibold tracking-tight rtl:tracking-normal md:text-5xl">
+                  {t("whoWeAre.title")}
                 </h3>
 
-                <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
-                  {whoWeAre.description}
+                <p className="text-sm text-soft md:text-base lg:text-lg">
+                  {t("whoWeAre.description")}
                 </p>
               </div>
 
-              <div className="grid gap-10 md:grid-cols-3 md:gap-12 text-center">
+              <div className="grid gap-10 text-center md:grid-cols-3 md:gap-12">
                 {columns.map((section) => (
                   <div
-                    key={section.title}
-                    className="flex flex-col gap-3 border-t border-border pt-6"
+                    key={section.id}
+                    className="flex flex-col gap-3 border-t border-line pt-6"
                   >
-                    <div className="flex items-center gap-2 justify-center">
-                      <section.icon className="h-6 w-6 text-primary" />
-                      <h4 className="text-lg font-semibold">{section.title}</h4>
+                    <div className="flex items-center justify-center gap-2">
+                      <section.icon className="h-6 w-6 text-green-500" />
+                      <h4 className="text-lg font-semibold">
+                        {t(`sections.${section.id}.title`)}
+                      </h4>
                     </div>
-                    <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
-                      {truncate(section.content)}
+                    <p className="text-sm text-soft md:text-base lg:text-lg">
+                      {truncate(t(`sections.${section.id}.content`))}
                     </p>
                   </div>
                 ))}
