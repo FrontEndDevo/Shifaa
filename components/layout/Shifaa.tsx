@@ -1,5 +1,9 @@
+// Next Components:
 import Link from "next/link";
 import Image from "next/image";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 type TShifaaProps = {
   class?: string;
@@ -7,6 +11,8 @@ type TShifaaProps = {
 };
 
 const Shifaa = (props: TShifaaProps) => {
+  const t = useTranslations("brand");
+
   return (
     <Link href="/">
       <div className="flex gap-2 items-end">
@@ -15,9 +21,11 @@ const Shifaa = (props: TShifaaProps) => {
           alt="shifaa"
           width={1000}
           height={1000}
-          className={`h-12 w-12 ${props.class}`}
+          className={`h-12 w-12 ${props?.class}`}
         />
-        <p className={`text-3xl font-bold font-mono ${props.text}`}>Shifaa</p>
+        <p className={`text-3xl font-bold font-mono ${props?.text}`}>
+          {t("name")}
+        </p>
       </div>
     </Link>
   );

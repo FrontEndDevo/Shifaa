@@ -1,5 +1,5 @@
-// Next Hooks:
-import { useRouter } from "next/navigation";
+// customised Next Components:
+import { useRouter } from "@/i18n/navigation";
 
 // Shadcn UI:
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,9 @@ import { ArrowRight, LogInIcon, UserRoundArrowLeft } from "lucide-react";
 // Types:
 import { TPatientStatus } from "@/types/patient.types";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 const NavActionButton = ({
   userId,
   status,
@@ -17,6 +20,8 @@ const NavActionButton = ({
   userId: string;
   status: TPatientStatus;
 }) => {
+  const t = useTranslations("Nav");
+
   const router = useRouter();
 
   const navLinkHandler = () => {
@@ -39,13 +44,13 @@ const NavActionButton = ({
   let navBtnName = null;
   switch (status) {
     case "UNAUTHENTICATED":
-      navBtnName = "Log in";
+      navBtnName = t("navStatus.UNAUTHENTICATED");
       break;
     case "NEEDS_ONBOARDING":
-      navBtnName = "Complete Profile";
+      navBtnName = t("navStatus.NEEDS_ONBOARDING");
       break;
     case "IS_PATIENT":
-      navBtnName = "Book Appointment";
+      navBtnName = t("navStatus.IS_PATIENT");
       break;
   }
 

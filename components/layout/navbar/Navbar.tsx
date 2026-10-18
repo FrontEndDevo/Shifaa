@@ -17,17 +17,23 @@ import NavItems from "./NavItems";
 import NavActionButton from "./NavActionButton";
 import NavAvatar from "@/components/avatar/NavAvatar";
 import DarkMode from "@/components/layout/DarkMode";
+import LanguageToggle from "../LanguageToggle";
 
 // API Actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 const Navbar = () => {
+  const t = useTranslations("Nav");
+
   const [isOpen, setIsOpen] = useState(false);
 
   const { data } = useGetPatient();
 
   return (
-    <header className="sticky top-0 right-0 z-50 border-b bg-page">
+    <header className="sticky top-0 z-50 border-line bg-page">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         {/* Logo */}
         <Shifaa class="w-8 h-8" text="text-xl" />
@@ -35,7 +41,7 @@ const Navbar = () => {
         {/* DESKTOP */}
         <div className="hidden items-center gap-1 lg:flex">
           {NAV_MENU.map((item) => (
-            <NavItems key={item.title} item={item} />
+            <NavItems key={item.id} item={item} />
           ))}
         </div>
 
@@ -44,7 +50,10 @@ const Navbar = () => {
             <NavActionButton userId={data?.userId} status={data?.status} />
           </div>
 
-          <DarkMode />
+          <div className="flex items-center gap-4">
+            <DarkMode />
+            <LanguageToggle />
+          </div>
 
           {data?.userId && <NavAvatar username={data?.name} />}
 
@@ -52,8 +61,8 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            className="rounded-md p-2 transition-colors hover:bg-muted lg:hidden"
-            aria-label="Toggle menu"
+            className="rounded-md p-2 transition-colors hover:bg-card lg:hidden"
+            aria-label={t("toggleMenu")}
             aria-expanded={isOpen}
           >
             {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
@@ -63,10 +72,10 @@ const Navbar = () => {
 
       {/* Mobile / Tablet Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 z-50 border-t bg-page shadow-xl lg:hidden">
+        <div className="absolute top-full inset-x-0 z-50 border-line bg-page shadow-xl lg:hidden">
           <div className="gap-4 max-w-7xl bg-page py-4">
             {NAV_MENU.map((item) => (
-              <NavItems key={item.title} item={item} />
+              <NavItems key={item.id} item={item} />
             ))}
             <div className="flex justify-center col-span-2">
               <NavActionButton userId={data?.userId} status={data?.status} />

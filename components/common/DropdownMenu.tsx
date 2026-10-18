@@ -1,14 +1,11 @@
-// Next Hooks:
-import { useRouter } from "next/navigation";
+// customised Next Components:
+import { Link, useRouter } from "@/i18n/navigation";
 
 // React Query:
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-// Next Components:
-import Link from "next/link";
-
 // Lucide Icons:
-import { LogOut, LucideIcon } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 // Shadcn UI:
 import { Button } from "@base-ui/react";
@@ -17,17 +14,17 @@ import { Button } from "@base-ui/react";
 import { logoutUser } from "@/lib/actions/patient.actions";
 import { toast } from "../ui/toast";
 
-export type DropdownMenuProps = {
-  data: {
-    title: string;
-    description?: string;
-    icon?: LucideIcon;
-    url: string;
-  }[];
-};
+// Types:
+import { DropdownMenuProps } from "@/types/navbar.types";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 const DropdownMenu = ({ data }: DropdownMenuProps) => {
+  const t = useTranslations("Nav");
+
   const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const logoutMutation = useMutation({
@@ -39,7 +36,7 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
 
       toast.add({
         type: "success",
-        title: "Logout Successfully",
+        title: t("navToaster.logoutSuccess"),
       });
 
       router.refresh();
@@ -48,7 +45,7 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
     onError: () => {
       toast.add({
         type: "error",
-        title: "Failed to Logout, please try again.",
+        title: t("navToaster.logoutError"),
       });
     },
   });
@@ -57,11 +54,10 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
     logoutMutation.mutate();
   };
 
-  const isLoggedOut =
-    data.filter((item) => item.title === "profile").length > 0 ? true : false;
+  const showLogout = data.some((item) => item.title === "profile");
 
   return (
-    <div className="invisible absolute right-0 top-full bg-page z-40 w-fit lg:w-80 pr-10 translate-y-2 rounded-lg border bg-popover p-2 text-popover-foreground opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+    <div className="invisible absolute end-0 top-full bg-page z-40 w-fit lg:w-80 pe-10 translate-y-2 rounded-lg border border-line p-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
       {data.map((item, i) => {
         const Icon = item?.icon;
 
@@ -69,9 +65,9 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
           <Link
             key={i}
             href={item.url}
-            className="flex gap-3 static left-0 top-full z-30 rounded-md p-3 transition-colors hover:bg-muted hover:bg-line"
+            className="flex gap-3 rounded-md p-3 transition-colors hover:bg-line"
           >
-            {Icon && <Icon className="mt-0.5 size-5 shrink-0 text-primary" />}
+            {Icon && <Icon className="mt-0.5 size-5 shrink-0 text-main" />}
 
             <div>
               <div className="text-sm font-semibold capitalize">
@@ -79,23 +75,23 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
               </div>
 
               {item.description && (
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {item.description}
-                </p>
+                <p className="mt-1 text-sm text-faint">{item.description}</p>
               )}
             </div>
           </Link>
         );
       })}
 
-      {isLoggedOut && (
+      {showLogout && (
         <Button
           onClick={logOutHandler}
-          className="border-t w-full flex gap-3 static left-0 top-full z-30 p-3 transition-colors hover:bg-line"
+          className="border-t border-line w-full flex gap-3 p-3 transition-colors hover:bg-line"
         >
-          <LogOut className="mt-0.5 size-5 shrink-0 text-primary" />
+          <LogOut className="mt-0.5 size-5 shrink-0 text-main" />
 
-          <p className="text-sm font-semibold capitalize">Log Out</p>
+          <p className="text-sm font-semibold capitalize">
+            {t("navToaster.logout")}
+          </p>
         </Button>
       )}
     </div>

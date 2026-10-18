@@ -1,15 +1,25 @@
+// Lucide Icons:
 import type { LucideIcon } from "lucide-react";
 
 export type NavSubItem = {
-  title: string;
+  id: string;
   description?: string;
   icon?: LucideIcon;
   url: string;
 };
 
 export type NavItem = {
-  title: string;
+  id: string;
   url: string;
   icon?: LucideIcon;
   items?: NavSubItem[];
+};
+
+export type DropdownMenuProps = {
+  data: {
+    title: string;
+    description?: string;
+    icon?: LucideIcon;
+    url: string;
+  }[];
 };
