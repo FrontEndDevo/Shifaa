@@ -1,5 +1,9 @@
 "use client";
 
+// Customised Next Components:
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+
 // Shadcn UI:
 import {
   Select,
@@ -15,43 +19,60 @@ import NewsletterSection from "./NewsletterSection";
 import FooterLinksSection from "./FooterLinksSection";
 import ContactSection from "./ContactSection";
 
-// Types:
-import { IFooterProps } from "@/types/footer.types";
+// Next Intl:
+import { useLocale, useTranslations } from "next-intl";
 
-// Constants:
-import {
-  CONTACT_LINKS,
-  FOOTER_LINKS,
-  NEWSLETTER_DATA,
-} from "@/constants/FooterSection";
+type Locale = (typeof routing.locales)[number];
 
-const Footer = ({
-  newsletter = NEWSLETTER_DATA,
-  footerLinks = FOOTER_LINKS,
-  contactLinks = CONTACT_LINKS,
-}: IFooterProps) => {
+const LANGUAGES = [
+  { value: "en", label: "English" },
+  { value: "ar", label: "العربية" },
+];
+
+const Footer = () => {
+  const t = useTranslations("Footer");
+
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const changeLanguageHandler = (value: string | null) => {
+    if (!value || value === locale) return;
+    router.replace(pathname, { locale: value as Locale });
+  };
+
   return (
-    <section className="pt-8 pb-8 xl:pt-12 border-t-2">
+    <section className="border-t-2 border-line pt-8 pb-8 xl:pt-12">
       <div className="container space-y-10">
-        <div className="grid grid-cols-1 gap-x-16 gap-y-8 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
-          <div className="md:col-span-2 col-span-1 text-center xl:text-start xl:col-span-1">
-            <NewsletterSection {...newsletter} />
+        <div className="grid grid-cols-1 justify-items-center gap-x-16 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="col-span-1 text-center md:col-span-2 xl:col-span-1 xl:text-start">
+            <NewsletterSection />
           </div>
-          <FooterLinksSection sections={footerLinks} />
-          <ContactSection links={contactLinks} />
+          <FooterLinksSection />
+          <ContactSection />
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <p className="copyright max-md:text-xs">© 2026 Shifaa</p>
+          <p className="copyright max-md:text-xs">{t("copyright")}</p>
           <div className="flex flex-wrap items-center gap-4">
-            <Select defaultValue="english">
-              <SelectTrigger className="h-8 w-24 text-xs">
-                <SelectValue placeholder="Select a Language..." />
+            <Select
+              value={locale}
+              onValueChange={changeLanguageHandler}
+              items={LANGUAGES}
+            >
+              <SelectTrigger
+                className="h-8 w-24 text-xs"
+                aria-label={t("language")}
+              >
+                <SelectValue />
               </SelectTrigger>
               <SelectContent align="end">
                 <SelectGroup>
-                  <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="arabic">Arabic</SelectItem>
+                  {LANGUAGES.map((lang) => (
+                    <SelectItem key={lang.value} value={lang.value}>
+                      {lang.label}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>

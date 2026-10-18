@@ -1,58 +1,28 @@
-// Types:
-import {
+import { Clock, Mail, Phone } from "lucide-react";
+
+import type {
   ContactLinks,
   FooterLinksSectionData,
   LinkTypes,
 } from "@/types/footer.types";
 
-import { Clock, MapPin, Phone } from "lucide-react";
-
-export const NEWSLETTER_DATA = {
-  title: "Shifaa",
-  description:
-    "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
-};
 export const FOOTER_LINKS: FooterLinksSectionData[] = [
   {
-    title: "Information",
+    id: "information",
     items: [
-      {
-        text: "About Us",
-        link: "/about",
-      },
-      {
-        text: "How It Works",
-        link: "/how-it-works",
-      },
-      {
-        text: "Privacy Policy",
-        link: "/privacy-policy",
-      },
-      {
-        text: "Terms & Conditions",
-        link: "/terms-and-conditions",
-      },
+      { id: "about", link: "/about" },
+      { id: "howItWorks", link: "/how-it-works" },
+      { id: "privacy", link: "/privacy-policy" },
+      { id: "terms", link: "/terms-and-conditions" },
     ],
   },
   {
-    title: "Appointments",
+    id: "appointments",
     items: [
-      {
-        text: "Find a Doctor",
-        link: "/doctors",
-      },
-      {
-        text: "Book an Appointment",
-        link: "/appointments",
-      },
-      {
-        text: "My Appointments",
-        link: "/my-appointments",
-      },
-      {
-        text: "Contact Us",
-        link: "/contact",
-      },
+      { id: "findDoctor", link: "/doctors" },
+      { id: "book", link: "/appointments" },
+      { id: "myAppointments", link: "/my-appointments" },
+      { id: "contact", link: "/contact" },
     ],
   },
 ];
@@ -82,35 +52,28 @@ export const LINK_TYPES = {
 export const CONTACT_LINKS: ContactLinks = {
   contactDetails: [
     {
-      icon: MapPin,
+      id: "email",
+      icon: Mail,
       text: "support@shifaa.com",
       link: "support@shifaa.com",
       type: LINK_TYPES.EMAIL_LINK as LinkTypes,
     },
     {
+      id: "phone",
       icon: Phone,
       text: "+12345678910",
       link: "+12345678910",
       type: LINK_TYPES.PHONE_LINK as LinkTypes,
     },
     {
+      id: "hours",
       icon: Clock,
-      text: "Monday - Friday, 9 am - 9 pm",
       type: LINK_TYPES.NO_LINK as LinkTypes,
     },
   ],
   socialMedia: [
-    {
-      icon: SOCIAL_ICONS.facebook,
-      link: "/",
-    },
-    {
-      icon: SOCIAL_ICONS.x,
-      link: "/",
-    },
-    {
-      icon: SOCIAL_ICONS.instagram,
-      link: "/",
-    },
+    { icon: SOCIAL_ICONS.facebook, link: "/" },
+    { icon: SOCIAL_ICONS.x, link: "/" },
+    { icon: SOCIAL_ICONS.instagram, link: "/" },
   ],
 };

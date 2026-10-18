@@ -3,39 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Shadcn UI:
-import { cn } from "cn";
+import { cn } from "@/lib/utils";
 import { Button } from "@base-ui/react";
 
-// Types:
-import { ContactSectionProps } from "@/types/footer.types";
-
 // Constants:
-import { LINK_TYPES } from "@/constants/FooterSection";
+import { CONTACT_LINKS, LINK_TYPES } from "@/constants/FooterSection";
 
-const ContactSection = ({ links }: ContactSectionProps) => {
-  const { socialMedia, contactDetails } = links;
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+const ContactSection = () => {
+  const t = useTranslations("Footer.contact");
+  const { socialMedia, contactDetails } = CONTACT_LINKS;
 
   return (
     <div>
-      <h2 className="text-center mb-6 text-sm leading-tight font-medium text-muted-foreground uppercase">
-        Contact
+      <h2 className="mb-6 text-center text-sm leading-tight font-medium text-faint uppercase">
+        {t("title")}
       </h2>
       <div className="space-y-6">
         <ul className="space-y-3">
           {contactDetails.map((item) => (
-            <li className="flex items-center gap-3" key={crypto.randomUUID()}>
+            <li className="flex items-center gap-3" key={item.id}>
               <item.icon className="size-4 shrink-0 basis-4" />
               <div className="flex-1">
                 {item.type === LINK_TYPES.NO_LINK ? (
-                  <p>{item.text}</p>
+                  <p>{t(item.id)}</p>
                 ) : (
                   <Link
                     href={
-                      LINK_TYPES.EMAIL_LINK
+                      item.type === LINK_TYPES.EMAIL_LINK
                         ? `mailto:${item.link}`
                         : `tel:${item.link}`
                     }
-                    className="underline-offset-4 hover:underline"
+                    dir="ltr"
+                    className="inline-block underline-offset-4 hover:underline"
                   >
                     {item.text}
                   </Link>
@@ -46,7 +48,7 @@ const ContactSection = ({ links }: ContactSectionProps) => {
         </ul>
         <ul className="flex flex-wrap gap-3">
           {socialMedia.map(({ icon, link }) => (
-            <li key={crypto.randomUUID()}>
+            <li key={icon.title}>
               <Button>
                 <Link href={link}>
                   <Image

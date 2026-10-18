@@ -1,25 +1,30 @@
-// Next Components:
-import Link from "next/link";
+// Customised Next Components:
+import { Link } from "@/i18n/navigation";
 
-// Types:
-import { IFooterLinksSectionProps } from "@/types/footer.types";
+// Constants:
+import { FOOTER_LINKS } from "@/constants/FooterSection";
 
-const FooterLinksSection = ({ sections }: IFooterLinksSectionProps) => {
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+const FooterLinksSection = () => {
+  const t = useTranslations("Footer.sections");
+
   return (
     <div className="flex gap-8 text-center">
-      {sections.map(({ title, items }) => (
-        <div key={crypto.randomUUID()}>
-          <h2 className="mb-6 text-sm leading-tight font-medium text-muted-foreground uppercase">
-            {title}
+      {FOOTER_LINKS.map(({ id, items }) => (
+        <div key={id}>
+          <h2 className="mb-6 text-sm leading-tight font-medium text-faint uppercase">
+            {t(`${id}.title`)}
           </h2>
           <ul className="space-y-3">
-            {items.map(({ text, link }) => (
-              <li key={crypto.randomUUID()}>
+            {items.map((item) => (
+              <li key={item.id}>
                 <Link
-                  href={link}
+                  href={item.link}
                   className="underline-offset-4 hover:underline"
                 >
-                  {text}
+                  {t(`${id}.items.${item.id}`)}
                 </Link>
               </li>
             ))}
