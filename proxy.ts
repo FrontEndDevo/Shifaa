@@ -1,5 +1,10 @@
 import { NextResponse, NextRequest } from "next/server";
 
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
+
+export default createMiddleware(routing);
+
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
@@ -40,5 +45,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin", "/patients/:path*", "/auth/:path*", "/profile"],
+  matcher: [
+    "/admin",
+    "/patients/:path*",
+    "/auth/:path*",
+    "/profile",
+    "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+  ],
 };
