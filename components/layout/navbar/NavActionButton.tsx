@@ -2,6 +2,7 @@
 import { useRouter } from "@/i18n/navigation";
 
 // Shadcn UI:
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 // Lucide Icons:
@@ -63,7 +64,13 @@ const NavActionButton = ({
         >
           <p className="font-mono text-base">{navBtnName}</p>
 
-          <NavIcon className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
+          <NavIcon
+            className={cn(
+              "size-5 transition-transform duration-200",
+              "group-hover:translate-x-1 rtl:group-hover:-translate-x-1",
+              NavIcon === ArrowRight && "rtl:rotate-180",
+            )}
+          />
         </Button>
       )}
     </>

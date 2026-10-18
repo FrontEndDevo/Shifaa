@@ -22,4 +22,5 @@ export type DropdownMenuProps = {
     icon?: LucideIcon;
     url: string;
   }[];
+  showLogout?: boolean;
 };
