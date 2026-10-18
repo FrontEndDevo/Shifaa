@@ -1,5 +1,5 @@
-// Next Components:
-import Link from "next/link";
+// Customised Next Components:
+import { Link } from "@/i18n/navigation";
 
 interface BannerProps {
   preMessage: string;

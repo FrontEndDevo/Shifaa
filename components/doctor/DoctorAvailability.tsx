@@ -1,20 +1,28 @@
 // Lucide Icons:
 import { CircleDashedCheck, CircleX } from "lucide-react";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 const DoctorAvailability = ({
   availableToday,
 }: {
   availableToday: boolean;
 }) => {
+  const t = useTranslations("DoctorDetails");
+
   return (
-    <div className="flex items-center gap-4 justify-between my-2 border-b-2 py-1">
-      <p className="font-semibold tracking-wider text-neutral-800">
-        Available Today?
+    <div className="my-2 flex items-center justify-between gap-4 border-b-2 py-1">
+      <p className="font-semibold tracking-wider rtl:tracking-normal text-neutral-800">
+        {t("availableToday")}
       </p>
       {availableToday ? (
-        <CircleDashedCheck className="h-8 w-8 text-green-400" />
+        <CircleDashedCheck
+          aria-label={t("yes")}
+          className="h-8 w-8 text-green-400"
+        />
       ) : (
-        <CircleX className="h-8 w-8 text-red-400" />
+        <CircleX aria-label={t("no")} className="h-8 w-8 text-red-400" />
       )}
     </div>
   );

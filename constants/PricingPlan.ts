@@ -1,47 +1,34 @@
 // Types:
-import { PricingPlan } from "@/types/pricing.types";
+import type { PricingPlan } from "@/types/pricing.types";
 
 export const PRICING_PLAN = [
   {
-    name: "Basic",
-    description: "Essential access to our network of doctors.",
+    id: "basic",
     price: 49,
-    features: [
-      "Access to all doctors",
-      "5 doctor consultations",
-      "Secure online appointments",
-      "Digital medical records",
-    ],
-    buttonText: "Get Basic",
+    features: ["accessAll", "consultations5", "secureAppointments", "records"],
   },
   {
-    name: "Standard",
-    description:
-      "More consultations and benefits for regular healthcare needs.",
+    id: "standard",
     price: 99,
     isPopular: true,
     features: [
-      "Access to all doctors",
-      "15 doctor consultations",
-      "Secure online appointments",
-      "Digital medical records",
-      "Priority appointment booking",
+      "accessAll",
+      "consultations15",
+      "secureAppointments",
+      "records",
+      "priority",
     ],
-    buttonText: "Get Standard",
   },
   {
-    name: "Premium",
-    description:
-      "The most comprehensive healthcare access for you and your family.",
+    id: "premium",
     price: 199,
     features: [
-      "Unlimited access to all doctors",
-      "Unlimited consultations",
-      "Secure online appointments",
-      "Digital medical records",
-      "Priority appointment booking",
-      "Premium customer support",
+      "accessUnlimited",
+      "consultationsUnlimited",
+      "secureAppointments",
+      "records",
+      "priority",
+      "support",
     ],
-    buttonText: "Get Premium",
   },
 ] satisfies PricingPlan[];

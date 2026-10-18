@@ -15,13 +15,6 @@ export const INTEGRATIONS_HEADING: HeadingProps = {
     "Connect your healthcare tools and services to make appointments, patient care, and everyday workflows simpler and more efficient.",
 };
 
-export const PRICING_PLAN_HEADING: HeadingProps = {
-  heading: "One Payment. Access Every Doctor.",
-  title: "Choose the healthcare plan that fits your needs",
-  description:
-    "Get access to our entire network of trusted doctors with a single payment. Choose the plan that works best for you and enjoy convenient healthcare access without subscribing to individual doctors.",
-};
-
 export const SERVICES_HEADING: HeadingProps = {
   heading: "our services",
   title: "Comprehensive Shifaa services",

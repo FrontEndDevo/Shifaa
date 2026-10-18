@@ -1,8 +1,7 @@
-// Lucide Icons:
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export type AvatarProps = {
-  title: string;
+  id: "profile" | "myAppointments";
   icon: LucideIcon;
   url: string;
 };

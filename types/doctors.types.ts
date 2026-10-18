@@ -1,20 +1,40 @@
 // Lucide Icons:
 import { LucideIcon } from "lucide-react";
 
-export type Doctor = {
+export type SpecialtyId =
+  | "cardiologist"
+  | "dermatologist"
+  | "pediatrician"
+  | "orthopedicSurgeon"
+  | "neurologist"
+  | "gynecologist"
+  | "internalMedicine"
+  | "ophthalmologist"
+  | "dentist"
+  | "urologist"
+  | "endocrinologist";
+
+export type LanguageId = "en" | "ar" | "fr" | "es" | "it";
+
+export type DoctorData = {
   doctorId: string;
-  name: string;
   image: string;
-  specialty: string;
+  specialty: SpecialtyId;
   experience: number;
-  bio: string;
-  education: string[];
-  certifications: string[];
-  languages: string[];
+  languages: LanguageId[];
   consultationFee: number;
   rating: number;
   reviewCount: number;
   availableToday: boolean;
+};
+
+export type Doctor = Omit<DoctorData, "specialty" | "languages"> & {
+  name: string;
+  specialty: string;
+  bio: string;
+  education: string[];
+  certifications: string[];
+  languages: string[];
   services: string[];
 };
 

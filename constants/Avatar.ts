@@ -1,19 +1,8 @@
-// Types:
-import { AvatarProps } from "@/types/avatar.types";
-
-// Lucide Icons:
 import { Calendar, User } from "lucide-react";
 
-export const AVATAR: AvatarProps[] = [
-  {
-    title: "profile",
-    icon: User,
-    url: "/profile",
-  },
+import type { AvatarProps } from "@/types/avatar.types";
 
-  {
-    title: "my appointments",
-    icon: Calendar,
-    url: "/profile",
-  },
+export const AVATAR: AvatarProps[] = [
+  { id: "profile", icon: User, url: "/profile" },
+  { id: "myAppointments", icon: Calendar, url: "/profile" },
 ];

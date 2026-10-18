@@ -20,7 +20,7 @@ import { DropdownMenuProps } from "@/types/navbar.types";
 // Next Intl:
 import { useTranslations } from "next-intl";
 
-const DropdownMenu = ({ data }: DropdownMenuProps) => {
+const DropdownMenu = ({ data, showLogout = false }: DropdownMenuProps) => {
   const t = useTranslations("Nav");
 
   const router = useRouter();
@@ -53,8 +53,6 @@ const DropdownMenu = ({ data }: DropdownMenuProps) => {
   const logOutHandler = () => {
     logoutMutation.mutate();
   };
-
-  const showLogout = data.some((item) => item.title === "profile");
 
   return (
     <div className="invisible absolute end-0 top-full bg-page z-40 w-fit lg:w-80 pe-10 translate-y-2 rounded-lg border border-line p-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">

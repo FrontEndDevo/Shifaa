@@ -1,13 +1,19 @@
 "use client";
 
-// Next Hooks:
-import { useParams } from "next/navigation";
+// Next Components:
+import { useParams, notFound } from "next/navigation";
 
 // Lucide Icons:
 import { UserRound } from "lucide-react";
 
-// Utilities:
-import { findDoctor } from "@/lib/utils";
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+// Custom Hooks:
+import { useDoctorDetails } from "@/hooks/useDoctorDetails";
+
+// API Actions Hooks:
+import { useGetPatient } from "@/hooks/usePatient";
 
 // Components:
 import Navbar from "@/components/layout/navbar/Navbar";
@@ -19,12 +25,16 @@ import ServicesAndLanguages from "@/components/doctor/ServicesAndLanguages";
 import NavActionButton from "@/components/layout/navbar/NavActionButton";
 import Footer from "@/components/layout/footer/Footer";
 
-// API Actions Hooks:
-import { useGetPatient } from "@/hooks/usePatient";
-
 const DoctorPage = () => {
+  const t = useTranslations("DoctorDetails");
+
   const { doctorId } = useParams<{ doctorId: string }>();
+
   const { data: patient } = useGetPatient();
+
+  const details = useDoctorDetails(doctorId);
+
+  if (!details) notFound();
 
   const {
     doctor: {
@@ -39,13 +49,13 @@ const DoctorPage = () => {
     doctorEducationAndCertifications,
     doctorAdvantages,
     doctorServicesAndLanguages,
-  } = findDoctor({ doctorId });
+  } = details;
 
   return (
     <>
       <Navbar />
-      <section className="py-20 bg-card">
-        <div className="container flex lg:flex-row flex-col items-center gap-6">
+      <section className="bg-card py-20">
+        <div className="container flex flex-col items-center gap-6 lg:flex-row">
           <DoctorPhoto
             availableToday={availableToday}
             image={image}
@@ -56,11 +66,11 @@ const DoctorPage = () => {
             <SectionHeading
               icon={UserRound}
               description={bio}
-              heading="Meet the doctor"
-              title={`${specialty} with ${experience} Experience.`}
+              heading={t("meet")}
+              title={t("title", { specialty, years: experience })}
             />
 
-            <div className="w-1/2 mx-auto h-[2px] bg-amber-300 my-6" />
+            <div className="mx-auto my-6 h-[2px] w-1/2 bg-amber-300" />
 
             {/* Education & certifications */}
             <EducationAndCertifications
@@ -69,23 +79,23 @@ const DoctorPage = () => {
               }
             />
 
-            <div className="w-1/2 mx-auto h-[2px] bg-cyan-300 my-6" />
+            <div className="mx-auto my-6 h-[2px] w-1/2 bg-cyan-300" />
 
             {/* Advantages & Counts */}
             <div className="container">
               <DoctorAdvantages doctorAdvantages={doctorAdvantages} />
 
-              <div className="w-1/2 mx-auto h-[2px] bg-indigo-700 my-6" />
+              <div className="mx-auto my-6 h-[2px] w-1/2 bg-indigo-700" />
 
               {/* Services & Languages */}
               <ServicesAndLanguages
                 doctorServicesAndLanguages={doctorServicesAndLanguages}
               />
 
-              <div className="flex items-center md:flex-row mt-4 flex-col gap-4 justify-between">
+              <div className="mt-4 flex flex-col items-center justify-between gap-4 md:flex-row">
                 <p className="text-lg font-semibold">
-                  Consultation Fee:{" "}
-                  <span className="text-green-500">
+                  {t("consultationFee")}{" "}
+                  <span dir="ltr" className="inline-block text-green-500">
                     ${consultationFee.toFixed(2)}
                   </span>
                 </p>
