@@ -29,8 +29,8 @@ const Integrations = () => {
             className="relative flex flex-col items-start overflow-hidden border bg-card"
             key={integration.title}
           >
-            <div className="absolute inset-x-0 top-7 h-9.5 border-y border-dashed bg-muted/30" />
-            <div className="absolute inset-y-0 left-7 w-9.5 border-x border-dashed bg-muted/30" />
+            <div className="absolute inset-x-0 top-7 h-9.5 border-y border-dashed bg-card/30" />
+            <div className="absolute inset-y-0 left-7 w-9.5 border-x border-dashed bg-card/30" />
 
             <div className="relative isolate flex items-start justify-between gap-5 p-6">
               <div className="w-fit shrink-0 rounded-3xl bg-transparent p-1">
@@ -55,7 +55,7 @@ const Integrations = () => {
                 <h3 className="py-2 font-medium text-xl">
                   {integration.title}
                 </h3>
-                <p className="mt-4 mb-2 text-pretty text-muted-foreground tracking-normal">
+                <p className="mt-4 mb-2 text-pretty text-faint tracking-normal">
                   {integration.description}
                 </p>
               </div>

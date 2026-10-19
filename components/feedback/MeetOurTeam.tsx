@@ -41,7 +41,7 @@ const MeetOurTeam = () => {
 
               <h3 className="mt-4 font-medium text-lg">{member.name}</h3>
 
-              <p className="text-muted-foreground text-sm">{member.title}</p>
+              <p className="text-faint text-sm">{member.title}</p>
 
               <p className="mt-3 text-center">{member.description}</p>
             </div>

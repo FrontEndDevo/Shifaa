@@ -37,7 +37,7 @@ const ProfileAppointments = ({ appointments }: ProfileAppointmentsProps) => {
                   >
                     {appointment.status}
                   </h6>
-                  <span className="text-muted-foreground text-xs sm:text-sm">
+                  <span className="text-faint text-xs sm:text-sm">
                     {appointmentDate}
                   </span>
                 </div>

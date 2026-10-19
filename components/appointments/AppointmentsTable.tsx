@@ -49,7 +49,7 @@ const AppointmentsTable = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-center">
         <div>
           <span className="text-lg border-b-2 border-red-500 py-1">Reason</span>
-          <p className="text-muted-foreground text-sm sm:text-base mt-4 line-clamp-3">
+          <p className="text-faint text-sm sm:text-base mt-4 line-clamp-3">
             {reason}
           </p>
         </div>
@@ -57,7 +57,7 @@ const AppointmentsTable = ({
           <span className="text-lg border-b-2 border-emerald-500 py-1">
             Note
           </span>
-          <p className="text-muted-foreground text-sm sm:text-base mt-4 line-clamp-3">
+          <p className="text-faint text-sm sm:text-base mt-4 line-clamp-3">
             {note}
           </p>
         </div>

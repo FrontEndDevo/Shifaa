@@ -31,7 +31,7 @@ const Testimonials = () => {
         {PATIENTS_TESTIMONIALS.map(
           ({ name, avatar, role, testimonial }, index) => (
             <div
-              className="relative flex flex-col rounded-lg border bg-muted/70 px-5 pt-10 pb-3"
+              className="relative flex flex-col rounded-lg border bg-card/70 px-5 pt-10 pb-3"
               key={index}
             >
               <span className="absolute top-2 left-4 font-satoshi text-8xl text-foreground/30">
@@ -60,7 +60,7 @@ const Testimonials = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="font-medium">{name}</p>
-                  <p className="text-muted-foreground text-sm">{role}</p>
+                  <p className="text-faint text-sm">{role}</p>
                 </div>
               </div>
             </div>
