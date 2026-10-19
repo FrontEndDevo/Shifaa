@@ -1,14 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-// Lucide Icons:
-import { Check, Languages, UserRound } from "lucide-react";
-
-// Constants:
-import { DOCTORS } from "@/constants/Doctor";
-
 // Types:
-import { BlogArticle } from "@/types/articles.types";
+import { BlogArticle, PostFilter } from "@/types/articles.types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -90,21 +84,25 @@ export const formatDateTime = (dateString: Date | string) => {
 export const blogPostsFilter = ({
   posts,
   filter,
+  locale,
 }: {
   posts: BlogArticle[];
-  filter: string;
+  filter: PostFilter;
+  locale: string;
 }) => {
+  const sorted = [...posts];
+
   switch (filter) {
-    case "Latest":
-      return posts.sort(
+    case "latest":
+      return sorted.sort(
         (a, b) =>
           new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
       );
-    case "Category":
-      return posts.sort((a, b) =>
-        String(a.category).localeCompare(String(b.category), "en"),
+    case "category":
+      return sorted.sort((a, b) =>
+        a.category.localeCompare(b.category, locale),
       );
-    case "Popular":
-      return posts.sort((a, b) => parseInt(a.readTime) - parseInt(b.readTime));
+    case "popular":
+      return sorted.sort((a, b) => a.readMinutes - b.readMinutes);
   }
 };
