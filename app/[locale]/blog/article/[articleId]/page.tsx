@@ -2,16 +2,20 @@
 
 // Next Components:
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+// Custom Hooks:
+import { useLocalizedArticles } from "@/hooks/useLocalizedArticles";
 
 // Shadcn UI:
 import { Separator } from "@/components/ui/separator";
 
-// Constants:
-import { BLOG_ARTICLES } from "@/constants/Articles";
-
 // Components:
 import Navbar from "@/components/layout/navbar/Navbar";
+import Heading from "@/components/blog/article/Heading";
 import HeaderAuthor from "@/components/blog/article/HeaderAuthor";
 import Content from "@/components/blog/article/Content";
 import Tags from "@/components/blog/article/Tags";
@@ -20,12 +24,17 @@ import FooterAuthor from "@/components/blog/article/FooterAuthor";
 import ShareArticle from "@/components/blog/article/ShareArticle";
 import BottomNavigation from "@/components/blog/article/BottomNavigation";
 import Footer from "@/components/layout/footer/Footer";
-import Heading from "@/components/blog/article/Heading";
 
 const BlogArticlePage = () => {
+  const t = useTranslations("Article");
+
   const { articleId } = useParams();
 
-  const article = BLOG_ARTICLES.filter((art) => art.slug === articleId)[0];
+  const articles = useLocalizedArticles();
+
+  const article = articles.find((art) => art.slug === articleId);
+
+  if (!article) notFound();
 
   const {
     author,
@@ -42,7 +51,7 @@ const BlogArticlePage = () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen">
         <article className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           {/* Article heading */}
           <header className="mx-auto max-w-4xl text-center">
@@ -61,7 +70,7 @@ const BlogArticlePage = () => {
           </header>
 
           {/* Hero image */}
-          <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl bg-muted sm:aspect-[16/8] sm:rounded-3xl">
+          <div className="relative mt-6 aspect-[4/3] overflow-hidden rounded-2xl bg-card sm:aspect-[16/8] sm:rounded-3xl">
             <Image
               src={image}
               alt={title}
@@ -78,8 +87,8 @@ const BlogArticlePage = () => {
             <div className="min-w-0 lg:col-span-10">
               {/* Mobile-friendly article actions */}
               <div className="mb-8 flex items-center justify-between gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  Inside the post
+                <span className="text-xs font-medium uppercase tracking-[0.18em] rtl:tracking-normal text-faint">
+                  {t("insideThePost")}
                 </span>
               </div>
 

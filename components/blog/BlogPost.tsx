@@ -1,35 +1,44 @@
 // Next Components:
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 // Lucide Icons:
 import { Calendar, ChevronRight } from "lucide-react";
+
+// Next Intl:
+import { useFormatter, useTranslations } from "next-intl";
+
+// Customised Next Components:
+import { useRouter } from "@/i18n/navigation";
 
 // Shadcn UI:
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 // Types:
-import { BlogArticle } from "@/types/articles.types";
-
-// Utilities:
-import { formatDateTime } from "@/lib/utils";
+import type { BlogArticle } from "@/types/articles.types";
 
 const BlogPost = ({ post }: { post: BlogArticle }) => {
   const { slug, title, image, category, readTime, publishedAt } = post;
 
+  const t = useTranslations("Blog");
+  const format = useFormatter();
   const router = useRouter();
 
-  const postDate = formatDateTime(publishedAt).dateOnly;
+  const postDate = format.dateTime(new Date(publishedAt), {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
 
   return (
-    <div className="overflow-hidden rounded-lg py-0 border" key={title}>
+    <div className="overflow-hidden rounded-lg border border-line py-0">
       <div className="relative p-0">
-        <div className="relative aspect-video w-full border-b">
+        <div className="relative aspect-video w-full border-b border-line">
           <Image
             src={image}
             alt={title}
-            className="object-cover max-h-full"
+            className="max-h-full object-cover"
             width={1000}
             height={1000}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -38,20 +47,20 @@ const BlogPost = ({ post }: { post: BlogArticle }) => {
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between gap-3 font-bold">
-          <Badge className="bg-line rounded-full shadow-none hover:bg-faint">
+          <Badge className="rounded-full bg-line shadow-none hover:bg-faint">
             {category}
           </Badge>
-          <span className="bg-slate-200 text-blue-500 py-1 px-2 rounded-full text-muted-foreground text-xs">
+          <span className="rounded-full bg-slate-200 px-2 py-1 text-xs text-blue-500">
             {readTime}
           </span>
         </div>
 
-        <h3 className="mt-4 font-extrabold text-[1.4rem] text-xl tracking-[-0.02em]">
+        <h3 className="mt-4 text-[1.4rem] text-xl font-extrabold tracking-[-0.02em] rtl:tracking-normal">
           {title}
         </h3>
 
-        <div className="flex items-center justify-between text-sm mt-2">
-          <div className="flex gap-1 items-center text-gray-500 font-semibold">
+        <div className="mt-2 flex items-center justify-between text-sm">
+          <div className="flex items-center gap-1 font-semibold text-faint">
             <Calendar className="h-4 w-4" />
             <p>{postDate}</p>
           </div>
@@ -60,8 +69,8 @@ const BlogPost = ({ post }: { post: BlogArticle }) => {
             className="group border-white"
             onClick={() => router.push(`/blog/article/${slug}`)}
           >
-            Read more{" "}
-            <ChevronRight className="group-hover:translate-x-1 transition duration-200" />
+            {t("readMore")}{" "}
+            <ChevronRight className="transition duration-200 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
           </Button>
         </div>
       </div>

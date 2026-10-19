@@ -1,16 +1,21 @@
 // React Hooks:
 import { useState } from "react";
 
+// Lucide Icons:
+import { Check, Link2 } from "lucide-react";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Shadcn UI:
 import { Button } from "@/components/ui/button";
-
-// Lucide UI:
-import { Check, Link2 } from "lucide-react";
 
 type ShareArticleProps = { title: string; description: string };
 
 const ShareArticle = ({ title, description }: ShareArticleProps) => {
   const [copied, setCopied] = useState(false);
+
+  const t = useTranslations("Article");
 
   const shareArticleHandler = () => {
     navigator.clipboard.writeText(`${title}...${description}`);
@@ -20,9 +25,7 @@ const ShareArticle = ({ title, description }: ShareArticleProps) => {
 
   return (
     <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-      <p className="text-sm text-muted-foreground">
-        Enjoyed this post? Copy and share it with someone.
-      </p>
+      <p className="text-sm text-faint">{t("shareText")}</p>
 
       <Button
         onClick={shareArticleHandler}
@@ -30,7 +33,7 @@ const ShareArticle = ({ title, description }: ShareArticleProps) => {
         className="gap-2 rounded-full"
       >
         {copied ? <Check className="size-4" /> : <Link2 className="size-4" />}
-        {copied ? "Post copied" : "Copy / share post"}
+        {copied ? t("copied") : t("copy")}
       </Button>
     </div>
   );

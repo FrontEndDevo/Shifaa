@@ -1,19 +1,19 @@
-export type PostFilter = "Latest" | "Category" | "Popular";
+export type PostFilter = "latest" | "category" | "popular";
 
-type BlogCategory =
-  | "Travel"
-  | "Culture"
-  | "Science"
-  | "Wellness"
-  | "Home"
-  | "Technology"
-  | "Food"
-  | "Design"
-  | "Business"
-  | "Nature"
-  | "Fitness"
-  | "Photography"
-  | "Environment";
+export type BlogCategoryId =
+  | "travel"
+  | "culture"
+  | "science"
+  | "wellness"
+  | "home"
+  | "technology"
+  | "food"
+  | "design"
+  | "business"
+  | "nature"
+  | "fitness"
+  | "photography"
+  | "environment";
 
 export type BlogAuthor = {
   name: string;
@@ -21,16 +21,22 @@ export type BlogAuthor = {
   bio: string;
 };
 
-export type BlogArticle = {
+export type BlogArticleData = {
   id: number;
   slug: string;
-  category: BlogCategory;
+  category: BlogCategoryId;
+  readMinutes: number;
+  image: string;
+  author: { avatar?: string };
+  publishedAt: string;
+};
+
+export type BlogArticle = Omit<BlogArticleData, "category" | "author"> & {
+  category: string;
   title: string;
   description: string;
   readTime: string;
-  image: string;
   author: BlogAuthor;
-  publishedAt: string;
   tags: string[];
   content: string[];
 };

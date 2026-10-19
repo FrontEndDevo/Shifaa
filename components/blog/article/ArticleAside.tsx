@@ -1,8 +1,8 @@
+// Next Intl:
+import { useFormatter, useTranslations } from "next-intl";
+
 // Shadcn UI:
 import { Separator } from "@/components/ui/separator";
-
-// Utilities:
-import { formatDateTime } from "@/lib/utils";
 
 type ArticleAsideProps = {
   category: string;
@@ -15,29 +15,37 @@ const ArticleAside = ({
   publishedAt,
   readTime,
 }: ArticleAsideProps) => {
+  const t = useTranslations("Article");
+  const format = useFormatter();
+
+  const date = format.dateTime(new Date(publishedAt), {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+
   return (
-    <aside className="space-y-8 lg:sticky lg:top-20 lg:self-start lg:col-span-2 border rounded-xl p-2">
-      <p className="lg:text-start border-b w-fit mx-auto lg:border-none text-lg lg:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-        About this post
+    <aside className="space-y-8 rounded-xl border border-line p-2 lg:sticky lg:top-20 lg:col-span-2 lg:self-start">
+      <p className="mx-auto w-fit border-b border-line text-lg font-semibold uppercase tracking-[0.2em] rtl:tracking-normal text-faint lg:border-none lg:text-start lg:text-xs">
+        {t("aboutThisPost")}
       </p>
 
       <Separator className="my-4" />
 
-      <div className="lg:space-y-5 text-center lg:text-start flex items-center justify-around gap-12 lg:block">
+      <div className="flex items-center justify-around gap-12 text-center lg:block lg:space-y-5 lg:text-start">
         <div>
-          <p className="text-xs text-muted-foreground">Category</p>
+          <p className="text-xs text-faint">{t("category")}</p>
           <span className="mt-1 text-sm font-medium">{category}</span>
         </div>
 
         <div>
-          <p className="text-xs text-muted-foreground">Published</p>
-          <span className="mt-1 text-sm">
-            {formatDateTime(publishedAt).dateTime}
-          </span>
+          <p className="text-xs text-faint">{t("published")}</p>
+          <span className="mt-1 text-sm">{date}</span>
         </div>
 
         <div>
-          <p className="text-xs text-muted-foreground">Reading time</p>
+          <p className="text-xs text-faint">{t("readingTime")}</p>
           <span className="mt-1 text-sm font-medium">{readTime}</span>
         </div>
       </div>
