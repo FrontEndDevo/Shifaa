@@ -4,23 +4,27 @@ import Image from "next/image";
 // Lucide Icons:
 import { User } from "lucide-react";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Constants:
 import { teamMembers } from "@/constants/Team";
-import { TEAM_HEADING } from "@/constants/Headings";
 
 // Components:
 import SectionHeading from "../common/SectionHeading";
 import CarouselWrapper from "../shared/CarouselWrapper";
 
 const MeetOurTeam = () => {
+  const t = useTranslations("Team");
+
   return (
     <section className="bg-card">
       <div className="container flex max-w-(--breakpoint-xl) flex-col justify-center gap-16 px-6 py-20 lg:px-8">
         <SectionHeading
           icon={User}
-          heading={TEAM_HEADING.heading}
-          title={TEAM_HEADING.title}
-          description={TEAM_HEADING.description}
+          heading={t("heading")}
+          title={t("title")}
+          description={t("description")}
         />
 
         <CarouselWrapper
@@ -30,20 +34,29 @@ const MeetOurTeam = () => {
           }}
         >
           {teamMembers.map((member) => (
-            <div key={member.name} className="border-2 p-2 rounded-t-lg">
+            <div
+              key={member.id}
+              className="rounded-t-lg border-2 border-line p-2"
+            >
               <Image
-                alt={member.name}
-                className="aspect-square w-full rounded-t-lg bg-secondary object-cover"
+                alt={t(`members.${member.id}.name`)}
+                className="aspect-square w-full rounded-t-lg bg-line object-cover"
                 height={600}
                 src={member.image}
                 width={600}
               />
 
-              <h3 className="mt-4 font-medium text-lg">{member.name}</h3>
+              <h3 className="mt-4 text-lg font-medium">
+                {t(`members.${member.id}.name`)}
+              </h3>
 
-              <p className="text-faint text-sm">{member.title}</p>
+              <p className="text-sm text-faint">
+                {t(`members.${member.id}.title`)}
+              </p>
 
-              <p className="mt-3 text-center">{member.description}</p>
+              <p className="mt-3 text-center">
+                {t(`members.${member.id}.description`)}
+              </p>
             </div>
           ))}
         </CarouselWrapper>

@@ -1,36 +1,18 @@
-// Types:
-import { ChooseUsProps } from "@/types/whyChooseus.types";
-
-// Lucide Icons:
+// constants/WhyChooseUsSection.ts
 import { Building, HeartHandshake, Microscope, Users } from "lucide-react";
 
+import type { ChooseColor, ChooseUsProps } from "@/types/whyChooseus.types";
+
+export const CHOOSE_COLORS: Record<ChooseColor, string> = {
+  red: "bg-red-200 text-red-400",
+  blue: "bg-blue-200 text-blue-400",
+  emerald: "bg-emerald-200 text-emerald-400",
+  yellow: "bg-yellow-200 text-yellow-400",
+};
+
 export const WHY_CHOOSE_US_DATA: ChooseUsProps[] = [
-  {
-    icon: Users,
-    coloring: "red",
-    heading: "Expert Medical Team",
-    content:
-      "Board-certified cardiologists with decades of combined clinical experience.",
-  },
-  {
-    icon: Microscope,
-    coloring: "blue",
-    heading: "Advanced Technology",
-    content:
-      "State-of-the-art diagnostic equipment for precise, accurate assessments.",
-  },
-  {
-    icon: HeartHandshake,
-    coloring: "emerald",
-    heading: "Patient-Centered Care",
-    content:
-      "Personalized treatment plans built around your unique health profile.",
-  },
-  {
-    icon: Building,
-    coloring: "yellow",
-    heading: "Modern Facilities",
-    content:
-      "Comfortable, fully-equipped clinic designed for the best patient experience.",
-  },
+  { id: "experts", icon: Users, coloring: "red" },
+  { id: "technology", icon: Microscope, coloring: "blue" },
+  { id: "patientCentered", icon: HeartHandshake, coloring: "emerald" },
+  { id: "facilities", icon: Building, coloring: "yellow" },
 ];

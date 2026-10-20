@@ -1,10 +1,12 @@
-// Lucide Icons:
-import { LucideIcon } from "lucide-react";
+// types/services.types.ts
+import type { LucideIcon } from "lucide-react";
 
-export interface OurServicesProps {
+export type ServiceColor = "red" | "emerald" | "blue";
+
+export type OurServicesProps = {
+  id: string;
   icon: LucideIcon;
-  coloring: string;
-  content: string;
-  btn: string;
+  coloring: ServiceColor;
+  action: "learnMore" | "callNow";
   link: string;
-}
+};

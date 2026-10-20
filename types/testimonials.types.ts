@@ -1,6 +1,4 @@
 export interface PatientsTestimonialsProps {
-  name: string;
-  role: string;
+  id: string;
   avatar?: string;
-  testimonial: string;
 }

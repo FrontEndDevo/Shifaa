@@ -1,7 +1,4 @@
-// Types:
-import { OurServicesProps } from "@/types/services.types";
-
-// Lucide Icons:
+// constants/OurServices.ts
 import {
   Activity,
   Siren,
@@ -11,53 +8,56 @@ import {
   ClipboardPlus,
 } from "lucide-react";
 
+import type { OurServicesProps, ServiceColor } from "@/types/services.types";
+
+export const SERVICE_COLORS: Record<ServiceColor, string> = {
+  red: "bg-red-200 text-red-400 group-hover:bg-red-400 group-hover:text-white",
+  emerald:
+    "bg-emerald-200 text-emerald-400 group-hover:bg-emerald-400 group-hover:text-white",
+  blue: "bg-blue-200 text-blue-400 group-hover:bg-blue-400 group-hover:text-white",
+};
+
 export const OUR_SERVICES: OurServicesProps[] = [
   {
+    id: "cardiacAssessment",
     icon: Activity,
     coloring: "red",
-    content:
-      "Comprehensive cardiac assessments, risk evaluations, and personalized preventive care plans to keep your heart healthy.",
-    btn: "Learn More",
+    action: "learnMore",
     link: "/about",
   },
   {
+    id: "diagnostics",
     icon: ClipboardPlus,
     coloring: "emerald",
-    content:
-      "Advanced electrocardiography, echocardiography, stress testing, and Holter monitoring for accurate heart condition assessment.",
-    btn: "Learn More",
+    action: "learnMore",
     link: "/about",
   },
   {
+    id: "bloodPressure",
     icon: Stethoscope,
     coloring: "blue",
-    content:
-      "Personalized blood pressure control programs combining medication management, lifestyle coaching, and continuous monitoring.",
-    btn: "Learn More",
+    action: "learnMore",
     link: "/about",
   },
   {
+    id: "rehabilitation",
     icon: ShieldPlus,
     coloring: "emerald",
-    content:
-      "Structured recovery programs for heart attack survivors and surgery patients to restore strength and improve quality of life.",
-    btn: "Learn More",
+    action: "learnMore",
     link: "/about",
   },
   {
+    id: "riskReduction",
     icon: Heart,
     coloring: "blue",
-    content:
-      "Proactive cardiovascular risk reduction through lifestyle modification, nutritional guidance, and targeted preventive therapies.",
-    btn: "Learn More",
+    action: "learnMore",
     link: "/about",
   },
   {
+    id: "emergency",
     icon: Siren,
     coloring: "red",
-    content:
-      "24/7 rapid response care for acute heart conditions including chest pain, arrhythmias, and cardiac emergencies requiring immediate attention.",
-    btn: "Call Now",
+    action: "callNow",
     link: "/about",
   },
 ];

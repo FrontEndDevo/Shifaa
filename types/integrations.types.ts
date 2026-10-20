@@ -1,5 +1,5 @@
 export type IntegrationsProps = {
+  id: string;
   img: string;
-  title: string;
-  description: string;
+  name: string;
 };

@@ -1,40 +1,53 @@
 // Lucide Icons:
 import { Star } from "lucide-react";
 
-// Types:
-import { WHY_CHOOSE_US_DATA } from "@/constants/WhyChooseUsSection";
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+// Shadcn UI:
+import { cn } from "@/lib/utils";
 
 // Constants:
-import { WHY_CHOOSE_US_HEADING } from "@/constants/Headings";
+import {
+  CHOOSE_COLORS,
+  WHY_CHOOSE_US_DATA,
+} from "@/constants/WhyChooseUsSection";
 
 // Components:
 import SectionHeading from "../common/SectionHeading";
 
 const WhyChooseUs = () => {
+  const t = useTranslations("WhyChooseUs");
+
   return (
-    <section className="text-center py-20 bg-card">
+    <section className="bg-card py-20 text-center">
       <SectionHeading
         icon={Star}
-        heading={WHY_CHOOSE_US_HEADING.heading}
-        title={WHY_CHOOSE_US_HEADING.title}
-        description={WHY_CHOOSE_US_HEADING.description}
+        heading={t("heading")}
+        title={t("title")}
+        description={t("description")}
       />
 
-      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {WHY_CHOOSE_US_DATA.map((item, idx) => {
+      <div className="container grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {WHY_CHOOSE_US_DATA.map((item) => {
           const ChooseIcon = item.icon;
 
           return (
             <div
-              key={idx}
-              className="group bg-page hover:bg-line p-4 rounded-xl transition duration-150 hover:-translate-y-5"
+              key={item.id}
+              className="group rounded-xl bg-page p-4 transition duration-150 hover:-translate-y-5 hover:bg-line"
             >
               <ChooseIcon
-                className={`w-14 h-14 mx-auto p-4 mb-4 rounded-xl transition duration-150 bg-${item.coloring}-200 text-${item.coloring}-400`}
+                className={cn(
+                  "mx-auto mb-4 h-14 w-14 rounded-xl p-4 transition duration-150",
+                  CHOOSE_COLORS[item.coloring],
+                )}
               />
-              <h4>{item.heading}</h4>
+              <h4>{t(`items.${item.id}.heading`)}</h4>
 
-              <p className="text-sm text-gray-500 my-6">{item.content}</p>
+              <p className="my-6 text-sm text-faint">
+                {t(`items.${item.id}.content`)}
+              </p>
             </div>
           );
         })}

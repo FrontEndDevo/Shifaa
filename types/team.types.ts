@@ -1,6 +1,4 @@
 export type TeamMember = {
+  id: string;
   image: string;
-  name: string;
-  title: string;
-  description: string;
 };
