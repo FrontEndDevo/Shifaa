@@ -1,16 +1,21 @@
-// Next Components:
-import { useRouter } from "next/navigation";
+// Lucide Icons:
+import { ArrowRightCircle } from "lucide-react";
+
+// Customised Next Components:
+import { useRouter } from "@/i18n/navigation";
 
 // Shadcn UI:
 import { Button } from "../ui/button";
 
-// Lucide Icons:
-import { ArrowRightCircle } from "lucide-react";
-
 // API Actions Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 export function CTAButtons() {
+  const t = useTranslations("Hero");
+
   const { data } = useGetPatient();
 
   const router = useRouter();
@@ -31,30 +36,29 @@ export function CTAButtons() {
     router.push("/doctors");
   };
 
-  let heroActionBtnName = null;
-  switch (data?.status) {
-    case "IS_PATIENT":
-      heroActionBtnName = "Book Your Appointment";
-      break;
-
-    default:
-      heroActionBtnName = "Get Started";
-      break;
-  }
+  const heroActionBtnName =
+    data?.status === "IS_PATIENT" ? t("bookAppointment") : t("getStarted");
 
   return (
-    <div className="flex flex-col sm:flex-row gap-6 lg:gap-4 justify-center items-center lg:justify-start">
+    <div className="flex flex-col items-center justify-center gap-6 sm:flex-row lg:justify-start lg:gap-4">
       <Button
         onClick={findDoctorHandler}
-        className={`font-serif flex items-center justify-center gap-2 text-blue-300 bg-blue-900 lg:bg-transparent lg:hover:bg-blue-900 hover:text-blue-100 lg:hover:text-blue-100 hover:gap-4 px-12 py-6 text-xl lg:text-2xl xl:text-3xl transition-all duration-200 rounded-full cursor-pointer`}
+        className="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-blue-900 px-12 py-6 font-serif text-xl text-blue-300 transition-all duration-200 hover:gap-4 hover:text-blue-100 lg:bg-transparent lg:text-2xl lg:text-blue-800 lg:hover:bg-blue-900 lg:hover:text-blue-100 xl:text-3xl dark:lg:text-blue-300 dark:lg:hover:text-blue-100 rtl:font-sans"
       >
-        Find a Doctor
-        <ArrowRightCircle className="w-5 h-5" aria-hidden="true" />
+        {t("findDoctor")}
+        <ArrowRightCircle
+          className="h-5 w-5 rtl:rotate-180"
+          aria-hidden="true"
+        />
       </Button>
 
       <Button
         onClick={getStartedHandler}
-        className={`font-serif ${data?.status === "IS_PATIENT" ? "bg-emerald-600 hover:bg-emerald-900" : "bg-blue-600 hover:bg-blue-900"} text-white px-12 py-6 text-xl lg:text-2xl xl:text-3xl rounded-full cursor-pointer transition-all duration-200`}
+        className={`rounded-full px-12 py-6 font-serif text-xl text-white transition-all duration-200 lg:text-2xl xl:text-3xl rtl:font-sans cursor-pointer ${
+          data?.status === "IS_PATIENT"
+            ? "bg-emerald-600 hover:bg-emerald-900"
+            : "bg-blue-600 hover:bg-blue-900"
+        }`}
       >
         {heroActionBtnName}
       </Button>

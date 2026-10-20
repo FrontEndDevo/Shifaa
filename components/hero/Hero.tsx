@@ -8,13 +8,10 @@ import HeroContent from "./HeroContent";
 import HeroTestimonials from "./HeroTestimonials";
 import HeroBackground from "./HeroBackground";
 
-// Types:
-import { HeroContentProps } from "@/types/hero.types";
-
 // Constants
 import { backgroundPattern } from "@/constants/HeroHome";
 
-const Hero = ({ headline, description }: HeroContentProps) => {
+const Hero = () => {
   return (
     <section
       style={backgroundPattern}
@@ -22,7 +19,7 @@ const Hero = ({ headline, description }: HeroContentProps) => {
     >
       <HeroBackground />
       <div className="relative flex flex-col items-center justify-center h-full w-full pt-16 pb-10 lg:px-[10%] z-40 gap-8">
-        <HeroContent headline={headline} description={description} />
+        <HeroContent />
 
         <TooltipProvider>
           <HeroTestimonials />

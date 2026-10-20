@@ -8,15 +8,12 @@ import MeetOurTeam from "@/components/feedback/MeetOurTeam";
 import Integrations from "@/components/integrations/Integrations";
 import Footer from "@/components/layout/footer/Footer";
 
-// Constants:
-import { SHIFAA_DATA } from "@/constants/HeroHome";
-
 export default function Home() {
   return (
     <>
       <Navbar />
 
-      <Hero {...SHIFAA_DATA} />
+      <Hero />
       <Services />
       <WhyChooseUs />
       <Testimonials />

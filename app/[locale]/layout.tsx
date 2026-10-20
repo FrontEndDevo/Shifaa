@@ -19,20 +19,30 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 
+import { getTranslations } from "next-intl/server";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-  title: "Shifaa",
-  description:
-    "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
-  icons: {
-    icon: "/assets/icons/shifaa-icon.png",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    icons: {
+      icon: "/assets/icons/shifaa-icon.png",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
