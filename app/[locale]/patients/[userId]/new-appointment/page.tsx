@@ -5,7 +5,12 @@ import { useEffect } from "react";
 
 // Next Components:
 import Image from "next/image";
+
+// Next Hooks:
 import { useParams } from "next/navigation";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 // Forms:
 import { AppointmentForm } from "@/components/forms/AppointmentForm/AppointmentForm";
@@ -25,6 +30,9 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/footer/Footer";
 
 const NewAppointment = () => {
+  const t = useTranslations("NewAppointment");
+  const tFooter = useTranslations("Footer");
+
   const params = useParams();
 
   const userId = params.userId as string;
@@ -35,10 +43,10 @@ const NewAppointment = () => {
     if (isError)
       toast.add({
         type: "error",
-        title: "Failed to load patient data.",
-        description: "Try to refresh the page.",
+        title: t("toast.title"),
+        description: t("toast.description"),
       });
-  }, [isError]);
+  }, [isError, t]);
 
   return (
     <>
@@ -48,7 +56,7 @@ const NewAppointment = () => {
         isLoading={isLoading}
         isError={isError}
         data={patient}
-        errorMessage="Failed to load patient information."
+        errorMessage={t("loadError")}
       >
         <div className="flex h-screen max-h-screen">
           <section className="remove-scrollbar container my-auto">
@@ -61,7 +69,7 @@ const NewAppointment = () => {
                 type="create"
               />
 
-              <p className="copyright mt-10 py-12">© 2026 Shifaa</p>
+              <p className="copyright mt-10 py-12">{tFooter("copyright")}</p>
             </div>
           </section>
 
@@ -69,7 +77,7 @@ const NewAppointment = () => {
             src="/assets/images/appointment-img.png"
             height={1500}
             width={1500}
-            alt="appointment"
+            alt={t("imageAlt")}
             className="side-img max-w-[390px] bg-bottom"
           />
         </div>

@@ -2,22 +2,26 @@
 
 // Next Components:
 import Image from "next/image";
-import Link from "next/link";
+
+// Next Intl:
+import { useFormatter, useTranslations } from "next-intl";
+
+// Customised Next Components:
+import { Link } from "@/i18n/navigation";
 
 // Shadcn UI:
 import { Button } from "@/components/ui/button";
 
-// Constants:
-import { DOCTORS } from "@/constants/Doctor";
-
 // Utilities:
-import { formatDateTime } from "@/lib/utils";
+import { resolveDoctorId } from "@/lib/doctors";
+// Constants:
 
 // Shifaa Icon:
 import Shifaa from "@/components/layout/Shifaa";
 
 // Hooks:
 import useSuccessPage from "@/hooks/useSuccessPage";
+import useLocalizedDoctors from "@/hooks/useLocalizedDoctors";
 
 // Components:
 import Navbar from "@/components/layout/navbar/Navbar";
@@ -25,11 +29,28 @@ import QueryWrapper from "@/components/shared/QueryWrapper";
 import Footer from "@/components/layout/footer/Footer";
 
 const Success = () => {
+  const t = useTranslations("Success");
+  const tFooter = useTranslations("Footer");
+  const format = useFormatter();
+  const doctors = useLocalizedDoctors();
+
   const { appointment, userId, isLoading, isError } = useSuccessPage();
 
-  const doctor = DOCTORS.find(
-    (doctor) => doctor.name === appointment?.primaryPhysician,
-  );
+  const doctor = appointment
+    ? doctors.find(
+        (doc) => doc.doctorId === resolveDoctorId(appointment.primaryPhysician),
+      )
+    : undefined;
+
+  const scheduleText = appointment
+    ? format.dateTime(new Date(appointment.schedule), {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+    : "";
 
   return (
     <>
@@ -39,9 +60,9 @@ const Success = () => {
         isLoading={isLoading}
         isError={isError}
         data={appointment}
-        errorMessage="Failed to load appointment details."
+        errorMessage={t("loadError")}
       >
-        <div className=" flex h-screen max-h-screen px-[5%]">
+        <div className="flex h-screen max-h-screen px-[5%]">
           <div className="success-img">
             <Shifaa />
 
@@ -50,48 +71,53 @@ const Success = () => {
                 src="/assets/gifs/success.gif"
                 height={300}
                 width={280}
-                alt="success"
+                alt={t("imageAlt")}
               />
               <h2 className="header mb-6 max-w-[600px] text-center">
-                Your <span className="text-green-500">appointment</span> has
-                been successfully submitted!
+                {t.rich("title", {
+                  highlight: (chunks) => (
+                    <span className="text-green-500">{chunks}</span>
+                  ),
+                })}
               </h2>
-              <p>We&apos;ll be in touch shortly to confirm.</p>
+              <p>{t("followUp")}</p>
             </section>
 
             <section className="request-details">
-              <p>Appointment details: </p>
-              <div className="flex items-center gap-3">
-                <Image
-                  src={doctor?.image as string}
-                  alt="doctor"
-                  width={100}
-                  height={100}
-                  className="size-12 rounded-full"
-                />
-                <p className="whitespace-nowrap">{doctor?.name}</p>
-              </div>
+              <p>{t("details")}</p>
+              {doctor && (
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={doctor.image}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="size-12 rounded-full"
+                  />
+                  <p className="whitespace-nowrap">{doctor.name}</p>
+                </div>
+              )}
               <div className="flex gap-2">
                 <Image
                   src="/assets/icons/calendar.svg"
                   height={24}
                   width={24}
-                  alt="calendar"
+                  alt=""
                 />
-                <p> {formatDateTime(appointment?.schedule).dateTime}</p>
+                <p>{scheduleText}</p>
               </div>
             </section>
 
             <Button
               variant="outline"
-              className="shad-primary-btn px-10 border-none hover:"
+              className="shad-primary-btn border-none px-10"
             >
               <Link href={`/patients/${userId}/new-appointment`}>
-                New Appointment
+                {t("newAppointment")}
               </Link>
             </Button>
 
-            <p className="copyright">© 2026 Shifaa</p>
+            <p className="copyright">{tFooter("copyright")}</p>
           </div>
         </div>
       </QueryWrapper>
