@@ -3,6 +3,9 @@
 // Next Components:
 import Image from "next/image";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Shadcn UI:
 import {
   AlertDialog,
@@ -19,10 +22,11 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-// Custom Hooks:
 import usePasskeyModal from "@/hooks/usePasskeyModal";
 
 const PasskeyModal = () => {
+  const t = useTranslations("Login.passkey");
+
   const {
     passkey,
     setPasskey,
@@ -39,11 +43,11 @@ const PasskeyModal = () => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent className="shad-alert-dialog">
         <AlertDialogHeader>
-          <AlertDialogTitle className="w-full flex items-start justify-between">
-            Admin Access Verification
+          <AlertDialogTitle className="flex w-full items-start justify-between">
+            {t("title")}
             <Image
               src="/assets/icons/close.svg"
-              alt="close"
+              alt={t("close")}
               width={20}
               height={20}
               onClick={closeModalHandler}
@@ -51,12 +55,10 @@ const PasskeyModal = () => {
             />
           </AlertDialogTitle>
 
-          <AlertDialogDescription>
-            To access the admin page, please enter the passkey.
-          </AlertDialogDescription>
+          <AlertDialogDescription>{t("description")}</AlertDialogDescription>
         </AlertDialogHeader>
 
-        <div>
+        <div dir="ltr">
           <InputOTP
             maxLength={6}
             value={passkey}
@@ -73,7 +75,10 @@ const PasskeyModal = () => {
           </InputOTP>
 
           {error && (
-            <p className="shad-error text-14-regular mt-4 flex justify-center">
+            <p
+              dir="auto"
+              className="shad-error text-14-regular mt-4 flex justify-center"
+            >
               {error}
             </p>
           )}
@@ -84,7 +89,7 @@ const PasskeyModal = () => {
             onClick={(e) => validatePasskeyHandler(e)}
             className="shad-primary-btn w-full"
           >
-            Enter Admin Passkey
+            {t("enter")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
