@@ -1,6 +1,8 @@
 // Next Hooks:
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+
+// Customised Next Components:
+import { useRouter } from "@/i18n/navigation";
 
 // Authorization:
 import {
@@ -8,11 +10,16 @@ import {
   verifyAndSetPasskey,
 } from "@/validation/auth.actions";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 const usePasskeyModal = () => {
+  const t = useTranslations("Login.passkey");
+
   const router = useRouter();
 
   const [passkey, setPasskey] = useState("");
-  const [error, setError] = useState("");
+  const [hasError, setHasError] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -43,14 +50,14 @@ const usePasskeyModal = () => {
     if (verifyAndSetAdminPasskey.success) {
       router.replace("/admin");
     } else {
-      setError("Invalid passkey. Please try again.");
+      setHasError(true);
     }
   };
 
   return {
     passkey,
     setPasskey,
-    error,
+    error: hasError ? t("invalid") : "",
     open,
     setOpen,
     closeModalHandler,
