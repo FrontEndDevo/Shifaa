@@ -1,31 +1,34 @@
 // Next Components:
-import Link from "next/link";
 import Image from "next/image";
 
-// Forms:
-import PatientLoginForm from "@/components/forms/PatientLoginForm/PatientLoginForm";
+// Next Intl:
+import { getTranslations } from "next-intl/server";
 
-// Shifaa Icon:
+// Shifaa Layout:
 import Shifaa from "@/components/layout/Shifaa";
 
 // Types:
 import { SearchParamProps } from "@/types";
 
 // Components:
+import Navbar from "@/components/layout/navbar/Navbar";
+import PatientLoginForm from "@/components/forms/PatientLoginForm/PatientLoginForm";
 import SpinnerButton from "@/components/shared/SpinnerButton";
 import PasskeyModal from "@/components/modals/PasskeyModal";
-import Footer from "@/components/layout/footer/Footer";
-import Navbar from "@/components/layout/navbar/Navbar";
 import AdminAccessBtn from "@/components/admin/AdminAccessBtn";
+import Footer from "@/components/layout/footer/Footer";
 
 const Login = async ({ searchParams }: SearchParamProps) => {
   const { admin } = await searchParams;
+  const t = await getTranslations("Login");
+
+  const tFooter = await getTranslations("Footer");
 
   return (
     <>
       <Navbar />
 
-      <section className="md:h-screen flex max-h-screen">
+      <section className="flex max-h-screen md:h-screen">
         {admin && <PasskeyModal />}
 
         <section className="container remove-scrollbar my-auto">
@@ -34,16 +37,14 @@ const Login = async ({ searchParams }: SearchParamProps) => {
             <PatientLoginForm />
 
             <div className="text-14-regular mt-20 flex justify-between">
-              <p className="justify-items-end text-gray-600 xl:text-left">
-                © 2026 Shifaa
-              </p>
+              <p className="text-faint xl:text-start">{tFooter("copyright")}</p>
               {!admin ? <AdminAccessBtn /> : <SpinnerButton />}
             </div>
           </div>
         </section>
         <Image
           src="/assets/images/onboarding-img.jpg"
-          alt="patient"
+          alt={t("imageAlt")}
           width={1000}
           height={1000}
           className="side-img max-w-[50%]"

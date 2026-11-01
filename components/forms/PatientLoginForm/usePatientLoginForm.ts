@@ -1,11 +1,16 @@
 // Next Hooks:
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 // Validation:
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoginFormSchema } from "@/validation/schema/LoginFormSchema";
+import { LoginFormValues } from "@/validation/schema/LoginFormSchema";
+
+// Validation Hooks:
+import { useLoginFormSchema } from "@/hooks/useFormSchemas";
 
 // API Actions Hooks:
 import { useCheckOrRegister } from "@/hooks/usePatient";
@@ -17,51 +22,49 @@ import { toast } from "@/components/ui/toast";
 import { useQueryClient } from "@tanstack/react-query";
 
 const usePatientLoginForm = () => {
+  const t = useTranslations("Auth.login.toast");
   const { mutateAsync: loginPatientMutation, isPending } = useCheckOrRegister();
 
   const router = useRouter();
 
-  const { handleSubmit, control } = useForm<z.infer<typeof LoginFormSchema>>({
-    resolver: zodResolver(LoginFormSchema),
+  const schema = useLoginFormSchema();
+
+  const { handleSubmit, control } = useForm<LoginFormValues>({
+    resolver: zodResolver(schema),
     mode: "onBlur",
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: { email: "", password: "" },
   });
 
   const queryClient = useQueryClient();
 
-  const onSubmitHandler = async (data: z.infer<typeof LoginFormSchema>) => {
+  const onSubmitHandler = async (data: LoginFormValues) => {
     toast.promise(
       loginPatientMutation(data).then((getUser) => {
         router.refresh();
 
         if (getUser.isNewUser) {
-          // Complete patient information:
           router.replace(`/auth/${getUser.user.userId}/register`);
           return {
-            title: "Sign Up Successfully.",
-            description: "Account created! Please complete your profile.",
+            title: t("signUp.title"),
+            description: t("signUp.description"),
           };
         } else {
-          // Go direct to set an appointment:
           router.replace(`/`);
           return {
-            title: "Login Successfully.",
-            description: "Welcome back!",
+            title: t("signIn.title"),
+            description: t("signIn.description"),
           };
         }
       }),
       {
         loading: {
-          title: "Authenticating...",
-          description: "Please wait while we process your account...",
+          title: t("loading.title"),
+          description: t("loading.description"),
         },
         success: (message) => message,
         error: {
-          title: "Authenticating Proccess Failed",
-          description: "Something went wrong, Please try again.",
+          title: t("error.title"),
+          description: t("error.description"),
         },
       },
     );

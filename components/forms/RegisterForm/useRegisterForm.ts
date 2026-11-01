@@ -1,13 +1,20 @@
 "use client";
 
 // Next Hooks:
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 // Validation:
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { PatientFormValidation } from "@/validation/schema";
+import { PatientFormValues } from "@/validation/schema/RegisterPatientFormSchema";
+
+// Validation Hooks:
+import { usePatientFormValidation } from "@/hooks/useFormSchemas";
+
+// Constants:
 import { PatientFormDefaultValues } from "@/constants";
 
 // API Actions Hooks:
@@ -17,23 +24,24 @@ import { useRegisterPatient } from "@/hooks/usePatient";
 import { toast } from "@/components/ui/toast";
 
 const useRegisterForm = ({ userId }: { userId: string }) => {
+  const t = useTranslations("Auth.register.toast");
+
   const { mutateAsync: registerPatientMutation, isPending } =
     useRegisterPatient();
 
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof PatientFormValidation>>({
-    resolver: zodResolver(PatientFormValidation),
+  const schema = usePatientFormValidation();
+
+  const form = useForm<PatientFormValues>({
+    resolver: zodResolver(schema),
     mode: "onBlur",
     defaultValues: {
       ...PatientFormDefaultValues,
     },
   });
 
-  // Submit
-  const onSubmitHandler = async (
-    values: z.infer<typeof PatientFormValidation>,
-  ) => {
+  const onSubmitHandler = async (values: PatientFormValues) => {
     let formData;
 
     if (
@@ -70,18 +78,16 @@ const useRegisterForm = ({ userId }: { userId: string }) => {
       }),
       {
         loading: {
-          title: "Saving...",
-          description: "Saving your information...",
+          title: t("loading.title"),
+          description: t("loading.description"),
         },
         success: {
-          title: "Registration Successful!",
-          description:
-            "Patient profile created successfully. Proceeding to appointment booking.",
+          title: t("success.title"),
+          description: t("success.description"),
         },
         error: () => ({
-          title: "Registration Failed!",
-          description:
-            "Failed to create patient profile. Please check the entered data and try again.",
+          title: t("error.title"),
+          description: t("error.description"),
         }),
       },
     );

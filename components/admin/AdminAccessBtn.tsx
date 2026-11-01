@@ -9,7 +9,12 @@ import { useQueryClient } from "@tanstack/react-query";
 // API Actions Hooks:
 import { getRecentAppointments } from "@/lib/actions/appointment.actions";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 const AdminAccessBtn = () => {
+  const t = useTranslations("Login");
+
   const queryClient = useQueryClient();
 
   const prefetchAdminAppointmentsHandler = async () => {
@@ -26,7 +31,7 @@ const AdminAccessBtn = () => {
       href="?admin=true"
       className="text-green-500"
     >
-      Admin
+      {t("admin")}
     </Link>
   );
 };

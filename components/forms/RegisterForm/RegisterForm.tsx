@@ -1,6 +1,9 @@
 "use client";
 
-// Hooks:
+// Next Intl:
+import { useTranslations } from "next-intl";
+
+// Custom Hooks:
 import useRegisterForm from "./useRegisterForm";
 
 // Components:
@@ -11,28 +14,36 @@ import FileUploader from "../common/FileUploader";
 // Shadcn UI:
 import { SelectItem } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "../../ui/label";
+import { Label } from "@/components/ui/label";
 
 // Types:
 import { InputFieldType } from "@/types/form.types";
 
 // Constants:
-import { GenderOptions, IdentificationTypes } from "@/constants/index";
+import {
+  GenderOptions,
+  IdentificationTypes,
+  IDENTIFICATION_TYPE_KEYS,
+} from "@/constants/index";
 
 const RegisterForm = ({ userId }: { userId: string }) => {
+  const t = useTranslations("Auth.register");
+
+  const tOptions = useTranslations("Options");
+
   const { isPending, form, onSubmitHandler } = useRegisterForm({ userId });
 
   return (
     <form onSubmit={form.handleSubmit(onSubmitHandler)}>
       <section className="my-12">
-        <h1 className="header mb-2">Welcome again 👋🏻</h1>
-        <p className="text-soft">Tell us more about yourself.</p>
+        <h1 className="header mb-2">{t("greeting")}</h1>
+        <p className="text-soft">{t("subtitle")}</p>
       </section>
 
       {/* Name & Phone number */}
       <section>
         <div className="mb-2">
-          <h2 className="sub-header underline">Personal Information</h2>
+          <h2 className="sub-header underline">{t("sections.personal")}</h2>
         </div>
 
         <div className="flex flex-col gap-6">
@@ -40,35 +51,34 @@ const RegisterForm = ({ userId }: { userId: string }) => {
             fieldType={InputFieldType.INPUT}
             control={form.control}
             name="name"
-            label="full Name"
-            placeholder="John Doe"
+            label={t("fields.name.label")}
+            placeholder={t("fields.name.placeholder")}
             iconSrc="/assets/icons/user.svg"
-            iconAlt="user"
           />
 
           <InputField
             fieldType={InputFieldType.PHONE_INPUT}
             control={form.control}
             name="phone"
-            label="Phone Number"
-            placeholder="Enter phone number"
+            label={t("fields.phone.label")}
+            placeholder={t("fields.phone.placeholder")}
           />
         </div>
 
         {/* BirthDate & Gender */}
-        <div className="flex flex-col gap-6 xl:flex-row my-8">
+        <div className="my-8 flex flex-col gap-6 xl:flex-row">
           <InputField
             fieldType={InputFieldType.DATE_PICKER}
             control={form.control}
             name="birthDate"
-            label="Date of birth"
+            label={t("fields.birthDate.label")}
           />
 
           <InputField
             fieldType={InputFieldType.SKELETON}
             control={form.control}
             name="gender"
-            label="Gender"
+            label={t("fields.gender.label")}
             renderSkeleton={(field) => (
               <RadioGroup
                 className="flex h-12 gap-6 xl:justify-between"
@@ -79,7 +89,7 @@ const RegisterForm = ({ userId }: { userId: string }) => {
                   <div key={option} className="radio-group">
                     <RadioGroupItem value={option} id={option} />
                     <Label className="cursor-pointer" htmlFor={option}>
-                      {option}
+                      {tOptions(`gender.${option.toLowerCase()}`)}
                     </Label>
                   </div>
                 ))}
@@ -89,11 +99,11 @@ const RegisterForm = ({ userId }: { userId: string }) => {
         </div>
       </section>
 
-      {/* Identification and Verfication */}
+      {/* Identification and Verification */}
       <section>
         <div className="mb-4 space-y-1">
           <h2 className="sub-header underline">
-            Identification and Verfication
+            {t("sections.identification")}
           </h2>
         </div>
 
@@ -102,16 +112,16 @@ const RegisterForm = ({ userId }: { userId: string }) => {
             fieldType={InputFieldType.SELECT}
             control={form.control}
             name="identificationType"
-            label="Identification Type"
-            placeholder="Select identification type"
+            label={t("fields.identificationType.label")}
+            placeholder={t("fields.identificationType.placeholder")}
           >
-            {IdentificationTypes.map((type, i) => (
+            {IdentificationTypes.map((type) => (
               <SelectItem
-                className="hover:bg-deep transition duration-100 cursor-pointer"
-                key={type + i}
+                className="cursor-pointer transition duration-100 hover:bg-deep"
+                key={type}
                 value={type}
               >
-                {type}
+                {tOptions(`identification.${IDENTIFICATION_TYPE_KEYS[type]}`)}
               </SelectItem>
             ))}
           </InputField>
@@ -120,7 +130,7 @@ const RegisterForm = ({ userId }: { userId: string }) => {
             fieldType={InputFieldType.SKELETON}
             control={form.control}
             name="identificationDocument"
-            label="Scanned Copy of Identification Document"
+            label={t("fields.identificationDocument.label")}
             renderSkeleton={(field) => (
               <FileUploader
                 files={(field.value as File[]) ?? []}
@@ -132,36 +142,34 @@ const RegisterForm = ({ userId }: { userId: string }) => {
       </section>
 
       {/* Consent and Privacy */}
-      <section className="space-y-6 my-10">
+      <section className="my-10 space-y-6">
         <div>
-          <h2 className="sub-header underline">Consent and Privacy</h2>
+          <h2 className="sub-header underline">{t("sections.consent")}</h2>
         </div>
 
         <InputField
           fieldType={InputFieldType.CHECKBOX}
           control={form.control}
           name="treatmentConsent"
-          label="I consent to receive treatment for my health condition."
+          label={t("consent.treatment")}
         />
 
         <InputField
           fieldType={InputFieldType.CHECKBOX}
           control={form.control}
           name="disclosureConsent"
-          label="I consent to the use and disclosure of my health
-            information for treatment purposes."
+          label={t("consent.disclosure")}
         />
 
         <InputField
           fieldType={InputFieldType.CHECKBOX}
           control={form.control}
           name="privacyConsent"
-          label="I acknowledge that I have reviewed and agree to the
-            privacy policy"
+          label={t("consent.privacy")}
         />
       </section>
 
-      <SubmitButton isLoading={isPending}>Register</SubmitButton>
+      <SubmitButton isLoading={isPending}>{t("submit")}</SubmitButton>
     </form>
   );
 };

@@ -1,23 +1,19 @@
 "use client";
 
-import { IFormField, InputFieldType } from "@/types/form.types";
-import Image from "next/image";
-import { Controller, FieldValues } from "react-hook-form";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import PhoneInputField from "./PhoneInputField";
+// Validation
+import { FieldValues } from "react-hook-form";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+// Types:
+import { IFormField, InputFieldType } from "@/types/form.types";
+
+// Input Types Components:
+import InputType from "../InputTypes/InputType";
+import TextareaType from "../InputTypes/TextareaType";
+import PhoneType from "../InputTypes/PhoneType";
+import DatePickerType from "../InputTypes/DatePickerType";
+import SelectType from "../InputTypes/SelectType";
+import SkeletonType from "../InputTypes/SkeletonType";
+import CheckboxType from "../InputTypes/CheckboxType";
 
 const InputField = <TFieldValues extends FieldValues>({
   control,
@@ -37,216 +33,73 @@ const InputField = <TFieldValues extends FieldValues>({
   switch (fieldType) {
     case InputFieldType.INPUT:
       return (
-        <Field className="flex flex-col gap-1.5 w-full my-4">
-          {label && (
-            <FieldLabel className="text-sm font-bold text-soft dark:text-gray-300">
-              {label}
-            </FieldLabel>
-          )}
-          <Controller
-            name={name}
-            control={control}
-            render={({ field, fieldState }) => (
-              <div className="flex flex-col gap-1">
-                <div
-                  className={`flex items-center h-11 w-full rounded-md border bg-card px-3 transition-colors ${
-                    fieldState.invalid
-                      ? "border-red-500 focus-within:border-red-500"
-                      : "border-line focus-within:border-primary-500"
-                  }`}
-                >
-                  {iconSrc && (
-                    <Image
-                      src={iconSrc}
-                      alt={iconAlt || "icon"}
-                      width={24}
-                      height={24}
-                      className="mr-2 flex-shrink-0"
-                    />
-                  )}
-
-                  <Input
-                    {...field}
-                    type={type}
-                    value={field.value ?? ""}
-                    aria-invalid={fieldState.invalid}
-                    placeholder={placeholder}
-                    autoComplete="off"
-                    className="w-full border-0 focus:border-none bg-transparent p-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none text-main placeholder:text-faint"
-                  />
-                </div>
-
-                {fieldState.invalid && (
-                  <FieldError
-                    errors={[fieldState.error]}
-                    className="text-xs font-medium text-red-500 mt-1"
-                  />
-                )}
-              </div>
-            )}
-          />
-        </Field>
+        <InputType
+          name={name}
+          label={label}
+          placeholder={placeholder}
+          type={type}
+          control={control}
+          iconAlt={iconAlt}
+          iconSrc={iconSrc}
+        />
       );
 
     case InputFieldType.TEXTAREA:
       return (
-        <Controller
+        <TextareaType
           name={name}
+          label={label}
+          placeholder={placeholder}
           control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel>{label}</FieldLabel>
-              <Textarea
-                placeholder={placeholder}
-                {...field}
-                className="shad-textArea"
-                disabled={disabled}
-              />
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-red-500"
-                />
-              )}
-            </Field>
-          )}
+          disabled={disabled}
         />
       );
 
     case InputFieldType.PHONE_INPUT:
       return (
-        <Controller
-          control={control}
+        <PhoneType
           name={name}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel>{label}</FieldLabel>
-              <PhoneInputField
-                placeholder={placeholder}
-                value={field.value}
-                onChange={field.onChange}
-              />
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-xs font-medium text-red-500 mt-1"
-                />
-              )}
-            </Field>
-          )}
+          label={label}
+          placeholder={placeholder}
+          control={control}
         />
       );
 
     case InputFieldType.DATE_PICKER:
       return (
-        <div>
-          <Label className="mb-2">{label}</Label>
-          <div className="flex h-fit items-center rounded-md border border-line bg-card">
-            <Image
-              src="/assets/icons/calendar.svg"
-              height={24}
-              width={24}
-              alt="user"
-              className="ml-2"
-            />
-            <Controller
-              name={name}
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  selected={field.value}
-                  onChange={field.onChange}
-                  showTimeSelect={showTimeSelect ?? false}
-                  timeInputLabel="Time:"
-                  dateFormat={dateFormat ?? "MM/dd/yyyy"}
-                  wrapperClassName="date-picker"
-                />
-              )}
-            />
-          </div>
-        </div>
+        <DatePickerType
+          name={name}
+          label={label}
+          control={control}
+          dateFormat={dateFormat}
+          showTimeSelect={showTimeSelect}
+        />
       );
 
     case InputFieldType.SELECT:
       return (
-        <Controller
+        <SelectType
           name={name}
+          label={label}
+          placeholder={placeholder}
           control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel>{label}</FieldLabel>
-
-              <Select onValueChange={field.onChange} value={field.value}>
-                <div>
-                  <SelectTrigger className="shad-select-trigger">
-                    <SelectValue placeholder={placeholder} />
-                  </SelectTrigger>
-                </div>
-                <SelectContent className="shad-select-content">
-                  {children}
-                </SelectContent>
-              </Select>
-
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-red-500"
-                />
-              )}
-            </Field>
-          )}
-        />
+        >
+          {children}
+        </SelectType>
       );
 
     case InputFieldType.SKELETON:
       return (
-        <Controller
+        <SkeletonType
           name={name}
+          label={label}
           control={control}
-          render={({ field, fieldState }) => (
-            <div className="flex flex-col gap-2">
-              <Label>{label}</Label>
-
-              {renderSkeleton ? renderSkeleton(field) : null}
-
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-xs font-medium text-red-500 mt-2"
-                />
-              )}
-            </div>
-          )}
+          renderSkeleton={renderSkeleton}
         />
       );
 
     case InputFieldType.CHECKBOX:
-      return (
-        <Controller
-          name={name}
-          control={control}
-          render={({ field, fieldState }) => (
-            <div>
-              <div className="flex items-center gap-4">
-                <Checkbox
-                  id={name}
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-                <label htmlFor={name} className="checkbox-label">
-                  {label}
-                </label>
-              </div>
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-xs font-medium text-red-500 mt-2"
-                />
-              )}
-            </div>
-          )}
-        />
-      );
+      return <CheckboxType name={name} label={label} control={control} />;
 
     default:
       break;

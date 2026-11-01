@@ -1,5 +1,8 @@
 "use client";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Hooks:
 import usePatientLoginForm from "./usePatientLoginForm";
 
@@ -7,18 +10,20 @@ import usePatientLoginForm from "./usePatientLoginForm";
 import InputField from "../common/InputField";
 import SubmitButton from "../common/SubmitButton";
 
-// Types
+// Types:
 import { InputFieldType } from "@/types/form.types";
 
 const PatientLoginForm = () => {
+  const t = useTranslations("Auth.login");
+
   const { isPending, onSubmitHandler, handleSubmit, control } =
     usePatientLoginForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <div>
-        <h1 className="header mb-2 mt-10">Hello there 👋🏻</h1>
-        <p className="text-soft">Schedule your first appointment</p>
+        <h1 className="header mb-2 mt-10">{t("greeting")}</h1>
+        <p className="text-soft">{t("subtitle")}</p>
       </div>
 
       <InputField
@@ -26,10 +31,9 @@ const PatientLoginForm = () => {
         fieldType={InputFieldType.INPUT}
         type="email"
         name="email"
-        label="Email"
-        placeholder="Enter your email"
+        label={t("fields.email.label")}
+        placeholder={t("fields.email.placeholder")}
         iconSrc="/assets/icons/email.svg"
-        iconAlt="email"
       />
 
       <InputField
@@ -37,13 +41,12 @@ const PatientLoginForm = () => {
         fieldType={InputFieldType.INPUT}
         type="password"
         name="password"
-        label="Password"
-        placeholder="Enter your password"
+        label={t("fields.password.label")}
+        placeholder={t("fields.password.placeholder")}
         iconSrc="/assets/icons/password.svg"
-        iconAlt="password"
       />
 
-      <SubmitButton isLoading={isPending}>Get Started</SubmitButton>
+      <SubmitButton isLoading={isPending}>{t("submit")}</SubmitButton>
     </form>
   );
 };
