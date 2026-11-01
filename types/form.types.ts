@@ -19,7 +19,7 @@ export interface IFormField<TFieldValues extends FieldValues> {
   control: Control<TFieldValues>;
   fieldType: InputFieldType;
   name: Path<TFieldValues>;
-  type?:string,
+  type?: string;
   label?: string;
   placeholder?: string;
   iconSrc?: string;
@@ -32,3 +32,45 @@ export interface IFormField<TFieldValues extends FieldValues> {
     field: ControllerRenderProps<TFieldValues, Path<TFieldValues>>,
   ) => React.ReactNode;
 }
+
+// Input
+export type InputTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "placeholder" | "type" | "control" | "iconAlt" | "iconSrc"
+>;
+
+// Textarea
+export type TextareaTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "placeholder" | "control" | "disabled"
+>;
+
+// Phone
+export type PhoneTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "placeholder" | "control"
+>;
+
+// Date Picker
+export type DatePickerTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "control" | "dateFormat" | "showTimeSelect"
+>;
+
+// Select
+export type SelectTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "placeholder" | "control" | "children"
+>;
+
+// Skeleton
+export type SkeletonTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "control" | "renderSkeleton"
+>;
+
+// Checkbox
+export type CheckboxTypeProps<T extends FieldValues> = Pick<
+  IFormField<T>,
+  "name" | "label" | "control"
+>;
