@@ -2,15 +2,15 @@
 
 // Lucide Icons:
 import { PencilIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 // Shadcn UI:
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Separator } from "@/components/ui/separator";
 
 // Components:
 import Navbar from "@/components/layout/navbar/Navbar";
@@ -19,14 +19,17 @@ import ProfileAppointments from "@/components/appointments/ProfileAppointments";
 import ProfileStatusCount from "@/components/appointments/ProfileStatusCount";
 import Footer from "@/components/layout/footer/Footer";
 
-// API Actions Hooks:
+// Custom Hooks:
 import { useGetPatient } from "@/hooks/usePatient";
+
+// API Actions Hooks:
 import { useGetPatientAppointments } from "@/components/forms/AppointmentForm/hooks/useAppointments";
 
 // Utilities:
 import { getInitials } from "@/lib/utils";
 
 const Profile = () => {
+  const t = useTranslations("Profile");
   const { data: patient } = useGetPatient();
 
   const {
@@ -43,29 +46,26 @@ const Profile = () => {
         isLoading={isLoading}
         isError={isError}
         data={appointments}
-        errorMessage="Failed to fetch your appointments, Try to refresh page."
+        errorMessage={t("loadError")}
       >
-        <section className="min-h-dvh bg-card/50 flex flex-col 2xl:flex-row items-start px-6 py-10 bg-card">
+        <section className="flex min-h-dvh flex-col items-start bg-card px-6 py-10 2xl:flex-row">
           {/* Profile */}
-          <div className="relative mx-auto flex w-full max-w-md flex-col items-center rounded-xl border border-border/55 bg-background px-8 py-10 shadow-[0_0_10px_rgba(0,0,0,0.04)] dark:border-border/75 dark:shadow-[0_0_20px_rgba(0,0,0,0.4)]">
+          <div className="relative mx-auto flex w-full max-w-md flex-col items-center rounded-xl border border-line bg-page px-8 py-10 shadow-[0_0_10px_rgba(0,0,0,0.04)] dark:shadow-[0_0_20px_rgba(0,0,0,0.4)]">
             {/* Edit Profile button */}
             <Tooltip>
               <TooltipTrigger>
-                <div className="absolute top-4 right-4 border-2 rounded p-1 border-blue-500 hover:bg-blue-500 transition duration-150">
+                <div className="absolute end-4 top-4 rounded border-2 border-blue-500 p-1 transition duration-150 hover:bg-blue-500">
                   <PencilIcon className="size-4" />
+                  <span className="sr-only">{t("editProfile")}</span>
                 </div>
               </TooltipTrigger>
-              <TooltipContent>Edit Profile</TooltipContent>
+              <TooltipContent>{t("editProfile")}</TooltipContent>
             </Tooltip>
 
             {/* Avatar Photo */}
             <div className="mb-4 flex items-center gap-4">
-              <Avatar className="size-24 border">
-                {/* <AvatarImage
-                alt="User avatar"
-                src="https://github.com/shadcn.png"
-              /> */}
-                <AvatarFallback className="font-medium text-2xl">
+              <Avatar className="size-24 border border-line">
+                <AvatarFallback className="text-2xl font-medium">
                   {getInitials(patient?.name)}
                 </AvatarFallback>
               </Avatar>
@@ -73,44 +73,46 @@ const Profile = () => {
 
             {/* Essential Information */}
             <div className="text-center">
-              <h2 className="font-medium text-2xl tracking-tight">
+              <h2 className="text-2xl font-medium tracking-tight rtl:tracking-normal">
                 {patient?.name}
               </h2>
-              <p className="mt-1 text-faint">{patient?.phone}</p>
+              <p dir="ltr" className="mt-1 text-faint">
+                {patient?.phone}
+              </p>
             </div>
 
             {/* Appointments Status */}
             <div className="mt-8 w-full">
               <div className="flex gap-1">
-                <h2 className="text-lg font-semibold mb-2 tracking-wider">
-                  Appointments:
+                <h2 className="mb-2 text-lg font-semibold tracking-wider rtl:tracking-normal">
+                  {t("appointments")}
                 </h2>
                 <p className="text-xl">{appointments?.total}</p>
               </div>
 
-              <div className="text-center grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4 text-center">
                 <ProfileStatusCount
-                  color="blue"
+                  status="pending"
                   count={appointments?.pendingCount}
-                  title="pending"
                 />
 
                 <ProfileStatusCount
-                  color="emerald"
+                  status="scheduled"
                   count={appointments?.scheduledCount}
-                  title="confirmed"
                 />
 
                 <ProfileStatusCount
-                  color="red"
+                  status="cancelled"
                   count={appointments?.cancelledCount}
-                  title="cancelled"
                 />
               </div>
             </div>
           </div>
 
-          <Separator className="bg-blue-400 w-1 h-dvh mx-10 2xl:block hidden" />
+          <div
+            aria-hidden="true"
+            className="mx-10 hidden h-dvh w-1 bg-blue-400 2xl:block"
+          />
 
           <ProfileAppointments appointments={appointments?.rows} />
         </section>
