@@ -1,13 +1,13 @@
-import { Gender } from "@/types";
+import type { Gender } from "@/types";
 
 export const PatientFormDefaultValues = {
   name: "",
   phone: "",
-  birthDate: new Date(Date.now()),
+  birthDate: new Date(),
   gender: "Male" as Gender,
 
   identificationType: "Birth Certificate",
-  identificationDocument: [],
+  identificationDocument: [] as File[],
 
   treatmentConsent: false,
   disclosureConsent: false,

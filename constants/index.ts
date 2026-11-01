@@ -1,7 +1,14 @@
 import { PatientFormDefaultValues } from "./PatientFormDefaultValues";
-import { IdentificationTypes } from "./IdentificationTypes";
+import {
+  IDENTIFICATION_TYPE_KEYS,
+  IdentificationTypes,
+} from "./IdentificationTypes";
 
-export { PatientFormDefaultValues, IdentificationTypes };
+export {
+  PatientFormDefaultValues,
+  IDENTIFICATION_TYPE_KEYS,
+  IdentificationTypes,
+};
 
 export const GenderOptions = ["Male", "Female", "Other"];
 
