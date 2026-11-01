@@ -1,43 +1,57 @@
+// Next Intl:
+import { useFormatter, useTranslations } from "next-intl";
+
+// Shadcn UI:
+import { cn } from "@/lib/utils";
+
+// Constants:
+import { STATUS_STYLES } from "@/constants/AppointmentStatus";
+
 // Types:
 import { Appointment } from "@/types/appointment.types";
 
 // Components:
 import AppointmentsTable from "./AppointmentsTable";
 
-// Utilities:
-import { formatDateTime } from "@/lib/utils";
-
 type ProfileAppointmentsProps = {
-  appointments: Appointment[];
+  appointments?: Appointment[];
 };
 
 const ProfileAppointments = ({ appointments }: ProfileAppointmentsProps) => {
-  return (
-    <div className="max-w-(--breakpoint-sm) px-6 py-12 md:mx-auto md:py-20 w-full">
-      <div className="relative">
-        {appointments?.map((appointment, index) => {
-          const statusColor =
-            appointment.status === "pending"
-              ? "blue"
-              : appointment.status === "cancelled"
-                ? "red"
-                : "emerald";
+  const t = useTranslations("AppointmentStatus");
+  const format = useFormatter();
 
-          const appointmentDate = formatDateTime(appointment.schedule).dateTime;
+  return (
+    <div className="w-full max-w-(--breakpoint-sm) px-6 py-12 md:mx-auto md:py-20">
+      <div className="relative">
+        {appointments?.map((appointment) => {
+          const styles = STATUS_STYLES[appointment.status];
+
+          const appointmentDate = format.dateTime(
+            new Date(appointment.schedule),
+            {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            },
+          );
 
           return (
-            <div className="group relative" key={index}>
-              <div className="flex items-center lg:items-start flex-col lg:flex-row gap-4 lg:gap-10">
+            <div className="group relative" key={appointment.$id}>
+              <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-start lg:gap-10">
                 {/* Content */}
                 <div
-                  className={`flex shrink-0 flex-col gap-2 text-center border-b py-1 border-${statusColor}-500`}
+                  className={cn(
+                    "flex shrink-0 flex-col gap-2 border-b py-1 text-center",
+                    styles.border,
+                  )}
                 >
-                  <h6
-                    className={`capitalize font-semibold text-lg text-${statusColor}-700`}
-                  >
-                    {appointment.status}
+                  <h6 className={cn("text-lg font-semibold", styles.text)}>
+                    {t(appointment.status)}
                   </h6>
-                  <span className="text-faint text-xs sm:text-sm">
+                  <span className="text-xs text-faint sm:text-sm">
                     {appointmentDate}
                   </span>
                 </div>

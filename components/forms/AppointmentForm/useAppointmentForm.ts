@@ -1,17 +1,22 @@
 // Validation:
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getAppointmentSchema } from "@/validation/schema";
+import { AppointmentFormValues } from "@/validation/schema/AppointmentFormSchema";
+
+// Schema Hooks:
+import { useAppointmentSchema } from "@/hooks/useFormSchemas";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
 
 // Types:
 import { TAppointmentFormProps } from "@/types/appointment.types";
 import { Status } from "@/types";
 
-// Utilities:
-import { ButtonLabel, StatusType } from "./AppointmentUtils";
+// Utilites:
+import { StatusType } from "./AppointmentUtils";
+import { resolveDoctorId } from "@/lib/doctors";
 
-// Appointments Hooks:
 import useAppointmentsMutations from "./hooks/useAppointmentsMutations";
 
 const useAppointmentForm = ({
@@ -21,6 +26,8 @@ const useAppointmentForm = ({
   type,
   setOpen,
 }: TAppointmentFormProps) => {
+  const t = useTranslations("Appointment.buttons");
+
   const { isLoading, hasError, handleMutationAction } =
     useAppointmentsMutations({
       type,
@@ -29,13 +36,14 @@ const useAppointmentForm = ({
       setOpen,
     });
 
-  // Get the specific form schema depend on type.
-  const AppointmentFormValidation = getAppointmentSchema(type);
+  const AppointmentFormValidation = useAppointmentSchema(type);
 
-  const form = useForm<z.infer<typeof AppointmentFormValidation>>({
+  const form = useForm<AppointmentFormValues>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryPhysician: appointment ? appointment?.primaryPhysician : "",
+      primaryPhysician: appointment
+        ? resolveDoctorId(appointment.primaryPhysician)
+        : "",
       schedule: appointment ? new Date(appointment.schedule) : new Date(),
       reason: appointment ? appointment.reason : "",
       note: appointment?.note || "",
@@ -44,9 +52,7 @@ const useAppointmentForm = ({
     },
   });
 
-  const onSubmit = async (
-    values: z.infer<typeof AppointmentFormValidation>,
-  ) => {
+  const onSubmit = async (values: AppointmentFormValues) => {
     const status = StatusType(type);
 
     const dataTypeValues = () => {
@@ -78,13 +84,12 @@ const useAppointmentForm = ({
       }
     };
 
-    // Prepare the required data to pass.
     const dataValues = dataTypeValues();
 
     handleMutationAction(dataValues);
   };
 
-  const buttonLabel = ButtonLabel(type);
+  const buttonLabel = t(type);
 
   return { isLoading, hasError, buttonLabel, onSubmit, form };
 };

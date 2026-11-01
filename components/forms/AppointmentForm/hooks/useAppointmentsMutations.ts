@@ -1,10 +1,13 @@
 // React:
 import { Dispatch, SetStateAction } from "react";
 
-// Next Hooks:
-import { useRouter } from "next/navigation";
+// Next Intl:
+import { useTranslations } from "next-intl";
 
-// API Actions Hooks:
+// Customised Next Hooks:
+import { useRouter } from "@/i18n/navigation";
+
+// Hooks:
 import {
   useCreateAppointment,
   useDeleteAppointment,
@@ -12,10 +15,7 @@ import {
 } from "./useAppointments";
 
 // Types:
-import { TAppointmentFormTypes } from "@/types/appointment.types";
-
-// Constants:
-import { APPOINTMENTS_MESSAGES } from "@/constants/AppointmentsMessages";
+import type { TAppointmentFormTypes } from "@/types/appointment.types";
 
 // Handlers:
 import MutationToaster from "@/lib/toast-handler";
@@ -30,14 +30,13 @@ type TAppointmentsMutationsProps = {
 function useAppointmentsMutations(props: TAppointmentsMutationsProps) {
   const { type, userId, appointmentId, setOpen } = props;
 
+  const t = useTranslations("Appointment.toast");
   const router = useRouter();
 
-  // Prepare all mutation functions we need:
   const createMutation = useCreateAppointment();
   const updateMutation = useUpdateAppointment();
   const deleteMutation = useDeleteAppointment();
 
-  // Collect all mutations in one single object.
   const allMutation = {
     create: createMutation,
     schedule: updateMutation,
@@ -45,29 +44,23 @@ function useAppointmentsMutations(props: TAppointmentsMutationsProps) {
     delete: deleteMutation,
   };
 
-  // One dynamic mutation depending on the type:
   const currentMutation = allMutation[type];
 
   const isLoading = currentMutation.isPending ?? false;
   const hasError = currentMutation.isError ?? false;
 
-  // Toast loading / success / error messages:
-  const toastMessages = APPOINTMENTS_MESSAGES[type];
-
   const repeatedMessages = {
-    loadingTitle: toastMessages.loadingTitle,
-    loadingDescription: toastMessages.loadingDescription,
-    successTitle: toastMessages.successTitle,
-    successDescription: toastMessages.successDescription,
-    errorTitle: toastMessages.errorTitle,
-    errorDescription: toastMessages.errorDescription,
+    loadingTitle: t(`${type}.loadingTitle`),
+    loadingDescription: "",
+    successTitle: t(`${type}.successTitle`),
+    successDescription: t(`${type}.successDescription`),
+    errorTitle: t(`${type}.errorTitle`),
+    errorDescription: t(`${type}.errorDescription`),
   };
 
-  // Fetch data (with) React Query.
   const handleMutationAction = (dataValues: any) => {
     const mutationExecution = () => {
       switch (type) {
-        // This part of code is used in the NewAppointment page to create new patient appointment:
         case "create":
           return {
             promise: createMutation.mutateAsync(dataValues),
@@ -85,7 +78,6 @@ function useAppointmentsMutations(props: TAppointmentsMutationsProps) {
             onSuccess: () => setOpen?.(false),
           };
 
-        // Scheduale / Cancel:
         default:
           return {
             promise: updateMutation.mutateAsync({
@@ -96,7 +88,6 @@ function useAppointmentsMutations(props: TAppointmentsMutationsProps) {
       }
     };
 
-    // Extract promise and success function to pass them through MutationToaster.
     const { promise, onSuccess } = mutationExecution();
 
     MutationToaster({

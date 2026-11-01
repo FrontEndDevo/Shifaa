@@ -14,21 +14,3 @@ export function StatusType(type: string) {
 
   return status;
 }
-export function ButtonLabel(type: string) {
-  let buttonLabel;
-  switch (type) {
-    case "cancel":
-      buttonLabel = "Cancel Appointment";
-      break;
-    case "delete":
-      buttonLabel = "Delete Appointment forever";
-      break;
-    case "schedule":
-      buttonLabel = "Schedule Appointment";
-      break;
-    default:
-      buttonLabel = "Submit Apppointment";
-  }
-
-  return buttonLabel;
-}
