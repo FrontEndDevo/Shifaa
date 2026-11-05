@@ -1,6 +1,9 @@
 // React Hooks:
 import { useState } from "react";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Shadcn UI:
 import {
   Select,
@@ -13,49 +16,74 @@ import {
 import { Label } from "@/components/ui/label";
 
 // Constants:
-import { DOCTORS } from "@/constants/Doctor";
 import { primaryFilters, statusValues } from "@/constants/Admin";
 
+// Custom Hooks:
+import useLocalizedDoctors from "@/hooks/useLocalizedDoctors";
+
 // Types:
-import { SelectMenuProps } from "@/types/admin.types";
+import type { SelectMenuProps } from "@/types/admin.types";
+
+type PrimaryFilter = (typeof primaryFilters)[number];
 
 const SelectMenu = ({ getAdminFilters }: SelectMenuProps) => {
-  const [adminFilter, setAdminFilter] = useState("Status");
+  const t = useTranslations("Admin.filters");
+  const tStatus = useTranslations("AppointmentStatus");
+  const doctors = useLocalizedDoctors();
 
-  const filters =
-    adminFilter === "Status"
-      ? statusValues
-      : adminFilter === "Doctors"
-        ? DOCTORS.map((doc) => doc.name)
-        : [];
+  const [adminFilter, setAdminFilter] = useState<PrimaryFilter>("status");
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const primaryItems = primaryFilters.map((filter) => ({
+    value: filter,
+    label: t(`primary.${filter}`),
+  }));
+
+  const secondaryItems =
+    adminFilter === "status"
+      ? statusValues.map((status) => ({
+          value: status,
+          label: tStatus(status),
+        }))
+      : doctors.map((doctor) => ({
+          value: doctor.doctorId,
+          label: doctor.name,
+        }));
+
+  const changePrimaryFilter = (value: string | null) => {
+    if (!value) return;
+    setAdminFilter(value as PrimaryFilter);
+    setSelected(null);
+  };
 
   const selectAdminFilter = (filter: string | null) => {
-    if (filter) getAdminFilters({ adminFilter, filter });
+    if (!filter) return;
+    setSelected(filter);
+    getAdminFilters({ adminFilter, filter });
   };
 
   return (
-    <div className="grid gap-3 grid-cols-2">
+    <div className="grid grid-cols-2 gap-3">
       <div className="grow">
-        <Label className="mb-2 block">Status (Default)</Label>
+        <Label className="mb-2 block">{t("filterBy")}</Label>
         <Select
-          defaultValue="Select a filter"
-          onValueChange={(value) => {
-            if (value) setAdminFilter(value);
-          }}
+          value={adminFilter}
+          items={primaryItems}
+          onValueChange={changePrimaryFilter}
         >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select a filter" />
+          <SelectTrigger className="w-full" aria-label={t("filterBy")}>
+            <SelectValue />
           </SelectTrigger>
 
           <SelectContent>
             <SelectGroup>
-              {primaryFilters.map((filter) => (
+              {primaryItems.map((item) => (
                 <SelectItem
-                  key={filter}
+                  key={item.value}
                   className="bg-deep py-1"
-                  value={filter}
+                  value={item.value}
                 >
-                  {filter}
+                  {item.label}
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -64,24 +92,28 @@ const SelectMenu = ({ getAdminFilters }: SelectMenuProps) => {
       </div>
 
       <div className="grow">
-        <Label className="mb-2 block">{adminFilter}</Label>
+        <Label className="mb-2 block">{t(`primary.${adminFilter}`)}</Label>
         <Select
-          defaultValue={`Select a ${adminFilter}`}
+          value={selected}
+          items={secondaryItems}
           onValueChange={selectAdminFilter}
         >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder={`Select a ${adminFilter}`} />
+          <SelectTrigger
+            className="w-full"
+            aria-label={t(`primary.${adminFilter}`)}
+          >
+            <SelectValue placeholder={t(`select.${adminFilter}`)} />
           </SelectTrigger>
 
           <SelectContent>
             <SelectGroup>
-              {filters.map((filter) => (
+              {secondaryItems.map((item) => (
                 <SelectItem
-                  key={filter}
+                  key={item.value}
                   className="bg-deep py-1"
-                  value={filter}
+                  value={item.value}
                 >
-                  {filter}
+                  {item.label}
                 </SelectItem>
               ))}
             </SelectGroup>
