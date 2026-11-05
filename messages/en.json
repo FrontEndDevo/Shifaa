@@ -1,0 +1,1237 @@
+{
+  "brand": {
+    "name": "Shifaa"
+  },
+
+  "Hero": {
+    "headline": "Book Faster. Care Better.",
+    "description": "Shifaa connects you with top-rated doctors in seconds, so you can find the right specialist, compare real patient reviews, and book instant appointments without endless phone calls.",
+    "findDoctor": "Find a Doctor",
+    "getStarted": "Get Started",
+    "bookAppointment": "Book Your Appointment",
+    "doctorsCount": "Over {count} doctors at your service."
+  },
+
+  "Metadata": {
+    "title": "Shifaa",
+    "description": "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers."
+  },
+
+  "Nav": {
+    "toggleMenu": "Toggle menu",
+    "menu": {
+      "home": "Home",
+      "about": "About",
+      "doctors": "Doctors",
+      "blog": "Blog"
+    },
+
+    "items": {
+      "aboutUs": {
+        "title": "About us",
+        "description": "Learn more about our healthcare platform"
+      },
+      "contactUs": {
+        "title": "Contact us",
+        "description": "Get in touch with our healthcare team"
+      },
+      "faqs": {
+        "title": "FAQs",
+        "description": "Let us answer all your questions about our services"
+      },
+      "findDoctor": {
+        "title": "Find a Doctor",
+        "description": "Browse doctors and find the right specialist for you"
+      }
+    },
+
+    "navToaster": {
+      "logout": "Log Out",
+      "logoutSuccess": "Logged out successfully",
+      "logoutError": "Failed to log out, please try again."
+    },
+
+    "navStatus": {
+      "UNAUTHENTICATED": "Log in",
+      "NEEDS_ONBOARDING": "Complete Profile",
+      "IS_PATIENT": "Book Appointment"
+    }
+  },
+
+  "About": {
+    "heading": "About Us",
+    "description": "We are committed to making quality healthcare more accessible, convenient, and patient-centered. Our team brings together healthcare professionals, technology experts, and dedicated support staff to create a trusted experience for patients and providers.",
+
+    "images": {
+      "hero": "About Shifaa",
+      "story": "Our story",
+      "drives": "What drives us"
+    },
+
+    "sections": {
+      "vision": {
+        "title": "Our Vision",
+        "content": "We envision a healthcare experience where patients can access the care they need with confidence, convenience, and compassion.\n\nHealthcare should be simple and accessible. From finding the right provider to managing appointments and receiving ongoing support, we believe every part of the patient journey should feel clear and connected.\n\nBy combining compassionate care with modern technology, we work to make healthcare easier for patients, families, and healthcare professionals.\n\nOur goal is to build a trusted healthcare experience centered around the people who matter most—our patients."
+      },
+      "story": {
+        "title": "Our Story",
+        "content": "Our journey began with a simple idea: healthcare can be more accessible, personal, and convenient for everyone.\n\nOur team brings together experienced healthcare professionals, technology specialists, and people who are passionate about improving the patient experience.\n\nWe continuously listen to patients and providers, learn from their experiences, and improve the way we deliver our services.\n\nEvery decision we make is guided by our commitment to quality care, patient trust, and meaningful outcomes."
+      },
+      "drives": {
+        "title": "What drives us",
+        "content": "We believe great healthcare starts with listening. We put patients at the center of everything we do, work closely with healthcare professionals, and continuously look for better ways to serve our community.\n\nWe are driven by compassion, transparency, innovation, and a commitment to making every patient interaction more meaningful."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "content": "Our mission is to connect people with reliable healthcare services while providing a safe, convenient, and compassionate experience. We focus on putting patients first, supporting healthcare professionals, and using technology to remove unnecessary barriers to care."
+      }
+    },
+
+    "whoWeAre": {
+      "title": "Who We Are",
+      "description": "We are a dedicated healthcare team committed to making quality care more accessible, personal, and convenient. By combining compassionate people, trusted medical expertise, and modern technology, we create a healthcare experience that puts patients first and supports better care at every step."
+    }
+  },
+
+  "Contact": {
+    "title": "Contact Shifaa",
+    "description": "Shifaa is a trusted cardiology practice dedicated to providing exceptional heart care with compassion, expertise, and advanced technology. Our experienced team is committed to putting patients first and helping every individual achieve better heart health.",
+    "imageAlt": "Contact Shifaa",
+    "brand": "Shifaa",
+    "tagline": "Healthcare management system",
+
+    "benefits": {
+      "experience": "20+ Years of Care",
+      "specialists": "Board-Certified Specialists",
+      "hipaa": "HIPAA Compliant",
+      "topRated": "Top Rated 2026"
+    },
+
+    "form": {
+      "title": "Get in Touch With Our Care Team",
+      "description": "Have a question or need assistance? Send us a message and our care team will get back to you as soon as possible.",
+      "placeholder": "Type your message here.",
+      "loginRequired": "Please login first, so you can contact us.",
+      "login": "Login",
+      "send": "Send Message",
+      "privacy": "We respect your privacy. Your information is secure and will only be used to respond to your request."
+    }
+  },
+
+  "Faqs": {
+    "badge": "FAQs",
+    "heading": "Got questions? We’ve got answers ready",
+
+    "items": {
+      "findDoctor": {
+        "question": "How can I find a doctor?",
+        "answer": "You can search for doctors by specialty, location, availability, or name. Each doctor profile includes information such as their specialty, experience, available appointment times, and consultation details."
+      },
+      "bookAppointment": {
+        "question": "How do I book an appointment with a doctor?",
+        "answer": "Choose a doctor, select an available date and time, provide the required information, and confirm your appointment. You will receive a confirmation once the booking is completed."
+      },
+      "chooseDateTime": {
+        "question": "Can I choose the date and time of my appointment?",
+        "answer": "Yes. You can view the doctor's available time slots and select the date and time that works best for you."
+      },
+      "cancelReschedule": {
+        "question": "Can I cancel or reschedule my appointment?",
+        "answer": "Yes, you can cancel or reschedule an appointment from your appointments section, subject to the healthcare provider's cancellation and rescheduling policy."
+      },
+      "upcomingAppointments": {
+        "question": "How can I view my upcoming appointments?",
+        "answer": "You can view all your upcoming appointments from your appointments dashboard. The appointment details include the doctor, date, time, location, and appointment status."
+      },
+      "reminders": {
+        "question": "Will I receive a reminder before my appointment?",
+        "answer": "Yes. Appointment reminders may be sent before your scheduled appointment to help you remember the date and time of your consultation."
+      },
+      "bookForOthers": {
+        "question": "Can I book an appointment for someone else?",
+        "answer": "Yes, depending on the healthcare provider's policies. You may be able to provide the patient's information while booking the appointment."
+      },
+      "doctorTypes": {
+        "question": "What types of doctors can I book appointments with?",
+        "answer": "You can book appointments with doctors across different medical specialties, depending on the healthcare providers available on the platform."
+      },
+      "onlineConsultation": {
+        "question": "Can I book an online consultation?",
+        "answer": "If the doctor offers online consultations, you can select the online consultation option when booking an appointment. The available consultation methods are shown in the doctor's profile."
+      },
+      "clinicLocation": {
+        "question": "Where can I find the doctor's clinic location?",
+        "answer": "The clinic address and location details are available on the doctor's profile and appointment details. Make sure to check the location before visiting the clinic."
+      },
+      "contactDoctor": {
+        "question": "How can I contact my doctor?",
+        "answer": "Depending on the available features and the doctor's settings, you may be able to contact the doctor through the platform or use the contact information provided in the appointment details."
+      },
+      "previousAppointments": {
+        "question": "Can I view my previous appointments?",
+        "answer": "Yes. Your completed and past appointments can be viewed from your appointment history, where available."
+      },
+      "medicalRecords": {
+        "question": "Can I access my medical records?",
+        "answer": "If medical records are supported by your healthcare provider, you can access your available records from your patient dashboard."
+      },
+      "uploadDocuments": {
+        "question": "Can I upload medical documents or test results?",
+        "answer": "If the feature is enabled, you can upload relevant medical documents, laboratory results, prescriptions, or other files to your patient profile or appointment."
+      },
+      "prescriptions": {
+        "question": "Where can I find my prescriptions?",
+        "answer": "Available prescriptions can be viewed from your medical records or prescriptions section, depending on the features provided by your healthcare provider."
+      },
+      "payment": {
+        "question": "How can I pay for my appointment?",
+        "answer": "Available payment methods depend on the healthcare provider and the platform configuration. Any required payment information will be displayed during the booking process."
+      },
+      "missedAppointment": {
+        "question": "What should I do if I miss my appointment?",
+        "answer": "If you miss an appointment, check your appointment details for available options or contact the healthcare provider to ask about rescheduling."
+      },
+      "doctorChanges": {
+        "question": "Can a doctor reject or change my appointment?",
+        "answer": "In some cases, a healthcare provider may need to modify or cancel an appointment due to availability or other circumstances. You will be notified if there are changes to your appointment."
+      },
+      "updateInfo": {
+        "question": "How do I update my personal information?",
+        "answer": "You can update your personal information from your profile or account settings. Some medical or identity-related information may require verification before it can be changed."
+      },
+      "security": {
+        "question": "Is my health information secure?",
+        "answer": "Healthcare information should be handled according to applicable privacy and security requirements. Access to patient information should be limited to authorized users and protected using appropriate security measures."
+      },
+      "cannotBook": {
+        "question": "What should I do if I cannot book an appointment?",
+        "answer": "Check whether the doctor has available time slots and make sure your required information is complete. If the problem continues, contact the healthcare provider or system support team."
+      }
+    }
+  },
+
+  "Footer": {
+    "brand": "Shifaa",
+    "description": "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
+    "copyright": "© 2026 Shifaa",
+    "language": "Language",
+
+    "sections": {
+      "information": {
+        "title": "Information",
+        "items": {
+          "about": "About Us",
+          "howItWorks": "How It Works",
+          "privacy": "Privacy Policy",
+          "terms": "Terms & Conditions"
+        }
+      },
+
+      "appointments": {
+        "title": "Appointments",
+        "items": {
+          "findDoctor": "Find a Doctor",
+          "book": "Book an Appointment",
+          "myAppointments": "My Appointments",
+          "contact": "Contact Us"
+        }
+      }
+    },
+
+    "contact": {
+      "title": "Contact",
+      "hours": "Monday - Friday, 9 am - 9 pm"
+    }
+  },
+
+  "DoctorsPage": {
+    "banner": {
+      "pre": "Having a problem with booking?",
+      "button": "Contact us",
+      "post": "to help you booking an appointment faster."
+    },
+
+    "title": "<brand>Shifaa</brand> Doctors",
+    "subtitle": "Let us meet you with the suitable doctor",
+    "searchPlaceholder": "find a doctor",
+    "notFound": "No doctors found.",
+
+    "card": {
+      "consultationFee": "Consultation fee:",
+      "readMore": "Read more"
+    }
+  },
+
+  "Specialties": {
+    "cardiologist": "Cardiologist",
+    "dermatologist": "Dermatologist",
+    "pediatrician": "Pediatrician",
+    "orthopedicSurgeon": "Orthopedic Surgeon",
+    "neurologist": "Neurologist",
+    "gynecologist": "Gynecologist",
+    "internalMedicine": "Internal Medicine",
+    "ophthalmologist": "Ophthalmologist",
+    "dentist": "Dentist",
+    "urologist": "Urologist",
+    "endocrinologist": "Endocrinologist"
+  },
+
+  "Languages": {
+    "en": "English",
+    "ar": "Arabic",
+    "fr": "French",
+    "es": "Spanish",
+    "it": "Italian"
+  },
+
+  "DoctorsData": {
+    "dr-sarah-ahmed": {
+      "name": "Dr. Sarah Ahmed",
+      "bio": "Dr. Sarah Ahmed is a board-certified cardiologist with over 12 years of experience diagnosing and treating cardiovascular conditions. She specializes in preventive cardiology, heart failure management, and interventional procedures.",
+      "education": [
+        "MD, Cairo University",
+        "Residency in Internal Medicine, Kasr Al Ainy Hospital",
+        "Fellowship in Cardiology, Egyptian Heart Institute"
+      ],
+      "certifications": [
+        "Egyptian Board of Cardiology",
+        "European Society of Cardiology"
+      ],
+      "services": [
+        "Cardiac Consultation",
+        "ECG",
+        "Echocardiography",
+        "Hypertension Management",
+        "Heart Failure Treatment"
+      ]
+    },
+
+    "dr-omar-hassan": {
+      "name": "Dr. Omar Hassan",
+      "bio": "Dr. Omar Hassan is a dermatologist specializing in medical and cosmetic dermatology. He focuses on acne treatment, skin conditions, hair loss, and advanced cosmetic procedures.",
+      "education": [
+        "MD, Ain Shams University",
+        "Dermatology Residency, Ain Shams University Hospitals"
+      ],
+      "certifications": [
+        "Egyptian Board of Dermatology",
+        "American Academy of Dermatology Member"
+      ],
+      "services": [
+        "Skin Consultation",
+        "Acne Treatment",
+        "Hair Loss Treatment",
+        "Laser Treatment",
+        "Cosmetic Dermatology"
+      ]
+    },
+
+    "dr-mariam-ali": {
+      "name": "Dr. Mariam Ali",
+      "bio": "Dr. Mariam Ali is a highly experienced pediatrician dedicated to providing comprehensive medical care for infants, children, and adolescents. She has a special interest in childhood development and preventive care.",
+      "education": [
+        "MD, Alexandria University",
+        "Pediatric Residency, Alexandria University Hospital",
+        "Pediatric Fellowship, Children's Cancer Hospital"
+      ],
+      "certifications": [
+        "Egyptian Board of Pediatrics",
+        "Member of the Royal College of Paediatrics"
+      ],
+      "services": [
+        "Child Consultation",
+        "Newborn Care",
+        "Vaccination",
+        "Growth & Development",
+        "Child Nutrition"
+      ]
+    },
+
+    "dr-youssef-mahmoud": {
+      "name": "Dr. Youssef Mahmoud",
+      "bio": "Dr. Youssef Mahmoud is an orthopedic surgeon with extensive experience in sports injuries, joint problems, and minimally invasive orthopedic procedures. He works with athletes and active patients of all ages.",
+      "education": [
+        "MD, Mansoura University",
+        "Orthopedic Surgery Residency, Mansoura University Hospital",
+        "Sports Medicine Fellowship, Barcelona Sports Medicine Center"
+      ],
+      "certifications": [
+        "Egyptian Board of Orthopedic Surgery",
+        "International Society of Arthroscopy Member"
+      ],
+      "services": [
+        "Orthopedic Consultation",
+        "Sports Injury Treatment",
+        "Joint Pain Treatment",
+        "Arthroscopy",
+        "Fracture Management"
+      ]
+    },
+
+    "dr-nour-ibrahim": {
+      "name": "Dr. Nour Ibrahim",
+      "bio": "Dr. Nour Ibrahim is a neurologist specializing in the diagnosis and treatment of neurological disorders, including migraines, epilepsy, neuropathy, and movement disorders.",
+      "education": [
+        "MD, Cairo University",
+        "Neurology Residency, Kasr Al Ainy Hospital",
+        "Clinical Neurology Fellowship, King’s College London"
+      ],
+      "certifications": [
+        "Egyptian Board of Neurology",
+        "European Academy of Neurology Member"
+      ],
+      "services": [
+        "Neurology Consultation",
+        "Migraine Treatment",
+        "Epilepsy Management",
+        "Neuropathy Treatment",
+        "Nerve Testing"
+      ]
+    },
+
+    "dr-layla-mostafa": {
+      "name": "Dr. Layla Mostafa",
+      "bio": "Dr. Layla Mostafa is an experienced obstetrician and gynecologist providing comprehensive women's healthcare, from routine examinations and prenatal care to reproductive health and minimally invasive procedures.",
+      "education": [
+        "MD, Ain Shams University",
+        "OB/GYN Residency, Ain Shams University Hospital",
+        "Women's Health Fellowship, University College London"
+      ],
+      "certifications": [
+        "Egyptian Board of Obstetrics & Gynecology",
+        "Royal College of Obstetricians and Gynaecologists Member"
+      ],
+      "services": [
+        "Gynecology Consultation",
+        "Prenatal Care",
+        "Women's Health Checkup",
+        "Ultrasound",
+        "Reproductive Health"
+      ]
+    },
+
+    "dr-ahmed-khaled": {
+      "name": "Dr. Ahmed Khaled",
+      "bio": "Dr. Ahmed Khaled is an experienced internal medicine specialist with a focus on diabetes, thyroid disorders, metabolic conditions, and preventive healthcare. He takes a comprehensive approach to managing chronic conditions and improving long-term health.",
+      "education": [
+        "MD, Cairo University",
+        "Internal Medicine Residency, Kasr Al Ainy Hospital",
+        "Endocrinology Fellowship, Cairo University Hospitals"
+      ],
+      "certifications": [
+        "Egyptian Board of Internal Medicine",
+        "American Association of Clinical Endocrinology Member"
+      ],
+      "services": [
+        "Internal Medicine Consultation",
+        "Diabetes Management",
+        "Thyroid Treatment",
+        "Cholesterol Management",
+        "Health Checkup"
+      ]
+    },
+
+    "dr-reem-samir": {
+      "name": "Dr. Reem Samir",
+      "bio": "Dr. Reem Samir is an ophthalmologist specializing in comprehensive eye care, corneal conditions, vision correction, and refractive surgery. She is passionate about providing personalized treatment plans for patients of all ages.",
+      "education": [
+        "MD, Alexandria University",
+        "Ophthalmology Residency, Alexandria University Hospital",
+        "Cornea Fellowship, Moorfields Eye Hospital"
+      ],
+      "certifications": [
+        "Egyptian Board of Ophthalmology",
+        "European Society of Ophthalmology Member"
+      ],
+      "services": [
+        "Eye Examination",
+        "Vision Testing",
+        "Corneal Treatment",
+        "LASIK Consultation",
+        "Dry Eye Treatment"
+      ]
+    },
+
+    "dr-reem-fathy": {
+      "name": "Dr. Reem Fathy",
+      "bio": "Dr. Reem Fathy is a cosmetic and restorative dentist focused on creating healthy, natural-looking smiles. She specializes in veneers, teeth whitening, restorative procedures, and preventive dental care.",
+      "education": [
+        "BDS, Cairo University",
+        "Diploma in Cosmetic Dentistry, University of Barcelona",
+        "Advanced Restorative Dentistry Program, Cairo University"
+      ],
+      "certifications": [
+        "Egyptian Dental Syndicate",
+        "International Association for Dental Research Member"
+      ],
+      "services": [
+        "Dental Consultation",
+        "Teeth Whitening",
+        "Dental Veneers",
+        "Dental Cleaning",
+        "Restorative Dentistry"
+      ]
+    },
+
+    "dr-mostafa-nabil": {
+      "name": "Dr. Mostafa Nabil",
+      "bio": "Dr. Mostafa Nabil is a senior urologist with extensive experience in urinary tract conditions, kidney stones, prostate health, and men's health. He has a particular interest in minimally invasive urological procedures.",
+      "education": [
+        "MD, Mansoura University",
+        "Urology Residency, Mansoura University Hospital",
+        "Urology Fellowship, University of Milan"
+      ],
+      "certifications": [
+        "Egyptian Board of Urology",
+        "European Association of Urology Member"
+      ],
+      "services": [
+        "Urology Consultation",
+        "Kidney Stone Treatment",
+        "Prostate Evaluation",
+        "Urinary Tract Treatment",
+        "Men's Health"
+      ]
+    },
+
+    "dr-salma-younis": {
+      "name": "Dr. Salma Younis",
+      "bio": "Dr. Salma Younis is an endocrinologist specializing in hormonal and metabolic disorders. She provides comprehensive care for thyroid disease, diabetes, obesity, and other endocrine conditions.",
+      "education": [
+        "MD, Tanta University",
+        "Endocrinology Residency, Tanta University Hospital",
+        "Endocrinology Fellowship, University of Birmingham"
+      ],
+      "certifications": [
+        "Egyptian Board of Endocrinology",
+        "Endocrine Society Member"
+      ],
+      "services": [
+        "Endocrinology Consultation",
+        "Diabetes Management",
+        "Thyroid Disorders",
+        "Weight Management",
+        "Hormonal Evaluation"
+      ]
+    }
+  },
+
+  "Pricing": {
+    "heading": "One Payment. Access Every Doctor.",
+    "title": "Choose the healthcare plan that fits your needs",
+    "description": "Get access to our entire network of trusted doctors with a single payment. Choose the plan that works best for you and enjoy convenient healthcare access without subscribing to individual doctors.",
+    "mostPopular": "Most Popular",
+
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "description": "Essential access to our network of doctors.",
+        "button": "Get Basic"
+      },
+
+      "standard": {
+        "name": "Standard",
+        "description": "More consultations and benefits for regular healthcare needs.",
+        "button": "Get Standard"
+      },
+
+      "premium": {
+        "name": "Premium",
+        "description": "The most comprehensive healthcare access for you and your family.",
+        "button": "Get Premium"
+      }
+    },
+
+    "features": {
+      "accessAll": "Access to all doctors",
+      "accessUnlimited": "Unlimited access to all doctors",
+      "consultations5": "5 doctor consultations",
+      "consultations15": "15 doctor consultations",
+      "consultationsUnlimited": "Unlimited consultations",
+      "secureAppointments": "Secure online appointments",
+      "records": "Digital medical records",
+      "priority": "Priority appointment booking",
+      "support": "Premium customer support"
+    }
+  },
+
+  "DoctorDetails": {
+    "meet": "Meet the doctor",
+    "title": "{specialty} with {years, plural, one {# year} other {# years}} of experience.",
+    "education": "Education",
+    "certifications": "Certifications",
+    "services": "Services",
+    "languages": "Languages",
+    "consultationFee": "Consultation fee:",
+
+    "advantages": {
+      "years": "Years of experience",
+      "certifications": "Certifications",
+      "services": "Services",
+      "rating": "Rating"
+    },
+
+    "availableToday": "Available today?",
+    "yes": "Yes",
+    "no": "No"
+  },
+
+  "Avatar": {
+    "items": {
+      "profile": "Profile",
+      "myAppointments": "My appointments"
+    }
+  },
+
+  "Blog": {
+    "sortBy": "Sort by",
+    "readMore": "Read more",
+    "readTime": "{minutes} min read",
+    "filters": {
+      "latest": "Latest",
+      "category": "Category",
+      "popular": "Popular"
+    },
+    "headings": {
+      "latest": "Latest posts",
+      "category": "Posts by category",
+      "popular": "Popular posts"
+    }
+  },
+
+  "BlogCategories": {
+    "travel": "Travel",
+    "culture": "Culture",
+    "science": "Science",
+    "wellness": "Wellness",
+    "home": "Home",
+    "technology": "Technology",
+    "food": "Food",
+    "design": "Design",
+    "business": "Business",
+    "nature": "Nature",
+    "fitness": "Fitness",
+    "photography": "Photography",
+    "environment": "Environment"
+  },
+
+  "Articles": {
+    "simple-meals-extraordinary": {
+      "title": "The Art of Making Simple Meals Feel Extraordinary",
+      "description": "Discover how fresh ingredients, seasonal produce, and a few thoughtful techniques can transform everyday cooking.",
+      "author": {
+        "name": "Emma Wilson",
+        "bio": "Food writer passionate about seasonal ingredients, easy recipes, and the joy of sharing meals."
+      },
+      "tags": ["Food", "Cooking", "Seasonal Ingredients", "Home Cooking"],
+      "content": [
+        "Extraordinary meals do not always require complicated recipes or expensive ingredients. The secret often lies in fresh ingredients and a few thoughtful techniques.",
+        "Start with seasonal produce, fresh herbs, and quality olive oil. Shopping at local markets can help you discover ingredients at their best.",
+        "Pay attention to texture and balance. A squeeze of lemon can brighten a rich sauce, while toasted nuts can add crunch to a salad.",
+        "Presentation matters, too. Simple plates, colorful ingredients, and a finishing touch of herbs can make everyday cooking feel special.",
+        "Ultimately, great cooking is about enjoying the process and sharing memorable meals with people you love."
+      ]
+    },
+    "hidden-gems-countryside": {
+      "title": "Exploring Hidden Gems in the Heart of the Countryside",
+      "description": "Discover quiet villages, scenic backroads, and charming local places worth exploring.",
+      "author": {
+        "name": "Olivia Bennett",
+        "bio": "Travel writer passionate about slow travel, local culture, and discovering hidden destinations."
+      },
+      "tags": ["Travel", "Countryside", "Adventure", "Hidden Gems"],
+      "content": [
+        "Some of the most memorable travel experiences happen far away from crowded attractions. Small countryside villages offer beautiful landscapes and a slower pace of life.",
+        "Explore winding roads, traditional markets, and family-owned cafés. Talk to residents and discover the traditions that make each destination unique.",
+        "Choose locally owned accommodations and independent businesses to support the communities you visit.",
+        "Bring comfortable walking shoes and leave room in your schedule for spontaneous stops and unexpected discoveries.",
+        "Whether you spend a weekend exploring historic streets or hiking country trails, traveling slowly can make every moment more meaningful."
+      ]
+    },
+    "ai-changing-everyday-work": {
+      "title": "How Artificial Intelligence Is Changing Everyday Work",
+      "description": "Discover how AI tools are helping teams automate tasks, organize information, and collaborate more effectively.",
+      "author": {
+        "name": "Daniel Carter",
+        "bio": "Technology journalist covering artificial intelligence, digital products, and the future of work."
+      },
+      "tags": ["AI", "Technology", "Productivity", "Future of Work"],
+      "content": [
+        "Artificial intelligence is becoming part of everyday professional life. Modern tools can help people complete routine tasks more efficiently.",
+        "Teams can use AI to summarize meetings, organize information, draft documents, and identify patterns in large datasets.",
+        "These tools can also help teams generate ideas, prepare project outlines, and communicate complex information clearly.",
+        "However, AI-generated information is not always accurate. Reviewing results and protecting sensitive data remain essential.",
+        "The biggest opportunity is using technology to spend less time on repetitive work and more time on creativity and problem-solving."
+      ]
+    },
+    "finding-balance-busy-world": {
+      "title": "Finding Balance in a World That Never Slows Down",
+      "description": "Simple strategies for managing stress, setting boundaries, and making more room for rest.",
+      "author": {
+        "name": "Sophia Miller",
+        "bio": "Lifestyle writer focused on mindful routines, personal growth, and sustainable everyday habits."
+      },
+      "tags": ["Wellness", "Mindfulness", "Lifestyle", "Self-Care"],
+      "content": [
+        "Modern life often fills every available moment with tasks, notifications, and commitments. This constant activity can leave little room for rest.",
+        "Small adjustments, such as taking breaks and planning realistic priorities, can make daily life feel more manageable.",
+        "Setting boundaries and protecting personal time can help prevent an overloaded schedule.",
+        "Consider building a simple morning or evening ritual, such as reading, walking, or spending time away from screens.",
+        "Start with one manageable change and gradually build a routine that supports your individual needs."
+      ]
+    },
+    "minimalist-interiors-warm-inviting": {
+      "title": "Minimalist Interiors That Still Feel Warm and Inviting",
+      "description": "Learn how natural materials, soft colors, and thoughtful details can make any room feel comfortable.",
+      "author": {
+        "name": "Isabella Brooks",
+        "bio": "Interior design writer exploring thoughtful spaces, natural materials, and functional design."
+      },
+      "tags": ["Design", "Interior Design", "Minimalism", "Home"],
+      "content": [
+        "Minimalist design does not have to feel cold or empty. A thoughtfully designed space can be simple, personal, and inviting.",
+        "Use warm neutrals, muted greens, and earthy tones to create a calm foundation that works with natural light.",
+        "Natural materials such as wood, linen, and wool introduce texture without creating visual clutter.",
+        "Choose a few meaningful decorations instead of filling every surface with objects.",
+        "The goal is to create a home where every item has a purpose, adds beauty, or makes the space more comfortable."
+      ]
+    },
+    "successful-small-businesses": {
+      "title": "What Successful Small Businesses Do Differently",
+      "description": "Explore practical habits that help independent businesses build customer loyalty and grow sustainably.",
+      "author": {
+        "name": "James Anderson",
+        "bio": "Business writer covering entrepreneurship, customer experience, and small business growth."
+      },
+      "tags": ["Business", "Entrepreneurship", "Marketing", "Growth"],
+      "content": [
+        "Building a successful small business requires more than a good product. Sustainable growth begins with understanding customers and delivering consistent value.",
+        "Listen to customer feedback, support requests, and everyday conversations to identify opportunities for improvement.",
+        "Reliable service, clear communication, and honest expectations help businesses build trust.",
+        "Focus marketing efforts on the audience most likely to appreciate your products or services.",
+        "Track customer satisfaction, repeat purchases, and operating costs to make informed decisions as your business grows."
+      ]
+    },
+    "wildlife-urban-environments": {
+      "title": "The Surprising Wildlife Thriving in Urban Environments",
+      "description": "Discover how birds, insects, and mammals adapt to life in parks, gardens, and busy cities.",
+      "author": {
+        "name": "Noah Thompson",
+        "bio": "Nature writer documenting urban biodiversity and the relationship between people and ecosystems."
+      },
+      "tags": ["Nature", "Wildlife", "Environment", "Biodiversity"],
+      "content": [
+        "Cities may appear dominated by concrete and traffic, but many urban environments support a surprising variety of wildlife.",
+        "Birds, insects, and small mammals find food and shelter in parks, gardens, waterways, and buildings.",
+        "Urban green spaces provide nesting places, attract pollinators, and create habitats for many species.",
+        "Residents can help by planting native species, reducing waste, and observing wildlife without disturbing it.",
+        "Protecting urban biodiversity creates greener neighborhoods and gives people more opportunities to connect with nature."
+      ]
+    },
+    "independent-bookstores-communities": {
+      "title": "How Independent Bookstores Are Building Stronger Communities",
+      "description": "Explore how local bookshops create welcoming spaces for creative events, conversations, and discovery.",
+      "author": {
+        "name": "Charlotte Reed",
+        "bio": "Culture writer exploring literature, creative communities, and the places that bring people together."
+      },
+      "tags": ["Culture", "Books", "Community", "Literature"],
+      "content": [
+        "Independent bookstores offer more than shelves of books. They create spaces where readers can discover authors and connect with others.",
+        "Many bookshops organize readings, book clubs, and workshops that give writers and readers opportunities to meet.",
+        "Personal recommendations from booksellers can introduce readers to unfamiliar subjects and new perspectives.",
+        "Local bookshops often collaborate with cafés, artists, schools, and community organizations.",
+        "These spaces remind us that reading can be a shared experience and an important part of community life."
+      ]
+    },
+    "sustainable-workout-routine": {
+      "title": "Building a Sustainable Workout Routine for Busy Days",
+      "description": "Learn how a flexible approach to exercise can help you stay active without spending hours at the gym.",
+      "author": {
+        "name": "Liam Foster",
+        "bio": "Fitness writer focused on practical movement, beginner-friendly exercise, and sustainable habits."
+      },
+      "tags": ["Fitness", "Exercise", "Healthy Habits", "Lifestyle"],
+      "content": [
+        "A consistent exercise routine does not need to involve long gym sessions or complicated schedules.",
+        "Choose activities you enjoy, such as walking, cycling, dancing, strength training, or recreational sports.",
+        "Short sessions can help you make movement part of your routine when your schedule is full.",
+        "Plan for flexibility rather than perfection. If you miss a workout, return to your routine when you can.",
+        "Set realistic goals, allow time for recovery, and choose activities that fit your lifestyle."
+      ]
+    },
+    "sleep-learning-memory": {
+      "title": "Why Sleep Plays a Bigger Role in Learning Than We Think",
+      "description": "Discover how quality sleep supports memory, concentration, and the ability to learn new skills.",
+      "author": {
+        "name": "Ava Mitchell",
+        "bio": "Science writer covering the brain, human behavior, and everyday science."
+      },
+      "tags": ["Science", "Sleep", "Brain", "Learning"],
+      "content": [
+        "Learning does not stop when we close a book. During sleep, the brain continues processing information gathered throughout the day.",
+        "Sleep supports memory consolidation, attention, emotional regulation, and the ability to work with new information.",
+        "Insufficient sleep can make concentration and recall more difficult, even after hours of studying.",
+        "Consistent sleep schedules and relaxing evening routines can help support better sleep habits.",
+        "Combining focused practice with adequate rest gives the brain a better opportunity to absorb and use new information."
+      ]
+    },
+    "natural-light-photography": {
+      "title": "Capturing Beautiful Moments With Nothing but Natural Light",
+      "description": "Learn how to use window light, shadows, and changing weather to create expressive photographs.",
+      "author": {
+        "name": "Ethan Parker",
+        "bio": "Photographer and visual storyteller interested in natural light and creative composition."
+      },
+      "tags": ["Photography", "Natural Light", "Creativity", "Composition"],
+      "content": [
+        "Natural light is one of the most accessible tools a photographer can use. You do not need expensive equipment to create compelling images.",
+        "Window light works particularly well for portraits and still-life photography, producing soft illumination and interesting shadows.",
+        "Early morning and late afternoon often provide softer light, while overcast weather can create even illumination.",
+        "Experiment with light direction. Side lighting reveals texture, while backlighting can create a glowing outline around a subject.",
+        "Practice photographing familiar objects in different conditions to develop your ability to observe light and composition."
+      ]
+    },
+    "sustainable-home-changes": {
+      "title": "Small Changes That Can Make Your Home More Sustainable",
+      "description": "Practical ideas for reducing household waste, saving energy, and making thoughtful everyday choices.",
+      "author": {
+        "name": "Grace Turner",
+        "bio": "Environmental writer covering sustainable living and practical ways to conserve resources."
+      },
+      "tags": ["Environment", "Sustainability", "Eco-Friendly", "Home"],
+      "content": [
+        "Making your home more sustainable does not require replacing everything you own. Small, consistent changes can reduce waste and conserve resources.",
+        "Turn off unused lights, choose efficient appliances when replacements are needed, and avoid unnecessary energy consumption.",
+        "Reduce household waste by planning meals, reusing suitable containers, and choosing durable products.",
+        "Conserve water by repairing leaks, avoiding unnecessary running water, and choosing efficient fixtures when possible.",
+        "Sustainable living is not about perfection. Focus on practical changes that fit your household and build habits gradually."
+      ]
+    }
+  },
+
+  "Article": {
+    "insideThePost": "Inside the post",
+    "author": "Author",
+    "aboutThisPost": "About this post",
+    "category": "Category",
+    "published": "Published",
+    "readingTime": "Reading time",
+    "writtenBy": "Written by",
+    "shareText": "Enjoyed this post? Copy and share it with someone.",
+    "copy": "Copy / share post",
+    "copied": "Post copied",
+    "explore": "Explore more posts",
+    "rights": "© {year} Shifaa. All rights reserved."
+  },
+
+  "Services": {
+    "heading": "our services",
+    "title": "Comprehensive Shifaa services",
+    "description": "From diagnostics to rehabilitation, we offer a full spectrum of cardiology services tailored to your heart health needs.",
+    "learnMore": "Learn More",
+    "callNow": "Call Now",
+    "items": {
+      "cardiacAssessment": "Comprehensive cardiac assessments, risk evaluations, and personalized preventive care plans to keep your heart healthy.",
+      "diagnostics": "Advanced electrocardiography, echocardiography, stress testing, and Holter monitoring for accurate heart condition assessment.",
+      "bloodPressure": "Personalized blood pressure control programs combining medication management, lifestyle coaching, and continuous monitoring.",
+      "rehabilitation": "Structured recovery programs for heart attack survivors and surgery patients to restore strength and improve quality of life.",
+      "riskReduction": "Proactive cardiovascular risk reduction through lifestyle modification, nutritional guidance, and targeted preventive therapies.",
+      "emergency": "24/7 rapid response care for acute heart conditions including chest pain, arrhythmias, and cardiac emergencies requiring immediate attention."
+    }
+  },
+
+  "WhyChooseUs": {
+    "heading": "Why Choose Us",
+    "title": "The Shifaa healthcare Difference",
+    "description": "Excellence in cardiac care with a patient-first approach backed by cutting-edge technology.",
+    "items": {
+      "experts": {
+        "heading": "Expert Medical Team",
+        "content": "Board-certified cardiologists with decades of combined clinical experience."
+      },
+      "technology": {
+        "heading": "Advanced Technology",
+        "content": "State-of-the-art diagnostic equipment for precise, accurate assessments."
+      },
+      "patientCentered": {
+        "heading": "Patient-Centered Care",
+        "content": "Personalized treatment plans built around your unique health profile."
+      },
+      "facilities": {
+        "heading": "Modern Facilities",
+        "content": "Comfortable, fully-equipped clinic designed for the best patient experience."
+      }
+    }
+  },
+
+  "Testimonials": {
+    "heading": "Testimonials",
+    "title": "Patients Opinions",
+    "description": "What our patients say about us",
+    "items": {
+      "sarah": {
+        "name": "Sarah M.",
+        "role": "Patient · General Medicine",
+        "testimonial": "The entire experience was wonderful. The doctor took the time to listen to my concerns and explained everything clearly. I felt genuinely cared for throughout my visit."
+      },
+      "ahmed": {
+        "name": "Ahmed R.",
+        "role": "Patient · Cardiology",
+        "testimonial": "The staff were welcoming and professional from the moment I arrived. My doctor was thorough, answered all my questions, and made me feel confident about my treatment."
+      },
+      "emily": {
+        "name": "Emily C.",
+        "role": "Patient · Dermatology",
+        "testimonial": "Booking an appointment was simple, and the whole process was smooth. I really appreciated how clearly the doctor explained my treatment and what to expect next."
+      },
+      "daniel": {
+        "name": "Daniel K.",
+        "role": "Patient · Orthopedics",
+        "testimonial": "I never felt rushed during my appointment. The medical team listened carefully, explained my options, and made sure I understood the next steps in my recovery."
+      },
+      "aisha": {
+        "name": "Aisha P.",
+        "role": "Patient · Pediatrics",
+        "testimonial": "The care was excellent and the staff were incredibly kind. Everyone made us feel comfortable, and the doctor was patient, attentive, and easy to talk to."
+      },
+      "liam": {
+        "name": "Liam G.",
+        "role": "Patient · Preventive Care",
+        "testimonial": "I had a great experience from start to finish. The clinic was welcoming, the appointment was well organized, and I felt that my health and concerns were taken seriously."
+      }
+    }
+  },
+
+  "Team": {
+    "heading": "our Team",
+    "title": "A team of founders",
+    "description": "Our dream is to provide the best health care for every human being",
+    "members": {
+      "ahmed-hassan": {
+        "name": "Dr. Ahmed Hassan",
+        "title": "Chief Medical Officer",
+        "description": "Dedicated to delivering compassionate care and ensuring the highest standards of patient safety."
+      },
+      "sarah-mohamed": {
+        "name": "Dr. Sarah Mohamed",
+        "title": "Cardiologist",
+        "description": "Helps patients maintain a healthy heart through personalized treatment and preventive care."
+      },
+      "omar-ali": {
+        "name": "Dr. Omar Ali",
+        "title": "Neurologist",
+        "description": "Specializes in diagnosing and treating neurological conditions with a patient-centered approach."
+      },
+      "youssef-khalil": {
+        "name": "Dr. Youssef Khalil",
+        "title": "Orthopedic Surgeon",
+        "description": "Focused on helping patients recover from injuries and improve their movement and quality of life."
+      },
+      "khaled-nabil": {
+        "name": "Dr. Khaled Nabil",
+        "title": "General Practitioner",
+        "description": "Offers comprehensive primary care with a focus on prevention, wellness, and long-term health."
+      }
+    }
+  },
+
+  "Integrations": {
+    "heading": "Integrations",
+    "title": "Everything connected in one place",
+    "description": "Connect your healthcare tools and services to make appointments, patient care, and everyday workflows simpler and more efficient.",
+    "items": {
+      "mayo": "Connect with Mayo Clinic to coordinate appointments, referrals, and patient care information.",
+      "cleveland": "Streamline patient referrals and appointment coordination with Cleveland Clinic.",
+      "quest": "Connect laboratory services to manage test orders, results, and patient records.",
+      "cvs": "Integrate pharmacy and healthcare services to help patients manage prescriptions and care.",
+      "oracle": "Connect your healthcare platform with electronic health records and clinical workflows.",
+      "cigna": "Simplify insurance verification and connect patients with covered healthcare services."
+    }
+  },
+
+  "Common": {
+    "loading": "Loading...",
+    "error": "Something went wrong, please try again."
+  },
+
+  "Login": {
+    "imageAlt": "Patient",
+    "admin": "Admin",
+    "passkey": {
+      "title": "Admin Access Verification",
+      "description": "To access the admin page, please enter the passkey.",
+      "enter": "Enter Admin Passkey",
+      "close": "Close",
+      "invalid": "Invalid passkey. Please try again."
+    }
+  },
+
+  "Auth": {
+    "login": {
+      "greeting": "Hello there 👋🏻",
+      "subtitle": "Schedule your first appointment",
+      "fields": {
+        "email": { "label": "Email", "placeholder": "Enter your email" },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password"
+        }
+      },
+      "submit": "Get Started",
+      "toast": {
+        "loading": {
+          "title": "Authenticating...",
+          "description": "Please wait while we process your account..."
+        },
+        "signUp": {
+          "title": "Signed up successfully.",
+          "description": "Account created! Please complete your profile."
+        },
+        "signIn": {
+          "title": "Logged in successfully.",
+          "description": "Welcome back!"
+        },
+        "error": {
+          "title": "Authentication failed",
+          "description": "Something went wrong, please try again."
+        }
+      }
+    },
+
+    "register": {
+      "imageAlt": "Patient",
+      "greeting": "Welcome again 👋🏻",
+      "subtitle": "Tell us more about yourself.",
+      "sections": {
+        "personal": "Personal Information",
+        "identification": "Identification and Verification",
+        "consent": "Consent and Privacy"
+      },
+      "fields": {
+        "name": { "label": "Full name", "placeholder": "John Doe" },
+        "phone": {
+          "label": "Phone number",
+          "placeholder": "Enter phone number"
+        },
+        "birthDate": { "label": "Date of birth" },
+        "gender": { "label": "Gender" },
+        "identificationType": {
+          "label": "Identification type",
+          "placeholder": "Select identification type"
+        },
+        "identificationDocument": {
+          "label": "Scanned copy of identification document"
+        }
+      },
+      "consent": {
+        "treatment": "I consent to receive treatment for my health condition.",
+        "disclosure": "I consent to the use and disclosure of my health information for treatment purposes.",
+        "privacy": "I acknowledge that I have reviewed and agree to the privacy policy"
+      },
+      "submit": "Register",
+      "toast": {
+        "loading": {
+          "title": "Saving...",
+          "description": "Saving your information..."
+        },
+        "success": {
+          "title": "Registration successful!",
+          "description": "Patient profile created successfully. Proceeding to appointment booking."
+        },
+        "error": {
+          "title": "Registration failed!",
+          "description": "Failed to create patient profile. Please check the entered data and try again."
+        }
+      }
+    }
+  },
+
+  "Options": {
+    "gender": { "male": "Male", "female": "Female", "other": "Other" },
+    "identification": {
+      "birthCertificate": "Birth Certificate",
+      "driversLicense": "Driver's License",
+      "medicalInsurance": "Medical Insurance Card/Policy",
+      "militaryId": "Military ID Card",
+      "nationalId": "National Identity Card",
+      "passport": "Passport",
+      "greenCard": "Resident Alien Card (Green Card)",
+      "socialSecurity": "Social Security Card",
+      "stateId": "State ID Card",
+      "studentId": "Student ID Card",
+      "voterId": "Voter ID Card"
+    }
+  },
+
+  "FileUploader": {
+    "uploadedAlt": "Uploaded file preview",
+    "prompt": "<link>Click to upload</link> or drag and drop",
+    "hint": "SVG, PNG, JPG or GIF (max. 800x400px)"
+  },
+
+  "Validation": {
+    "nameRequired": "Name is required.",
+    "phoneRequired": "Phone number is required.",
+    "birthDateRequired": "Please select a birth date.",
+    "genderRequired": "Please select a gender.",
+    "treatmentConsent": "You must consent to treatment in order to proceed.",
+    "disclosureConsent": "You must consent to disclosure in order to proceed.",
+    "privacyConsent": "You must accept the privacy policy in order to proceed.",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "passwordRequired": "Password is required.",
+    "doctorRequired": "Please select a doctor.",
+    "reasonMin": "Reason must be at least 2 characters.",
+    "reasonMax": "Reason must be at most 500 characters.",
+    "cancellationReasonMin": "Cancellation reason must be at least 2 characters.",
+    "cancellationReasonMax": "Cancellation reason must be at most 500 characters."
+  },
+
+  "Appointment": {
+    "form": {
+      "newTitle": "New Appointment",
+      "newSubtitle": "Request a new appointment in 10 seconds.",
+      "doctor": { "label": "Doctor", "placeholder": "Select a doctor" },
+      "schedule": "Expected appointment date",
+      "reason": {
+        "label": "Appointment reason",
+        "placeholder": "Annual check-up"
+      },
+      "note": {
+        "label": "Comments/notes",
+        "placeholder": "Prefer afternoon appointments, if possible"
+      },
+      "cancellationReason": {
+        "label": "Reason for cancellation",
+        "placeholder": "Urgent meeting came up"
+      },
+      "deleteConfirm": "Are you sure you want to delete this appointment? This action cannot be undone.",
+      "error": "Something went wrong, please try again."
+    },
+    "buttons": {
+      "create": "Submit appointment",
+      "schedule": "Schedule appointment",
+      "cancel": "Cancel appointment",
+      "delete": "Delete appointment forever"
+    },
+    "toast": {
+      "create": {
+        "loadingTitle": "Creating your appointment...",
+        "successTitle": "Appointment requested.",
+        "successDescription": "Your appointment has been submitted successfully.",
+        "errorTitle": "Booking failed!",
+        "errorDescription": "Unable to schedule appointment. Please try again later."
+      },
+      "schedule": {
+        "loadingTitle": "Scheduling appointment...",
+        "successTitle": "Appointment confirmed",
+        "successDescription": "The appointment has been successfully scheduled.",
+        "errorTitle": "Scheduling failed.",
+        "errorDescription": "Failed to confirm the appointment. Please try again."
+      },
+      "cancel": {
+        "loadingTitle": "Canceling...",
+        "successTitle": "Appointment canceled",
+        "successDescription": "The appointment has been successfully canceled.",
+        "errorTitle": "Cancellation failed.",
+        "errorDescription": "Could not cancel the appointment. Please try again."
+      },
+      "delete": {
+        "loadingTitle": "Deleting...",
+        "successTitle": "Appointment deleted.",
+        "successDescription": "The appointment has been permanently removed.",
+        "errorTitle": "Deletion failed.",
+        "errorDescription": "Unable to delete the appointment, try again later."
+      }
+    },
+
+    "modal": {
+      "triggers": {
+        "schedule": "Schedule",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      },
+      "schedule": {
+        "title": "Schedule appointment",
+        "description": "Please review the following details and confirm the appointment."
+      },
+      "cancel": {
+        "title": "Cancel appointment",
+        "description": "Are you sure you want to cancel this appointment?"
+      },
+      "delete": { "title": "Delete appointment" }
+    }
+  },
+
+  "NewAppointment": {
+    "imageAlt": "Appointment",
+    "loadError": "Failed to load patient information.",
+    "toast": {
+      "title": "Failed to load patient data.",
+      "description": "Try to refresh the page."
+    }
+  },
+
+  "Success": {
+    "imageAlt": "Success",
+    "title": "Your <highlight>appointment</highlight> has been successfully submitted!",
+    "followUp": "We'll be in touch shortly to confirm.",
+    "details": "Appointment details:",
+    "newAppointment": "New Appointment",
+    "loadError": "Failed to load appointment details."
+  },
+
+  "AppointmentStatus": {
+    "pending": "Pending",
+    "scheduled": "Confirmed",
+    "cancelled": "Cancelled"
+  },
+
+  "Profile": {
+    "editProfile": "Edit profile",
+    "editAppointment": "Edit appointment",
+    "appointments": "Appointments:",
+    "reason": "Reason",
+    "note": "Note",
+    "loadError": "Failed to fetch your appointments, try to refresh the page."
+  },
+
+  "Admin": {
+    "dashboard": "Admin Dashboard",
+    "welcome": "Welcome 👋",
+    "subtitle": "Start the day with managing new appointments",
+    "stats": {
+      "scheduled": "Scheduled appointments",
+      "pending": "Pending appointments",
+      "cancelled": "Cancelled appointments"
+    },
+    "loadError": "Failed to fetch the appointments, please try again.",
+    "toast": {
+      "title": "Failed to fetch appointments.",
+      "description": "Refresh the page and try again."
+    },
+    "table": {
+      "searchPlaceholder": "Filter appointments by patient name...",
+      "empty": "No appointments.",
+      "previous": "Previous page",
+      "next": "Next page",
+      "columns": {
+        "id": "ID",
+        "patient": "Patient",
+        "phone": "Phone",
+        "status": "Status",
+        "appointment": "Appointment",
+        "doctor": "Doctor",
+        "actions": "Actions"
+      }
+    },
+    "filters": {
+      "filterBy": "Filter by",
+      "primary": { "status": "Status", "doctors": "Doctor" },
+      "select": { "status": "Select a status", "doctors": "Select a doctor" }
+    }
+  },
+
+  "DatePicker": { "time": "Time" }
+}
