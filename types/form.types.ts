@@ -28,6 +28,7 @@ export interface IFormField<TFieldValues extends FieldValues> {
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
+  items?: { value: string; label: string }[];
   renderSkeleton?: (
     field: ControllerRenderProps<TFieldValues, Path<TFieldValues>>,
   ) => React.ReactNode;
@@ -60,7 +61,7 @@ export type DatePickerTypeProps<T extends FieldValues> = Pick<
 // Select
 export type SelectTypeProps<T extends FieldValues> = Pick<
   IFormField<T>,
-  "name" | "label" | "placeholder" | "control" | "children"
+  "name" | "label" | "placeholder" | "control" | "children" | "items"
 >;
 
 // Skeleton
