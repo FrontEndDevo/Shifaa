@@ -1,16 +1,21 @@
 // Next Components:
 import Image from "next/image";
 
+// Styling:
+import clsx from "clsx";
+
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Constants:
 import { StatusIcon } from "@/constants";
 
 // Types:
-import { Status } from "@/types";
-
-// Styling:
-import clsx from "clsx";
+import  { Status } from "@/types";
 
 const StatusBadge = ({ status }: { status: Status }) => {
+  const t = useTranslations("AppointmentStatus");
+
   return (
     <div
       className={clsx("status-badge mx-auto", {
@@ -21,19 +26,19 @@ const StatusBadge = ({ status }: { status: Status }) => {
     >
       <Image
         src={StatusIcon[status]}
-        alt={status}
+        alt=""
         width={24}
         height={24}
         className="h-fit w-3"
       />
       <p
-        className={clsx("text-12-semibold capitalize", {
+        className={clsx("text-12-semibold", {
           "text-gray-200 dark:text-green-500": status === "scheduled",
           "text-gray-200 dark:text-blue-500": status === "pending",
           "text-gray-200 dark:text-red-500": status === "cancelled",
         })}
       >
-        {status}
+        {t(status)}
       </p>
     </div>
   );

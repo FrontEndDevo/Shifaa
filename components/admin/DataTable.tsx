@@ -6,6 +6,9 @@ import { useState } from "react";
 // Next Components:
 import Image from "next/image";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // React Table
 import {
   useTable,
@@ -42,6 +45,7 @@ export function DataTable<TData extends RowData>({
   columns,
   data,
 }: DataTableProps<TData>) {
+  const t = useTranslations("Admin.table");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useTable({
@@ -55,17 +59,15 @@ export function DataTable<TData extends RowData>({
   });
 
   const getAdminFilters = ({ adminFilter, filter }: AdminFiltersProps) => {
-    if (adminFilter === "Status") {
+    if (adminFilter === "status") {
       table.resetColumnFilters();
       table.getColumn("status")?.setFilterValue(filter);
-    } else if (adminFilter === "Doctors") {
+    } else if (adminFilter === "doctors") {
       table.resetColumnFilters();
       table.getColumn("primaryPhysician")?.setFilterValue(filter);
-    } else {
     }
   };
 
-  // Filter table by patient name using input field.
   const filterTableByPatientNameHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -78,12 +80,14 @@ export function DataTable<TData extends RowData>({
 
   return (
     <>
-      <div className="flex flex-col-reverse md:flex-row items-center justify-between py-4 w-full gap-10">
+      <div className="flex w-full flex-col-reverse items-center justify-between gap-10 py-4 md:flex-row">
         <Input
-          placeholder="Filter appointments by patient name..."
+          dir="auto"
+          placeholder={t("searchPlaceholder")}
+          aria-label={t("searchPlaceholder")}
           value={patientInputFilter}
           onChange={filterTableByPatientNameHandler}
-          className="max-w-sm border focus:border-green-500 border-green-500"
+          className="max-w-sm border border-green-500 focus:border-green-500"
         />
         <SelectMenu getAdminFilters={getAdminFilters} />
       </div>
@@ -127,7 +131,7 @@ export function DataTable<TData extends RowData>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No appointments.
+                  {t("empty")}
                 </TableCell>
               </TableRow>
             )}
@@ -141,13 +145,15 @@ export function DataTable<TData extends RowData>({
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            aria-label={t("previous")}
             className="shad-gray-btn"
           >
             <Image
               src="/assets/icons/arrow.svg"
               width={24}
               height={24}
-              alt="arrow"
+              alt=""
+              className="rtl:rotate-180"
             />
           </Button>
 
@@ -156,14 +162,15 @@ export function DataTable<TData extends RowData>({
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            aria-label={t("next")}
             className="shad-gray-btn"
           >
             <Image
               src="/assets/icons/arrow.svg"
               width={24}
               height={24}
-              alt="arrow"
-              className="rotate-180"
+              alt=""
+              className="rotate-180 rtl:rotate-0"
             />
           </Button>
         </div>

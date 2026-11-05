@@ -1,3 +1,3 @@
-export const primaryFilters = ["Status", "Doctors"];
+export const primaryFilters = ["status", "doctors"] as const;
 
-export const statusValues = ["Pending", "Scheduled", "Cancelled"];
+export const statusValues = ["pending", "scheduled", "cancelled"] as const;

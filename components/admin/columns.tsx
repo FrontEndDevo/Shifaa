@@ -1,129 +1,158 @@
 "use client";
 
+// React Hooks:
+import { useMemo } from "react";
+
 // Next Components:
 import Image from "next/image";
 
-// Shadcn UI:
+// Tanstack Table:
 import { createColumnHelper } from "@tanstack/react-table";
-import { DataTableFeatures } from "./AdminFeatures";
 
-// Components:
-import StatusBadge from "./StatusBadge";
+// Next Intl:
+import { useFormatter, useTranslations } from "next-intl";
+
 
 // Modals Components:
+import { DataTableFeatures } from "./AdminFeatures";
+import StatusBadge from "./StatusBadge";
 import AppointmentModal from "../modals/AppointmentModal";
 
 // Utilities:
-import { formatDateTime } from "@/lib/utils";
+import { resolveDoctorId } from "@/lib/doctors";
+
+// Hooks:
+import useLocalizedDoctors from "@/hooks/useLocalizedDoctors";
 
 // Types:
 import { Appointment } from "@/types/appointment.types";
 
-// Constants:
-import { DOCTORS } from "@/constants/Doctor";
-
-// Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Appointment>();
 
-export const columns = columnHelper.columns([
-  {
-    header: "ID",
-    cell: ({ row }) => <p className="text-sm">{row.index + 1}</p>,
-  },
+export const useColumns = () => {
+  const t = useTranslations("Admin.table.columns");
+  const tm = useTranslations("Appointment.modal");
+  const format = useFormatter();
+  const doctors = useLocalizedDoctors();
 
-  {
-    id: "patient",
-    accessorFn: (row) => row.patient?.name,
-    header: "Patient",
-    cell: ({ row }) => (
-      <h3 className="text-sm">{row.original.patient?.name}</h3>
-    ),
-  },
+  return useMemo(
+    () =>
+      columnHelper.columns([
+        {
+          header: t("id"),
+          cell: ({ row }) => <p className="text-sm">{row.index + 1}</p>,
+        },
 
-  {
-    accessorKey: "phone",
-    header: "Phone",
-    cell: ({ row }) => (
-      <h3 className="text-sm">{row.original.patient?.phone}</h3>
-    ),
-  },
+        {
+          id: "patient",
+          accessorFn: (row) => row.patient?.name,
+          header: t("patient"),
+          cell: ({ row }) => (
+            <h3 className="text-sm">{row.original.patient?.name}</h3>
+          ),
+        },
 
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div>
-        <StatusBadge status={row.original?.status} />
-      </div>
-    ),
-  },
+        {
+          accessorKey: "phone",
+          header: t("phone"),
+          cell: ({ row }) => (
+            <h3 dir="ltr" className="text-sm">
+              {row.original.patient?.phone}
+            </h3>
+          ),
+        },
 
-  {
-    accessorKey: "schedule",
-    header: "Appointment",
-    cell: ({ row }) => (
-      <p className="text-sm min-w-[100px]">
-        {formatDateTime(row.original?.schedule).dateTime}
-      </p>
-    ),
-  },
+        {
+          accessorKey: "status",
+          header: t("status"),
+          cell: ({ row }) => (
+            <div>
+              <StatusBadge status={row.original?.status} />
+            </div>
+          ),
+        },
 
-  {
-    accessorKey: "primaryPhysician",
-    header: "Doctor",
-    cell: ({ row }) => {
-      const appointment = row.original;
+        {
+          accessorKey: "schedule",
+          header: t("appointment"),
+          cell: ({ row }) => (
+            <p className="min-w-[100px] text-sm">
+              {format.dateTime(new Date(row.original.schedule), {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+              })}
+            </p>
+          ),
+        },
 
-      const doctor = DOCTORS.find(
-        (doctor) => doctor.name === appointment?.primaryPhysician,
-      );
+        {
+          id: "primaryPhysician",
+          accessorFn: (row) => resolveDoctorId(row.primaryPhysician),
+          header: t("doctor"),
+          cell: ({ row }) => {
+            const appointment = row.original;
 
-      return (
-        <div className="flex items-center gap-3">
-          <Image
-            src={doctor?.image as string}
-            alt="doctor"
-            width={100}
-            height={100}
-            className="size-8 rounded-full"
-          />
-          <p className="whitespace-nowrap">{doctor?.name}</p>
-        </div>
-      );
-    },
-  },
+            const doctor = doctors.find(
+              (doc) =>
+                doc.doctorId === resolveDoctorId(appointment.primaryPhysician),
+            );
 
-  {
-    accessorKey: "actions",
-    header: "Actions",
-    cell: ({ row: { original: data } }) => {
-      return (
-        <div className="flex gap-1 justify-center">
-          <AppointmentModal
-            type="schedule"
-            appointment={data}
-            title="Schedule Appointment"
-            description="Please confirm the following details to"
-          />
+            return (
+              <div className="flex items-center gap-3">
+                {doctor && (
+                  <Image
+                    src={doctor.image}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="size-8 rounded-full"
+                  />
+                )}
+                <p className="whitespace-nowrap">
+                  {doctor?.name ?? appointment.primaryPhysician}
+                </p>
+              </div>
+            );
+          },
+        },
 
-          {data.status !== "cancelled" && (
-            <AppointmentModal
-              type="cancel"
-              appointment={data}
-              title="Cancle Appointment"
-              description="Are you sure you want to cancle this appointment?"
-            />
-          )}
+        {
+          accessorKey: "actions",
+          header: t("actions"),
+          cell: ({ row: { original: data } }) => {
+            return (
+              <div className="flex justify-center gap-1">
+                <AppointmentModal
+                  type="schedule"
+                  appointment={data}
+                  title={tm("schedule.title")}
+                  description={tm("schedule.description")}
+                />
 
-          {data.status === "cancelled" && (
-            <AppointmentModal
-              type="delete"
-              appointment={data}
-              title="Delete Appointment"
-            />
-          )}
-        </div>
-      );
-    },
-  },
-]);
+                {data.status !== "cancelled" && (
+                  <AppointmentModal
+                    type="cancel"
+                    appointment={data}
+                    title={tm("cancel.title")}
+                    description={tm("cancel.description")}
+                  />
+                )}
+
+                {data.status === "cancelled" && (
+                  <AppointmentModal
+                    type="delete"
+                    appointment={data}
+                    title={tm("delete.title")}
+                  />
+                )}
+              </div>
+            );
+          },
+        },
+      ]),
+    [t, tm, format, doctors],
+  );
+};

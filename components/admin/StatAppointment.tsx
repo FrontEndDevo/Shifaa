@@ -26,7 +26,7 @@ export const StatAppointment = ({
           src={icon}
           height={32}
           width={32}
-          alt="appointments"
+          alt=""
           className="size-8 w-fit"
         />
         <h2 className="text-32-bold text-main">{count}</h2>
