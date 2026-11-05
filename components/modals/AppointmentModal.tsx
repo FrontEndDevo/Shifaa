@@ -3,6 +3,9 @@
 // React Hooks:
 import { useState } from "react";
 
+// Next Intl:
+import { useTranslations } from "next-intl";
+
 // Shadcn UI:
 import {
   Dialog,
@@ -12,6 +15,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+// Utilities:
+import { cn } from "@/lib/utils";
 
 // Components:
 import { AppointmentForm } from "../forms/AppointmentForm/AppointmentForm";
@@ -25,15 +31,20 @@ const AppointmentModal = ({
   title,
   description,
 }: TAppointmentModalProps) => {
+  const t = useTranslations("Appointment.modal");
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <div
-          className={`capitalize mx-2 text-sm ${type === "schedule" && "text-green-500 hover:text-green-400"} ${type === "delete" && "text-red-500 hover:text-red-300"}`}
+          className={cn(
+            "mx-2 text-sm capitalize",
+            type === "schedule" && "text-green-500 hover:text-green-400",
+            type === "delete" && "text-red-500 hover:text-red-300",
+          )}
         >
-          {type}
+          {t(`triggers.${type}`)}
         </div>
       </DialogTrigger>
 
