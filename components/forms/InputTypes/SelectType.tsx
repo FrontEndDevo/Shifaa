@@ -18,6 +18,7 @@ const SelectType = <T extends FieldValues>({
   label,
   placeholder,
   control,
+  items,
   children,
 }: SelectTypeProps<T>) => {
   return (
@@ -28,9 +29,16 @@ const SelectType = <T extends FieldValues>({
         <Field data-invalid={fieldState.invalid}>
           <FieldLabel>{label}</FieldLabel>
 
-          <Select onValueChange={field.onChange} value={field.value}>
+          <Select
+            onValueChange={field.onChange}
+            value={field.value}
+            items={items}
+          >
             <div>
-              <SelectTrigger className="shad-select-trigger">
+              <SelectTrigger
+                aria-invalid={fieldState.invalid}
+                className="shad-select-trigger"
+              >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </div>

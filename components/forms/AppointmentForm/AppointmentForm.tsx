@@ -61,6 +61,10 @@ export const AppointmentForm = ({
             name="primaryPhysician"
             label={t("doctor.label")}
             placeholder={t("doctor.placeholder")}
+            items={doctors.map((doctor) => ({
+              value: doctor.doctorId,
+              label: doctor.name,
+            }))}
           >
             {doctors.map((doctor) => (
               <SelectItem key={doctor.doctorId} value={doctor.doctorId}>

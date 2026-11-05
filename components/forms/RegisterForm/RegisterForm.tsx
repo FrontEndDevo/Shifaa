@@ -114,6 +114,12 @@ const RegisterForm = ({ userId }: { userId: string }) => {
             name="identificationType"
             label={t("fields.identificationType.label")}
             placeholder={t("fields.identificationType.placeholder")}
+            items={IdentificationTypes.map((type) => ({
+              value: type,
+              label: tOptions(
+                `identification.${IDENTIFICATION_TYPE_KEYS[type]}`,
+              ),
+            }))}
           >
             {IdentificationTypes.map((type) => (
               <SelectItem

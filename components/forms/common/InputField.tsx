@@ -27,6 +27,7 @@ const InputField = <TFieldValues extends FieldValues>({
   disabled,
   dateFormat,
   showTimeSelect,
+  items,
   children,
   renderSkeleton,
 }: IFormField<TFieldValues>) => {
@@ -83,6 +84,7 @@ const InputField = <TFieldValues extends FieldValues>({
           label={label}
           placeholder={placeholder}
           control={control}
+          items={items}
         >
           {children}
         </SelectType>
